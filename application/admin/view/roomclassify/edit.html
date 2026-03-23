@@ -1,0 +1,460 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<script type="text/javascript" src='__PUBLIC__/static/webuploader/wangEditor.min.js'></script>
+<link rel="stylesheet" href="http://cdn.staticfile.org/webuploader/0.1.5/webuploader.css">
+<script type="text/javascript" src='http://cdn.staticfile.org/webuploader/0.1.5/webuploader.min.js'></script>
+<section class="panel">
+    {if isset($info)}
+    <header class="panel-heading">
+        <h4>编辑{if $render == "game"}游戏{/if}{if $render == "match"}比赛{/if}{if $render == "mobile"}端游{/if}{if $render == "roomgame"}房间赛制{/if}类型分类</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" method="post" onsubmit="return false" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">标题</label>
+
+                <div class="col-sm-5">
+                    <input type="text" value="{$info['title']}" name="title" class="form-control"
+                           placeholder="请输入标题">
+                </div>
+            </div>
+            {if $render == "match"}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">父级分类</label>
+
+                <div class="col-sm-5">
+                    <select name="parent_id" class="form-control">
+                        {foreach $parent_class as $key=>$item}
+                        <option value="{$item['id']}">{$item['title']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="panel-body" style="padding-bottom: 50px">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">上传图片</label>
+                    <div class="col-sm-5">
+                        <div id="filePicker" {if $info['image']}style="display:none;"{/if}>选择并上传图片</div>
+                </div>
+                <input type="hidden" value="{$info['image']}" name="image" id="path" class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-5">
+                    <div id="fileList" class="uploader-list">
+                        {if $info['image']}
+                        <div id="WU_FILE_0" class="upload-state-done" data-id="{$info['image']}">
+                            <img src="{$info['image']}" width="200"><br><a href="javascript:;" onclick="deleteImag(this);">删除</a>
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            {/if}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">排序</label>
+
+                <div class="col-sm-5">
+                    <input type="text" value="{$info['displayorder'] ? $info['displayorder'] : 100}" name="displayorder" class="form-control"
+                           placeholder="排序">
+                </div>
+                <div class="col-sm-5 help-block">
+                    数字越大，排到最前面
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否显示</label>
+
+                <div class="col-sm-8">
+                    <label class="radio radio-custom pull-left">
+                        <input type="radio" {if $info['status'] == 1}checked{/if} name="status" value="1">
+                        <i class="radio "></i> 显示
+                    </label>
+                    <label class="radio radio-custom pull-left">
+                        <input type="radio" {if $info['status'] == 0}checked{/if} name="status" value="0">
+                        <i class="radio "></i> 不显示
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">比赛方式</label>
+
+                <div class="col-sm-8">
+                    <label class="radio radio-custom pull-left">
+                        <input type="radio" {if $info['vip_type'] == 1}checked{/if} name="vip_type" value="1">
+                        <i class="radio "></i> 1V1
+                    </label>
+                    <label class="radio radio-custom pull-left">
+                        <input type="radio" {if $info['vip_type'] == 0}checked{/if} name="vip_type" value="0">
+                        <i class="radio "></i> PVP
+                    </label>
+                </div>
+            </div>
+            <input type="text" value="{$render}" name="render" class="form-control" style="display: none">
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" data-url="{:url('admin/roomclassify/update',['id'=>$info['id']])}"
+                            onclick="main.ajaxPosts(this)" class="btn btn-primary">确定修改
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {else /}
+    <header class="panel-heading">
+        <h4>添加{if $render == "game"}游戏{/if}{if $render == "match"}比赛{/if}{if $render == "mobile"}端游{/if}{if $render == "roomgame"}房间赛制{/if}类型分类</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" method="post" onsubmit="return false" role="form">
+            <input type="text" value="{$render}" name="render" class="form-control" style="display: none">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">分类名称</label>
+
+                <div class="col-sm-5">
+                    <input type="text" value="" name="title" class="form-control"
+                           placeholder="请输入分类名称">
+                </div>
+            </div>
+            {if $render == "match"}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">父级分类</label>
+
+                <div class="col-sm-5">
+                    <select name="parent_id" class="form-control">
+                        {foreach $parent_class as $key=>$item}
+                        <option value="{$item['id']}">{$item['title']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="panel-body" style="padding-bottom: 50px">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">上传图片</label>
+
+                    <div class="col-sm-5">
+                        <div id="filePicker" >选择并上传图片</div>
+                    </div>
+                    <input type="hidden" value="" name="image" id="path" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"></label>
+                    <div class="col-sm-5">
+                        <div id="fileList" class="uploader-list">
+                            {if isset($info)}
+                            <div id="WU_FILE_0" class="upload-state-done" data-id="{$list['image']}">
+                                <img src="{$list['image']}" width="200"><br><a href="javascript:;" onclick="deleteImag(this);">删除</a></div>
+                            {/if}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/if}
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">排序</label>
+
+                <div class="col-sm-5">
+                    <input type="text" value="100" name="displayorder" class="form-control"
+                           placeholder="排序">
+                </div>
+                <div class="col-sm-5 help-block">
+                    数字越大，排到最前面
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否显示</label>
+
+                <div class="col-sm-5">
+                    <label class="radio radio-custom pull-left">
+                        <input type="radio" checked name="status" value="1">
+                        <i class="radio "></i> 显示
+                    </label>
+                    <label class="radio radio-custom pull-left">
+                        <input type="radio" name="status" value="0">
+                        <i class="radio "></i> 不显示
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label">比赛方式</label>
+
+                <div class="col-sm-5">
+                    <label class="radio radio-custom pull-left">
+                        <input type="radio" checked name="vip_type" value="1">
+                        <i class="radio "></i> 1v1
+                    </label>
+                    <label class="radio radio-custom pull-left">
+                        <input type="radio" name="vip_type" value="0">
+                        <i class="radio "></i> PVP
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" onclick="main.ajaxPosts(this)" data-url="{:url('admin/roomclassify/save')}"
+                            class="btn btn-primary">提交
+                    </button>
+                    &nbsp;
+                    <button type="button" onclick="javascript:history.back(-1);" class="btn btn-warning">返回
+                </div>
+            </div>
+        </form>
+    </div>
+    {/if}
+</section>
+{/block}
+
+
+{block name="footer"}
+<script src="__PUBLIC__/admin/vendor/fuelux/radio.js"></script>
+<script>
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    var $content = $('#content');
+    editor.customConfig.uploadFileName = 'image'
+    editor.customConfig.uploadImgServer = "{:url('upload/uploadEditor')}";
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $content.val(html)
+    };
+    editor.customConfig.menus = [
+        'head',  // 标题
+        'bold',  // 粗体
+        'fontSize',  // 字号
+        'fontName',  // 字体
+        'foreColor',  // 文字颜色
+        'backColor',  // 背景颜色
+        'link',  // 插入链接
+        'list',  // 列表
+        'justify',  // 对齐方式
+        'quote',  // 引用
+        'image',  // 插入图片
+    ]
+    editor.create()
+
+    $(function(){
+        $(".w-e-text-container").css('height','600px')
+    })
+</script>
+<script>
+    // 初始化Web Uploader
+    var uploader = WebUploader.create({
+
+        // 选完文件后，是否自动上传。
+        auto: true,
+
+        // 文件接收服务端。
+        server: "{:url('upload/uploadImg')}",
+
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: {
+            id:'#filePicker',
+            multiple:true
+        },
+
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/jpg,image/jpeg,image/png'
+        }
+    });
+    var $list = $('#fileList');
+    var thumbnailWidth =600;
+    var thumbnailHeight = 200;
+    // 当有文件添加进来的时候
+    uploader.on( 'fileQueued', function( file ) {
+        var $li = $(
+            '<div id="' + file.id + '" class="">' +
+            '<img>' +
+            '<br><a href="javascript:;" onclick="deleteImag(this);">删除</a>' +
+            '</div>'
+            ),
+            $img = $li.find('img');
+
+
+        // $list为容器jQuery实例
+        $list.append( $li );
+
+        // 创建缩略图
+        // 如果为非图片文件，可以不用调用此方法。
+        // thumbnailWidth x thumbnailHeight 为 100 x 100
+        uploader.makeThumb( file, function( error, src ) {
+            if ( error ) {
+                $img.replaceWith('<span>不能预览</span>');
+                return;
+            }
+
+            $img.attr( 'src', src );
+        }, thumbnailWidth, thumbnailHeight );
+    });
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on( 'uploadProgress', function( file, percentage ) {
+        var $li = $( '#'+file.id ),
+            $percent = $li.find('.progress span');
+
+        // 避免重复创建
+        if ( !$percent.length ) {
+            $percent = $('<p class="progress"><span></span></p>')
+                .appendTo( $li )
+                .find('span');
+        }
+
+        $percent.css( 'width', percentage * 100 + '%' );
+    });
+
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploader.on( 'uploadSuccess', function( file ,data) {
+        if(data.errno == 0){
+            $( '#'+file.id ).addClass('upload-state-done');
+            $( '#'+file.id ).attr('data-id',data.data);
+            $('#path').val(data.data);
+            $('#filePicker').hide();
+        }
+    });
+
+    // 文件上传失败，显示上传出错。
+    uploader.on( 'uploadError', function( file ) {
+        var $li = $( '#'+file.id ),
+            $error = $li.find('div.error');
+
+        // 避免重复创建
+        if ( !$error.length ) {
+            $error = $('<div class="error"></div>').appendTo( $li );
+        }
+
+        $error.text('上传失败');
+    });
+
+    // 完成上传完了，成功或者失败，先删除进度条。
+    uploader.on( 'uploadComplete', function( file ) {
+        $( '#'+file.id ).find('.progress').remove();
+    });
+    //删除图片
+    function deleteImag(dom){
+        var _this = $(dom);
+        $.confirm({
+            title: '<strong style="color: #c7254e;font-size: 16px">温馨提示</strong>',
+            content: '<div class="text-center" style="border-top:1px solid #eee;padding-top: 20px">确定删除</div>',
+            confirmButton: '确定',
+            confirmButtonClass: 'btn btn-info',
+            cancelButton: '取消',
+            cancelButtonClass: 'btn btn-danger',
+            animation: 'scaleY',
+            theme: 'material',
+            confirm: function () {
+                $('#path').val('');
+                $('#filePicker').show();
+                _this.parent('div').remove();
+                var uploader = WebUploader.create({
+
+                    // 选完文件后，是否自动上传。
+                    auto: true,
+
+                    // 文件接收服务端。
+                    server: "{:url('upload/uploadImg')}",
+
+                    // 选择文件的按钮。可选。
+                    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                    pick: {
+                        id:'#filePicker',
+                        multiple:true
+                    },
+
+                    // 只允许选择图片文件。
+                    accept: {
+                        title: 'Images',
+                        extensions: 'gif,jpg,jpeg,bmp,png',
+                        mimeTypes: 'image/jpg,image/jpeg,image/png'
+                    }
+                });
+                var $list = $('#fileList');
+                var thumbnailWidth =600;
+                var thumbnailHeight = 200;
+// 当有文件添加进来的时候
+                uploader.on( 'fileQueued', function( file ) {
+                    var $li = $(
+                        '<div id="' + file.id + '" class="">' +
+                        '<img>' +
+                        '<br><a href="javascript:;" onclick="deleteImag(this);">删除</a>' +
+                        '</div>'
+                        ),
+                        $img = $li.find('img');
+
+
+                    // $list为容器jQuery实例
+                    $list.append( $li );
+
+                    // 创建缩略图
+                    // 如果为非图片文件，可以不用调用此方法。
+                    // thumbnailWidth x thumbnailHeight 为 100 x 100
+                    uploader.makeThumb( file, function( error, src ) {
+                        if ( error ) {
+                            $img.replaceWith('<span>不能预览</span>');
+                            return;
+                        }
+
+                        $img.attr( 'src', src );
+                    }, thumbnailWidth, thumbnailHeight );
+                });
+// 文件上传过程中创建进度条实时显示。
+                uploader.on( 'uploadProgress', function( file, percentage ) {
+                    var $li = $( '#'+file.id ),
+                        $percent = $li.find('.progress span');
+
+                    // 避免重复创建
+                    if ( !$percent.length ) {
+                        $percent = $('<p class="progress"><span></span></p>')
+                            .appendTo( $li )
+                            .find('span');
+                    }
+
+                    $percent.css( 'width', percentage * 100 + '%' );
+                });
+
+// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+                uploader.on( 'uploadSuccess', function( file ,data) {
+                    if(data.errno == 0){
+                        $( '#'+file.id ).addClass('upload-state-done');
+                        $( '#'+file.id ).attr('data-id',data.data);
+                        $('#path').val(data.data);
+                        $('#filePicker').hide();
+                    }
+                });
+
+// 文件上传失败，显示上传出错。
+                uploader.on( 'uploadError', function( file ) {
+                    var $li = $( '#'+file.id ),
+                        $error = $li.find('div.error');
+
+                    // 避免重复创建
+                    if ( !$error.length ) {
+                        $error = $('<div class="error"></div>').appendTo( $li );
+                    }
+
+                    $error.text('上传失败');
+                });
+
+// 完成上传完了，成功或者失败，先删除进度条。
+                uploader.on( 'uploadComplete', function( file ) {
+                    $( '#'+file.id ).find('.progress').remove();
+                });
+
+            }
+
+        });
+
+    }
+
+</script>
+
+{/block}

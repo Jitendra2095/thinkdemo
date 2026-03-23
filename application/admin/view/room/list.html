@@ -1,0 +1,178 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>房间列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('room/roomlist')}">
+            <div class="form-group">
+                <div class="col-xs-1 no-pd-r">
+                    <select name="types" id="types" class="form-control">
+                        <option  value="0">比赛类型</option>
+                        {foreach $types as $i=>$m}
+                        <option {if $Request.get.types ==$m['id']}selected{/if} value="{$m.id}">{$m.title}</option>
+                        {/foreach}
+                    </select>
+                </div>
+                <div class="col-xs-1 no-pd-r">
+                    <select name="type" id="type" class="form-control">
+                        <option {if $Request.get.type == 'nick_name'} selected {/if} value="nick_name">用户名</option>
+                        <option {if $Request.get.type == 'mobile'} selected {/if} value="mobile">手机号</option>
+                    </select>
+                </div>
+                <div class="col-xs-3 no-pd-l">
+                    <input type="text" id="keyword" value="{$Request.get.keyword}" name="keyword" class="form-control" placeholder="请输入关键词搜索">
+                </div>
+                <div class="col-xs-2 no-pd-2">
+                    <input type="text" value="{$Request.get.startTime}" name="startTime" id="startTime" class="form-control" placeholder="请输入开始时间">
+                </div>
+                <div class="col-xs-2 no-pd-2">
+                    <input type="text" value="{$Request.get.endTime}" name="endTime" id="endTime" class="form-control" placeholder="请输入结束时间">
+                </div>
+                <button type="submit" class="btn btn-color">搜索</button>
+                <!--<button type="button" class="btn btn-success" id="export">导出</button>-->
+                <a type="button" href="{:url('/admin/room/create')}" class="btn btn-info">创建房间</a>
+            </div>
+           
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">房间ID</th>
+                <th class="text-center">房间名称</th>
+                <th class="text-center">房间类型</th>
+                <th class="text-center">绑定门票</th>
+                <th class="text-center">比赛报名时间</th>
+                <th class="text-center">比赛准备时间</th>
+                <th class="text-center">比赛开始时间</th>
+                <th class="text-center">比赛结束时间</th>
+                <th class="text-center">奖励方式</th>
+                <th class="text-center">奖励币种</th>
+                <th class="text-center">奖励</th>
+                <th class="text-center">比赛房间链接</th>
+                <th class="text-center">游戏规则</th>
+                <th class="text-center">状态</th>
+                <th class="text-center">房间创建时间</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($items)}
+            {foreach $items as $entity}
+            <tr>
+                <td class="text-center">{$entity['id']}</td>
+                <td class="text-center">{$entity['roomname']}</td>
+                <td class="text-center">
+                    <div>
+                    <span class="btn btn-xs btn-primary">{$entity['game_type']['title']}</span>
+                    <span class="btn btn-xs btn-danger">{$entity['match_type']['title']}</span><br>
+                    <span class="btn btn-xs btn-success">{$entity['mobile_type']['title']}</span>
+                    <span class="btn btn-xs btn-warning">{$entity['roomgame_type']['title']}</span><br>
+                    </div>
+                </td>
+                <td class="text-center">{$entity['ticket_id']}</td>
+                <td class="text-center">{$entity['enrolltime']}</td>
+                <td class="text-center">{$entity['readytime']}</td>
+                <td class="text-center">{$entity['starttime']}</td>
+                <td class="text-center">{$entity['endtime']}</td>
+                <td class="text-center">{$entity['reward_type']}</td>
+                <td class="text-center">{$entity['currency']}</td>
+                <td class="text-center">
+                    <span style="display:none">{$entity['reward']}</span>
+                    <a onclick="showContent(this)"   class="btn btn-xs btn-primary">查看</a>
+                </td>
+                <td class="text-center">
+                    <span style="display:none">{$entity['room_url']}</span>
+                    <a onclick="showRoomurl(this)"   class="btn btn-xs btn-primary">查看</a>
+                </td>
+                <td class="text-center">
+                    <span style="display:none">{:htmlspecialchars_decode($entity['rule'])}</span>
+                    <a onclick="showRule(this)"   class="btn btn-xs btn-primary">查看</a>
+                </td>
+                <td class="text-center">
+                    {if $entity['status'] == 0}
+                    <a class="btn btn-xs btn-default">准备报名</a>
+                    {/if}
+                    {if $entity['status'] == 1}
+                    <a class="btn btn-xs btn-primary">{$entity['statustext']}</a>
+                    {/if}
+                    {if $entity['status'] == 2}
+                    <a class="btn btn-xs btn-danger">{$entity['statustext']}</a>
+                    {/if}
+                    {if $entity['status'] == 3}
+                    <a class="btn btn-xs btn-success">{$entity['statustext']}</a>
+                    {/if}
+                    {if $entity['status'] == 4}
+                    <a class="btn btn-xs btn-warning">{$entity['statustext']}</a>
+                    {/if}
+                    {if $entity['status'] == 5}
+                    <a class="btn btn-xs btn-purple">{$entity['statustext']}</a>
+                    {/if}
+
+                </td>
+                <td class="text-center">{:date("Y-m-d H:i",$entity['createtime'])}</td>
+
+                <td class="text-center">
+                    {if $entity['status'] != 5}
+                    <a href="{:url('room/edit',['id'=>$entity['id']])}" class="btn btn-xs btn-info">编辑</a>
+                    {/if}
+                    {if $entity['status'] == 3}
+                    <a data-url="{:url('room/roomStatus',['id'=>$entity['id'],'status'=>4])}" onclick="main.ajaxDelete(this)"
+                       data-msg="确定要现在结算吗？" class="btn btn-xs btn-success">结算</a>
+                    {/if}
+                    {if $entity['status'] == 4}
+                    <a data-url="{:url('room/roomStatus',['id'=>$entity['id'],'status'=>5])}" onclick="main.ajaxDelete(this)"
+                       data-msg="确定要现在结束吗？" class="btn btn-xs btn-warning">结束</a>
+                    {/if}
+                    <a data-url="{:url('room/delete',['id'=>$entity['id']])}" onclick="main.ajaxDelete(this)"
+                    data-msg="确定要删除该房间吗？" class="btn btn-xs btn-danger">删除</a><br>
+<!--                    {if $entity['status'] == 4}-->
+<!--                    <a href="{:url('room/participate',['id'=>$entity['id']])}" class="btn btn-xs btn-purple">填写结果</a>-->
+<!--                    {/if}-->
+                    <a href="{:url('room/participate',['id'=>$entity['id']])}" class="btn btn-xs btn-purple">参赛会员</a>
+                </td>
+            </tr>
+            {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="20">暂无数据</td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+<script>
+    function showContent(e){
+        $.dialog({
+            title: '奖励',
+            content: $(e).prev().html()
+        });
+    }
+    function showRule(e){
+        $.dialog({
+            title: '规则',
+            content: $(e).prev().html()
+        });
+    }
+    function showRoomurl(e){
+        $.dialog({
+            title: '比赛房间链接',
+            content: $(e).prev().html()
+        });
+    }
+</script>
+{/block}

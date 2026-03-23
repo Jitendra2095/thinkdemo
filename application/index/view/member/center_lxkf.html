@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>联系客服</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	
+	<script src="/zc/js/mui.min.js"></script>
+    <script src="/zc/js/jquery.min.js"></script>
+    <script src="/zc/js/template.js"></script>
+    <script src="/zc/js/base.js"></script>
+    <link href="/zc/css/mui.min.css" rel="stylesheet"/>
+    <link href="/zc/css/base_1.css" rel="stylesheet"/>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+	
+	<style>
+		
+		.erweima img{
+            width:9px;height:16px;
+        }
+        .add_input img {
+            top: 10px;
+            width: 17px;
+        }
+        input[type=text],input[type=password]{
+            border: none;
+            background: transparent;
+            border-bottom:1px solid #BFBFBF;
+            padding-left: 6px;
+        }
+        .send_btn{
+            color: #333;
+        }
+        .wt_list{
+            color: #228EDA;
+            font-size: 12px;
+            line-height: 1;
+        }
+        .talk_recordboxme .talk_recordtext{
+            min-height: 28px;
+        }
+	</style>
+	<body>
+		<div class="head_bg">
+        <div class="index_head">
+            <a href="javascript:history.back(-1);">
+            <div class="erweima">
+                <img src="/zc/img/lxkf06.png" alt="">
+            </div>
+            </a>
+            <p class="index_title">
+                    客服
+            </p>
+            <!-- <div class="saoma">
+                    <img src="/zc/img/saoma.png" alt="">
+            </div> -->
+        </div>
+    </div>
+    <main class="add_address" style="margin-top:20px;overflow: scroll;display: none;">
+            
+             
+             
+    </main>
+    <div class="dhk" style="display: none;">
+            <textarea class="div-textarea" placeholder="点击输入内容" name="" id="" cols="30" rows="10"></textarea>
+            <div id="chat-tuxiang">
+                    <div class="send_btn">发送</div>
+            </div>
+    </div>
+    <script type="text/html" id="wt_list">
+        <div class="talk_recordbox talk_recordbox1">
+                <div class="user"><img src="/zc/img/center02.png"/></div>
+                <div class="talk_recordtext kefu_tell" style="width:224px;padding-top: 10px">
+                    <p style="color:#000;font-size: 12px;line-height: 14px;">您好，我是IAG机器人~</p>
+                    <p style="color:#000;font-size: 12px;line-height: 14px;">您是不是要咨询以下问题：</p>
+                    {{each info val}}
+                    <p class="wt_list" data-content="{{val.answer}}">{{val.title}}</p>
+                    {{/each}}
+                    <div style="height:1px;background:#f1f1f1"></div>
+                    <div class="rgfw" style="position: relative;">
+                            <div style="color:#228EDA">转人工服务</div>
+                            <div style="color:#228EDA">服务时间:09:00-18:00</div>
+                            <img style="position:absolute;width:6px;right:0;bottom:14px" src="/zc/img/right_sjt.png" alt="">
+                    </div>
+                </div>
+               
+        </div>
+        <div class="hdn">
+
+        </div>
+    </script>
+    <script type="text/html" id="kefu_tell">
+        <div class="talk_recordbox">
+            <div class="user"><img src="/zc/img/kefu_tx.png"/></div>
+            <div class="talk_recordtext kefu_tell">
+                <h3></h3>
+            </div>
+        </div>
+        <div style="clear:both"></div> 
+    </script>
+    <script type="text/html" id="kefu_tell1">
+        {{each info val}}
+        <%if(val.status==2){%>    
+            <div class="talk_recordbox">
+                <div class="user"><img src="/zc/img/kefu_tx.png"/></div>
+                <div class="talk_recordtext kefu_tell">
+                    <h3 class="get_id" data-id="{{val.id}}">{{val.answer}}</h3>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        <%}else{%>
+        <%}%>
+        {{/each}}
+    </script>
+    <script type="text/html" id="me_tell">
+        <div class="talk_recordboxme">
+            <div class="user"><img src="/zc/img/friend1.png"/></div>
+            <div class="talk_recordtext me_tell">
+                <h3></h3>
+            </div>
+        </div> 
+        <div style="clear:both"></div> 
+    </script>
+    <script type="text/html" id="me_tell1">
+        {{each info val}}
+        <%if(val.status==1){%> 
+        <div class="talk_recordboxme talk_recordboxme2" style="display:none">
+            <div class="user"><img src="/zc/img/center02.png"/></div>
+            <div class="talk_recordtext me_tell">
+                <h3>{{val.question}}</h3>
+            </div>
+        </div> 
+        <div style="clear:both"></div> 
+        <%}else{%>
+        <%}%>
+        {{/each}}
+    </script>
+    <script>
+        $(function () {          
+                $.ajax({
+                    type: "POST",
+                    url: "/index/robot/question",
+                    dataType: "json",
+                    success: function (res) {
+                        if(res.code==0){
+                            $('.add_address').html(template("wt_list", res));
+                            $('.wt_list').click(function () { 
+                               var content1=$(this).data('content');
+                               $('.hdn').html(template("kefu_tell",res));
+                               $('.kefu_tell h3').html(content1); 
+                            });
+                            $('.rgfw').click(function () { 
+                                   $('.dhk').show();
+                                   $('.talk_recordbox1,.hdn').hide();
+                                   $('.talk_recordboxme2').show();
+                               });
+                        }else{
+                            mui.toast(res.message);
+                        }
+                    }
+                });
+                $('.send_btn').click(function () { 
+                    $('.add_address').append(template("me_tell"));
+                    $('.me_tell h3').last().text($('.div-textarea').val());
+                        var text=$('.div-textarea').val();
+                        $.ajax({
+                        type: "post",
+                        url: "/index/robot/man",
+                        data: {text:text},
+                        success: function (res) {
+                            console.log(res);
+                            if(res.code==0){
+                                mui.toast('发送成功');
+                                $('.div-textarea').val('');
+                            }else{
+                                mui.alert(res.message);
+                            }
+                        }
+                    });
+            });
+                $.ajax({
+                        type: "POST",
+                        url: "/index/robot/answer",
+                        success: function (res) {
+                            if(res.code==0){
+                                 $('.add_address').append(template("me_tell1",res));
+                            }else{
+                                mui.toast(res.message);
+                            }
+                        }
+                    });
+
+            setInterval(() => {
+                $.ajax({
+                        type: "POST",
+                        url: "/index/robot/answer",
+                        success: function (res) {
+                            if(res.code==0){
+                                        $('.add_address').append(template("me_tell1",res));
+                                        $('.add_address').append(template("kefu_tell1",res));
+                                        var length1=$('.get_id').length;
+                                        for(let i=0;i<length1;i++){
+                                            $.ajax({
+                                            type: "POST",
+                                            url: "/index/robot/read",
+                                            data: {id:$('.get_id').eq(i).data('id')},
+                                            success: function (res) {
+                                                console.log(res);
+                                                if(res.code==0){
+                                                    
+                                                }else{
+                                                    mui.toast(res.message);
+                                                }
+                                            }
+                                        });
+                                        }  
+                            }else{
+                                mui.alert(res.message);
+                            }
+                        }
+                    });
+
+            }, 5000);
+        });
+    </script>
+	</body>
+	
+	
+	
+</html>

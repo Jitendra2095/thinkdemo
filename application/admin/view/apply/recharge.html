@@ -1,0 +1,161 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<script src="__PUBLIC__/admin/js/laydate/laydate.js"></script>
+<style type="text/css">
+    .link-th{
+        color:blue;
+    }
+</style>
+<section class="panel">
+    <header class="panel-heading">
+        <h4>充值列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('admin/Apply/recharge')}">
+            <div class="form-group">
+                <div class="col-xs-1 no-pd-r">
+                    <select name="type" id="type" class="form-control">
+                        <option {if $Request.get.type == 'nick_name'} selected {/if} value="nick_name">昵称</option>
+                        <option {if $Request.get.type == 'mobile'} selected {/if} value="mobile">手机号</option>
+                        <option {if $Request.get.type == 'ordersn'} selected {/if} value="ordersn">订单号</option>
+                    </select>
+                </div>
+                <div class="col-xs-3 no-pd-l">
+                    <input type="text" id="keyword" value="{$Request.get.keyword}" name="keyword" class="form-control" placeholder="请输入关键词搜索">
+                </div>
+<!--                <div class="col-xs-1 no-pd-r">-->
+<!--                    <select name="types" id="types" class="form-control">-->
+<!--                        <option  value="" >充值方式</option>-->
+<!--                        {foreach $allTypes as $k => $status}-->
+<!--                        <option {if $Request.get.types == $k} selected {/if} value="{$k}">{$status}</option>-->
+<!--                        {/foreach}-->
+<!--                    </select>-->
+<!--                </div>-->
+                <div class="col-xs-1 no-pd-r">
+                    <select name="status" id="status" class="form-control">
+                        <option  value="" >审核状态</option>
+                        {foreach $allStatus as $k => $status}
+                        <option {if $Request.get.status == $k && $Request.get.status != ""} selected {/if} value="{$k}">{$status}</option>
+                        {/foreach}
+                    </select>
+                </div>
+                <div class="col-xs-2 no-pd-2">
+                    <input type="text" value="{$Request.get.startTime}" name="startTime" id="startTime" class="form-control" placeholder="请输入开始时间">
+                </div>
+                <div class="col-xs-2 no-pd-2">
+                    <input type="text" value="{$Request.get.endTime}" name="endTime" id="endTime" class="form-control" placeholder="请输入结束时间">
+                </div>
+                <button type="submit" class="btn btn-color">搜索</button>
+                <!--<button type="button" class="btn btn-success" id="export">导出</button>-->
+                <!--<a type="button" href="/admin/user/create" class="btn btn-info">添加会员</a>-->
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">用户信息</th>
+                <th class="text-center">订单号</th>
+<!--                <th class="text-center">充值方式</th>-->
+                <th class="text-center">充值金额</th>
+<!--                <th class="text-center">充值凭证</th>-->
+                <th class="text-center">审核状态</th>
+                <th class="text-center">时间</th>
+<!--                <th class="text-center">操作</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($list)}
+                {foreach $list as $entity}
+                <tr>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->id}<br>
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        昵称：{$entity->nick_name}<br>
+                        手机号：{$entity->mobile}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->ordersn}
+                    </td>
+
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->money}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$allStatus[$entity->status]}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        申请时间：{$entity->createtime}<br>
+                        {if $entity->status != 0}
+                        审核时间：{$entity->update_time}
+                        {/if}
+                    </td>
+<!--                    <td style="vertical-align: middle" class="text-center">-->
+<!--                        {if $entity->status == 1}-->
+<!--                            <a data-url="{:url('examineRecharge',['id'=>$entity->id,'types'=>'pass'])}" onclick="main.ajaxDelete(this)" data-msg="确定要通过此申请吗？" class="btn btn-xs btn-success">通过</a>-->
+<!--                            <a data-url="{:url('examineRecharge',['id'=>$entity->id,'types'=>'refuse'])}" onclick="main.ajaxDelete(this)" data-msg="确定要拒绝此申请吗？" class="btn btn-xs btn-warning">拒绝</a>-->
+<!--                        {/if}-->
+<!--                        <a data-url="{:url('deleteRecharge',['id'=>$entity->id])}" onclick="main.ajaxDelete(this)" data-msg="确定要删除此申请吗？" class="btn btn-xs btn-danger">删除</a>-->
+<!--                    </td>-->
+                </tr>
+                {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="9">暂无数据</td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+{/block}
+{block name="footer"}
+<script>
+    laydate.render({
+        elem: '#startTime',
+        type: 'datetime'
+    });
+    laydate.render({
+        elem: '#endTime',
+        type: 'datetime'
+    });
+</script>
+<form action="{:url('admin/Apply/exportRecharge')}" id="exportForm">
+    <input type="hidden" name="type" id="e_type">
+    <input type="hidden" name="keyword" id="e_keyword">
+    <input type="hidden" name="types" id="e_types">
+    <input type="hidden" name="status" id="e_status">
+    <input type="hidden" name="page" value="{$Request.get.page}">
+</form>
+    <script>
+        function showPic(e){
+            $.dialog({
+                title: '图片',
+                content: $(e).prev().html()
+            });
+        }
+        //导出会员信息
+        $("#export").click(function(){
+            var type = $("#type").val();
+            var keyword = $("#keyword").val();
+            var types = $("#types").val();
+            var types = $("#types").val();
+            var status = $("#status").val();
+            $('#e_status').val(status);
+            $('#e_keyword').val(keyword);
+            $('#e_type').val(type);
+            $("#exportForm").submit();
+        })
+    </script>
+
+
+{/block}

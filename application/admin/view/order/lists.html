@@ -1,0 +1,162 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<style type="text/css">
+    .link-th{
+        color:blue;
+    }
+</style>
+<section class="panel">
+    <header class="panel-heading">
+        <h4>订单列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('admin/Order/lists')}">
+            <div class="form-group">
+                <div class="col-xs-1 no-pd-r">
+                    <select name="type" id="type" class="form-control">
+                        <option {if $Request.get.type == 'good_name'} selected {/if} value="good_name">产品名称</option>
+                        <option {if $Request.get.type == 'addressee'} selected {/if} value="addressee">收件人</option>
+                        <option {if $Request.get.type == 'order_no'} selected {/if} value="order_no">订单号</option>
+                    </select>
+                </div>
+                <div class="col-xs-3 no-pd-l">
+                    <input type="text" id="keyword" value="{$Request.get.keyword}" name="keyword" class="form-control" placeholder="请输入关键词搜索">
+                </div>
+                <div class="col-xs-1 no-pd-r">
+                    <select name="status" id="status" class="form-control">
+                        <option  value="" >订单状态</option>
+                        {foreach $allStatus as $k => $status}
+                        <option {if $Request.get.status == $k} selected {/if} value="{$k}">{$status}</option>
+                        {/foreach}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-color">搜索</button>
+                <button type="button" class="btn btn-success" id="export">导出</button>
+                <!--<a type="button" href="/admin/user/create" class="btn btn-info">添加会员</a>-->
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">订单ID</th>
+                <th class="text-center">用户信息</th>
+                <th class="text-center">订单号</th>
+                <th class="text-center">产品名称</th>
+                <th class="text-center">订单总价</th>
+                <th class="text-center">订单状态</th>
+                <th class="text-center">购买数量</th>
+                <th class="text-center">收件人</th>
+                <th class="text-center">时间</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($list)}
+                {foreach $list as $entity}
+                <tr>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->id}<br>
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        昵称：{$user->getUserInfo( $entity->uid)['nick_name']}<br>
+                        手机号：{$user->getUserInfo( $entity->uid)['mobile']}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->order_no}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->good_name}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->total}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$allStatus[$entity->status]}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->num}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->addressee}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        下单时间：{$entity->create_time}<br>
+                        {if $entity->status == 2}
+                        支付时间：{$entity->pay_time|date='Y-m-d H:i:s',###}<br>
+                        {/if}
+                        {if $entity->status == 3}
+                        支付时间：{$entity->pay_time|date='Y-m-d H:i:s',###}<br>
+                        发货时间：{$entity->send_time|date='Y-m-d H:i:s',###}<br>
+                        {/if}
+                        {if $entity->status == 4}
+                        支付时间：{$entity->pay_time|date='Y-m-d H:i:s',###}<br>
+                        发货时间：{$entity->send_time|date='Y-m-d H:i:s',###}<br>
+                        完成时间：{$entity->receive_time|date='Y-m-d H:i:s',###}<br>
+                        {/if}
+                        {if $entity->status == 5}
+                        取消时间：{$entity->cancel_time|date='Y-m-d H:i:s',###}
+                        {/if}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        <a href="{:url('editOrder',['id'=>$entity->id,'types'=>'edit'])}" class="btn btn-xs btn-warning">修改</a>
+                        {if $entity->status == 2}
+                            <a data-url="{:url('sendOrder',['id'=>$entity->id])}" onclick="main.ajaxDelete(this)" data-msg="确定要上架此产品吗？" class="btn btn-xs btn-success">发货</a>
+                        {/if}
+                        <a href="{:url('editOrder',['id'=>$entity->id,'types'=>'look'])}" class="btn btn-xs btn-info">详情</a>
+                        <a data-url="{:url('deleteOrder',['id'=>$entity->id])}" onclick="main.ajaxDelete(this)" data-msg="确定要删除此订单吗？" class="btn btn-xs btn-danger">删除</a>
+                    </td>
+                </tr>
+                {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="9">暂无数据</td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+{/block}
+{block name="footer"}
+<form action="{:url('admin/Order/exportUser')}" id="exportForm">
+    <input type="hidden" name="status" id="e_status">
+    <input type="hidden" name="keyword" id="e_keyword">
+    <input type="hidden" name="type" id="e_type">
+    <input type="hidden" name="page" value="{$Request.get.page}">
+</form>
+<script>
+        function showContent(e){
+            $.dialog({
+                title: '产品详情',
+                content: $(e).prev().html()
+            });
+        }
+        function showPic(e){
+            $.dialog({
+                title: '产品主图',
+                content: $(e).prev().html()
+            });
+        }
+        //导出会员信息
+        $("#export").click(function(){
+            var status = $("#status").val();
+            var keyword = $("#keyword").val();
+            var type = $("#type").val();
+            $('#e_status').val(status);
+            $('#e_keyword').val(keyword);
+            $('#e_type').val(type);
+            $("#exportForm").submit();
+        })
+
+    </script>
+
+
+{/block}

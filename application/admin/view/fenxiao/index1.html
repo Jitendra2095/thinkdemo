@@ -1,0 +1,76 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>下级列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('article/index')}">
+            <div class="form-group">
+               
+                <!-- <button type="submit" class="btn btn-color">搜索</button> -->
+                <!-- <a type="button" href="{:url('/admin/zaixian/create')}" class="btn btn-info">添加</a> -->
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">用户ID</th>
+                <th class="text-center">手机号</th>
+                <th class="text-center">等级</th>
+                <th class="text-center">昵称</th>
+                <th class="text-center">注册时间</th>
+                <th class="text-center">下级人数</th>
+
+                
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($list)}
+            {foreach $list as $entity}
+            <tr>
+                <td class="text-center">{$entity.id}</td>
+                <td class="text-center">{$entity.mobile}</td>
+                <td class="text-center">{$entity.nick_name}</td>
+                <td class="text-center">{$entity.register_time}</td>
+                <td class="text-center">{$entity.level}星</td>
+                <td class="text-center"><a href="{:url('Fenxiao/index1',['id'=>$entity.id])}" class="btn btn-xs btn-info">{$entity.count}人</a></td>
+
+                
+            {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="5">暂无数据</td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+     
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+    <script>
+        function showContent(e){
+            $.dialog({
+                title: '文章内容',
+                content: $(e).attr('data-content')
+            });
+        }
+    </script>
+    <script>
+        function showContents(e){
+            $.dialog({
+                title: '图片内容',
+                content: $(e).attr('data-content')
+            });
+        }
+    </script>
+{/block}

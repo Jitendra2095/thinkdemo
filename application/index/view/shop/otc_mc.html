@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>卖出</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_sfrz.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<style>
+		.mr{
+			width: 100%;
+			padding: .3rem 0;
+			overflow: hidden;
+			background: #f2f2f2;
+		}
+		.mr_lt,.mr_rt{
+			float: left;
+		}
+		.mr_lt{
+			margin-left: .3rem;
+		}
+		.mr_lt01{
+			font-size: .4rem;
+			font-weight: bold;
+			color: #333;
+			margin-top: .3rem;
+		}
+		.mr_lt02{
+			font-size: .4rem;
+			color: #03BE87;
+			margin-top: .3rem;
+		}
+		.mr_lt03{
+			font-size: .35rem;
+			color: #999;
+			line-height: .8rem;
+		}
+		.mr_lt04{
+			overflow: hidden;
+		}
+		.mr_lt04 img,.mr_lt04 p{
+			float: left;
+		}
+		.mr_lt04_box{
+			overflow: hidden;
+			float: left;
+		}
+		.mr_lt04_box img,.mr_lt04_box p{
+			float: left;
+		}
+		.mr_lt04 img{
+			width: .4rem;
+			height: .4rem;
+			display: block;
+		}
+		.mr_lt04 p{
+			font-size: .3rem;
+			color: #333;
+			margin-left: .1rem;
+		}
+		.mr_rt{
+			float: right;
+			margin-right: .3rem;
+		}
+		.mr_rt img{
+			width: 1rem;
+			height: 1rem;
+			display: block;
+			margin-top: .3rem;
+		}
+		.gmk{
+			width: 95%;
+			margin: auto;
+			border: 1px solid #f2f2f2;
+			margin-top: .5rem;
+		}
+		.gmk_s{
+			width: 90%;
+			height: 1rem;
+			margin: auto;
+			border-bottom: 1px solid #f2f2f2;
+			overflow: hidden;
+		}
+		.gmk_s input,.gmk_s p,.gmk_s button{
+			float: left;
+		}
+		.gmk_s input{
+			border: 0;
+			font-size: .35rem;
+			line-height: 1rem;
+		}
+		.gmk_s p{
+			font-size: .35rem;
+			color: #333;
+			line-height: 1rem;
+		}
+		.gmk_s button{
+			float: right;
+			background: #fff;
+			border: 0;
+			color: #03BE87;
+			line-height: 1rem;
+			padding-left: .5rem;
+			border-left: 1px solid #f2f2f2;
+		}
+		#btc{
+			border: 0;
+		}
+		.mrtx{
+			font-size: .35rem;
+			color: #666;
+			height: 1rem;
+			line-height: 1rem;
+			margin-left: .3rem;
+		}
+		.mran{
+			width: 95%;
+			margin: auto;
+			overflow: hidden;
+			margin-top: .3rem;
+		}
+		.mran_lt,.mran_rt{
+			float: left;
+			width: 48%;
+		}
+		.mran_lt{
+			background: #fff;
+			border: 1px solid #dcdcdc;
+			font-size: .4rem;
+			color: #333;
+			height: 1.1rem;
+			line-height: 1.1rem;
+		}
+		.mran_rt{
+			float: right;
+			background: #f2f2f2;
+			border: 1px solid #f2f2f2;
+			color: #fff;
+			font-size: .4rem;
+			height: 1.1rem;
+			line-height: 1.1rem;
+			color: #333;
+		}
+		.mjbz{
+			width: 95%;
+			margin: auto;
+			margin-top: .5rem;
+			
+		}
+		.mjbz_s{
+			font-size: .4rem;
+			color: #666;
+			height: .6rem;
+			line-height: .6rem;
+		}
+		.mjbz_x{
+			font-size: .35rem;
+			color: #666;
+			line-height: .5rem;
+		}
+		mran_lt p {
+	      font-size: 80px;
+	      text-align: center;
+	    }
+	    mran_lt p span {
+	      color: red;
+	    }
+	    mran_lt p span.time {
+	      color: black
+	    }
+	    .zjmm{
+	    	width: 95%;
+	    	height: 1rem;
+	    	margin: auto;
+	    	border: 1px solid #f2f2f2;
+	    	margin-top: .3rem;
+	    	color: #999;
+	    }
+	    .zjmm img,.zjmm input{
+	    	float: left;
+	    }
+	    .zjmm img{
+	    	width: .4rem;
+	    	height: .4rem;
+	    	display: block;
+	    	margin: .3rem;
+	    }
+	    .zjmm input{
+	    	font-size: .35rem;
+	    	color: #333;
+	    	line-height: 1rem;
+	    	border: 0;
+	    }
+	</style>
+	
+	<body>
+		<div class="header">
+			<span>卖出</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		<div class="mr">
+			<div class="mr_lt">
+				<p class="mr_lt01">卖出BTC</p>
+				<p class="mr_lt02">56.790.00 CNY</p>
+				<!--<p class="mr_lt03">限额 5.000.00-50.176.00 CNY</p>
+				<div class="mr_lt04">
+					<div class="mr_lt04_box">
+						<img src="/zc/img/mm02.png">
+						<p>支付宝</p>
+					</div>
+					<div class="mr_lt04_box" style="margin-left: .3rem;">
+						<img src="/zc/img/mm01.png">
+						<p>银行卡支付</p>
+					</div>
+				</div>-->
+			</div>
+			
+			<div class="mr_rt">
+				<img src="/zc/img/center16.png">
+			</div>
+		</div>
+		
+		
+		<div class="gmk">
+			<div class="gmk_s">
+				<p><span>1000.00</span>CNY</p>
+				<button type="button">全部卖出</button>
+			</div>
+			
+			<div class="gmk_s" id="btc">
+				<p>2000.00BTC</p>
+			</div>
+		</div>
+		
+		<!--<div class="zjmm">
+			<img src="/zc/img/mima.png">
+			<input type="password" placeholder="请输入您的资金密码" />
+		</div>-->
+		
+		<div class="mran">
+			<button class="mran_lt" type="button"><div id="countdown">15</div><span style="display: none;">15</span></button>
+			<button class="mran_rt" id="xiadan" type="button">卖出</button>
+		</div>
+		
+		
+	</body>
+	
+	<script>
+		$(document).ready(function(){
+			$(".mran_rt").click(function(){
+				alert("卖出成功")
+			})
+		})
+	</script>
+	
+	<script>
+	  window.onload=function(){
+                var countdown=document.getElementById("countdown");
+                
+                var time=900;//30分钟换算成1800秒
+                 
+                
+                setInterval(function(){
+                    time=time-1;
+                   var minute=parseInt(time/60);
+                   var second=parseInt(time%60);
+                    countdown.innerHTML=minute+'分'+second+'秒'+'取消';
+                
+                
+                },1000);
+                
+                
+                $(".mran_lt").on("click",function(){
+                	$("#countdown").hide();
+                	$(".mran_lt span").show();
+                	$("#xiadan").addClass("xiadan");
+                });
+                
+                
+                
+                $(document).on("click",".xiadan",function(){
+                	alert(123);
+                });
+                
+            }
+	</script>
+</html>
+

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>交易密码</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link rel="stylesheet" href="/zc/css/center_gywm.css" />
+	<link rel="stylesheet" href="/zc/css/center_lxkf.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_aqzx.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<style>
+		body{
+			text-align: center;
+		}
+		.srk{
+			width: 80%;
+			height: 1rem;
+			margin: auto;
+			margin-top: .5rem;
+			color: #999;
+			border: 1px solid #999;
+			border-radius: .1rem;
+			text-align: center;
+		}
+		.srk input{
+			width: 90%;
+			height: 1rem;
+			line-height: 1rem;
+			color: #333;
+			border: 0;
+			font-size: .35rem;
+		}
+		.tj{
+			width: 80%;
+			margin: auto;
+			height: 1rem;
+			background: #18C78D;
+			border: 1px solid #18c78d;
+			color: #fff;
+			border-radius: .1rem;
+			margin-top: 1rem;
+		}
+		.aqts{
+			font-size: .35rem;
+			line-height: .8rem;
+			color: #333;
+			width: 80%;
+			margin: auto;
+			margin-top: .5rem;
+		}
+	</style>
+	<body>
+		<div class="header">
+			<span>修改密码</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		<div class="srk"><input type="password" id="old_pass" placeholder="请输入旧密码"></div>
+		<div class="srk"><input type="password" id="new_pass" placeholder="请输入新密码"></div>
+		<div class="srk"><input type="password" id="con_pass" placeholder="请再次输入新密码"></div>
+		
+		<button class="tj iag_btn" type="submit">提交</button>
+	</body>
+	 <script>
+        $(function () {
+            $('.iag_btn').on('click',function(){
+                var old_pwd=$('#old_pass').val();
+                var new_pwd=$('#new_pass').val();
+                var con_pwd=$('#con_pass').val();
+                if(!old_pwd) return alert('请输入原密码');
+                if(!new_pwd) return alert('请输入新密码');
+                if(new_pwd!=con_pwd) return alert('两次密码不一致');
+                $.ajax({
+                    type: "POST",
+                    url: "/index/apiindex/passwordLoginUpdate",
+                    data: {old_pwd:old_pwd,new_pwd:new_pwd,confirm_pwd:con_pwd},
+                    dataType: "jsonp",
+                    success: function (res) {
+                    	
+                        if(res.code==0){
+                            alert(res.message);
+                            window.location.href="/index/publics/index"
+                        }else{
+                            alert(res.message);
+                        }
+                    }
+                });
+            })
+        });
+    </script>
+</html>

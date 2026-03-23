@@ -1,0 +1,624 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+
+<link rel="stylesheet" href="http://cdn.staticfile.org/webuploader/0.1.5/webuploader.css">
+<script type="text/javascript" src='http://cdn.staticfile.org/webuploader/0.1.5/webuploader.min.js'></script>
+
+<section class="panel">
+
+    <header class="panel-heading">
+        <h4>付款方式配置</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" method="post" onsubmit="return false" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">人工充值客服一</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$list['service1']}" name="service1" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">人工充值客服二</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$list['service2']}" name="service2" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">人工充值客服三</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$list['service3']}" name="service3" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否启用人工充值</label>
+                <div class="col-xs-7 col-sm-8 col-md-9 col-lg-8">
+                    <div class="input-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="service_status" value="1" {if(1 == $list['service_status'])}checked="checked"{/if} />
+                            启用
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="service_status" value="2" {if(2 == $list['service_status'])}checked="checked"{/if} />
+                            禁用
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">微信账号</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$list['wx_num']}" name="wx_num" class="form-control">
+                </div>
+            </div>
+            <div class="panel-body" style="padding-bottom: 50px">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">微信收款码</label>
+                    <div class="col-sm-5">
+                        <div id="wxFilePicker" {if $list['wx_pic']}style="display:none;"{/if}>选择并上传图片</div>
+                </div>
+                <input type="hidden" value="{$list.wx_pic}" name="wx_pic" id="path_wx" class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-5">
+                    <div id="fileList1" class="uploader-list">
+                        {if $list['wx_pic']}
+                        <div  class="upload-state-done" data-id="{$list['wx_pic']}">
+                            <img src="{$list['wx_pic']}" width="200"><br><a href="javascript:;" onclick="deleteImag1(this);">删除</a>
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否启用微信</label>
+                <div class="col-xs-7 col-sm-8 col-md-9 col-lg-8">
+                    <div class="input-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="wx_status" value="1" {if(1 == $list['wx_status'])}checked="checked"{/if} />
+                           启用
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="wx_status" value="2" {if(2 == $list['wx_status'])}checked="checked"{/if} />
+                            禁用
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">支付宝账号</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$list['zfb_num']}" name="zfb_num" class="form-control"
+                           placeholder="请输入支付宝账号">
+                </div>
+            </div>
+            <div class="panel-body" style="padding-bottom: 50px">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">支付宝收款码</label>
+                    <div class="col-sm-5">
+                        <div id="filePicker" {if $list['zfb_pic']}style="display:none;"{/if}>选择并上传图片</div>
+                </div>
+                <input type="hidden" value="{$list.zfb_pic}" name="zfb_pic" id="path" class="form-control">
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-5">
+                    <div id="fileList" class="uploader-list">
+                        {if $list['zfb_pic']}
+                        <div  class="upload-state-done" data-id="{$list['zfb_pic']}">
+                            <img src="{$list['zfb_pic']}" width="200"><br><a href="javascript:;" onclick="deleteImag(this);">删除</a>
+                        </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否启用支付宝</label>
+                <div class="col-xs-7 col-sm-8 col-md-9 col-lg-8">
+                    <div class="input-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="zfb_status" value="1" {if(1 == $list['zfb_status'])}checked="checked"{/if} />
+                            启用
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="zfb_status" value="2" {if(2 == $list['zfb_status'])}checked="checked"{/if} />
+                            禁用
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">开户人</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$list['bank_man']}" name="bank_man" class="form-control"
+                           placeholder="请输入支付宝账号">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">开户行</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$list['bank_name']}" name="bank_name" class="form-control"
+                           placeholder="请输入支付宝账号">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">银行卡号</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$list['bank_number']}" name="bank_number" class="form-control"
+                           placeholder="请输入支付宝账号">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">是否启用银行卡</label>
+                <div class="col-xs-7 col-sm-8 col-md-9 col-lg-8">
+                    <div class="input-group">
+                        <label class="radio-inline">
+                            <input type="radio" name="bank_status" value="1" {if(1 == $list['bank_status'])}checked="checked"{/if} />
+                            启用
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="bank_status" value="2" {if(2 == $list['bank_status'])}checked="checked"{/if} />
+                            禁用
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">秘钥</label>
+                <div class="col-sm-5">
+                    <input type="password" value="" name="password" class="form-control"
+                           placeholder="请输入秘钥">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" onclick="main.ajaxPosts(this)" data-url="{:url('admin/System/update',['id'=>$list.id])}"
+                            class="btn btn-primary">提交
+                    </button>
+                    <button type="button" onclick="javascript:history.back(-1);" class="btn btn-warning">返回
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+{/block}
+{block name="footer"}
+<script src="/admin/vendor/fuelux/radio.js"></script>
+<script>
+    // 初始化Web Uploader
+    var uploader = WebUploader.create({
+
+        // 选完文件后，是否自动上传。
+        auto: true,
+
+        // 文件接收服务端。
+        server: "{:url('upload/uploadImg')}",
+
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: {
+            id:'#filePicker',
+            multiple:true
+        },
+
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/jpg,image/jpeg,image/png'
+        }
+    });
+    var $list = $('#fileList');
+    var thumbnailWidth =300;
+    var thumbnailHeight = 300;
+    // 当有文件添加进来的时候
+    uploader.on( 'fileQueued', function( file ) {
+        var $li = $(
+            '<div id="' + file.id + '" class="col-sm-5">' +
+            '<img width="200px">' +
+            '<br><a href="javascript:;" onclick="deleteImag(this);">删除</a>' +
+            '</div>'
+            ),
+            $img = $li.find('img');
+
+
+        // $list为容器jQuery实例
+        $list.append( $li );
+
+        // 创建缩略图
+        // 如果为非图片文件，可以不用调用此方法。
+        // thumbnailWidth x thumbnailHeight 为 100 x 100
+        uploader.makeThumb( file, function( error, src ) {
+            if ( error ) {
+                $img.replaceWith('<span>不能预览</span>');
+                return;
+            }
+
+            $img.attr( 'src', src );
+        }, thumbnailWidth, thumbnailHeight );
+    });
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on( 'uploadProgress', function( file, percentage ) {
+        var $li = $( '#'+file.id ),
+            $percent = $li.find('.progress span');
+
+        // 避免重复创建
+        if ( !$percent.length ) {
+            $percent = $('<p class="progress"><span></span></p>')
+                .appendTo( $li )
+                .find('span');
+        }
+
+        $percent.css( 'width', percentage * 100 + '%' );
+    });
+
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploader.on( 'uploadSuccess', function( file ,data) {
+        if(data.errno == 0){
+            $( '#'+file.id ).addClass('upload-state-done');
+            $( '#'+file.id ).attr('data-id',data.data);
+            $('#path').val(data.data);
+            $('#filePicker').hide();
+        }
+    });
+
+    // 文件上传失败，显示上传出错。
+    uploader.on( 'uploadError', function( file ) {
+        var $li = $( '#'+file.id ),
+            $error = $li.find('div.error');
+
+        // 避免重复创建
+        if ( !$error.length ) {
+            $error = $('<div class="error"></div>').appendTo( $li );
+        }
+
+        $error.text('上传失败');
+    });
+
+    // 完成上传完了，成功或者失败，先删除进度条。
+    uploader.on( 'uploadComplete', function( file ) {
+        $( '#'+file.id ).find('.progress').remove();
+    });
+    //删除图片
+    function deleteImag(dom){
+        var _this = $(dom);
+        $.confirm({
+            title: '<strong style="color: #c7254e;font-size: 16px">温馨提示</strong>',
+            content: '<div class="text-center" style="border-top:1px solid #eee;padding-top: 20px">确定删除</div>',
+            confirmButton: '确定',
+            confirmButtonClass: 'btn btn-info',
+            cancelButton: '取消',
+            cancelButtonClass: 'btn btn-danger',
+            animation: 'scaleY',
+            theme: 'material',
+            confirm: function () {
+                $('#path').val('');
+                $('#filePicker').show();
+                _this.parent('div').remove();
+                var uploader = WebUploader.create({
+
+                    // 选完文件后，是否自动上传。
+                    auto: true,
+
+                    // 文件接收服务端。
+                    server: "{:url('upload/uploadImg')}",
+
+                    // 选择文件的按钮。可选。
+                    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                    pick: {
+                        id:'#filePicker',
+                        multiple:true
+                    },
+
+                    // 只允许选择图片文件。
+                    accept: {
+                        title: 'Images',
+                        extensions: 'gif,jpg,jpeg,bmp,png',
+                        mimeTypes: 'image/jpg,image/jpeg,image/png'
+                    }
+                });
+                var $list = $('#fileList');
+                var thumbnailWidth =200;
+                var thumbnailHeight = 200;
+// 当有文件添加进来的时候
+                uploader.on( 'fileQueued', function( file ) {
+                    var $li = $(
+                        '<div id="' + file.id + '" class="">' +
+                        '<img>' +
+                        '<br><a href="javascript:;" onclick="deleteImag(this);">删除</a>' +
+                        '</div>'
+                        ),
+                        $img = $li.find('img');
+
+
+                    // $list为容器jQuery实例
+                    $list.append( $li );
+
+                    // 创建缩略图
+                    // 如果为非图片文件，可以不用调用此方法。
+                    // thumbnailWidth x thumbnailHeight 为 100 x 100
+                    uploader.makeThumb( file, function( error, src ) {
+                        if ( error ) {
+                            $img.replaceWith('<span>不能预览</span>');
+                            return;
+                        }
+
+                        $img.attr( 'src', src );
+                    }, thumbnailWidth, thumbnailHeight );
+                });
+// 文件上传过程中创建进度条实时显示。
+                uploader.on( 'uploadProgress', function( file, percentage ) {
+                    var $li = $( '#'+file.id ),
+                        $percent = $li.find('.progress span');
+
+                    // 避免重复创建
+                    if ( !$percent.length ) {
+                        $percent = $('<p class="progress"><span></span></p>')
+                            .appendTo( $li )
+                            .find('span');
+                    }
+
+                    $percent.css( 'width', percentage * 100 + '%' );
+                });
+
+// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+                uploader.on( 'uploadSuccess', function( file ,data) {
+                    if(data.errno == 0){
+                        $( '#'+file.id ).addClass('upload-state-done');
+                        $( '#'+file.id ).attr('data-id',data.data);
+                        $('#path').val(data.data);
+                        $('#filePicker').hide();
+                    }
+                });
+
+// 文件上传失败，显示上传出错。
+                uploader.on( 'uploadError', function( file ) {
+                    var $li = $( '#'+file.id ),
+                        $error = $li.find('div.error');
+
+                    // 避免重复创建
+                    if ( !$error.length ) {
+                        $error = $('<div class="error"></div>').appendTo( $li );
+                    }
+
+                    $error.text('上传失败');
+                });
+
+// 完成上传完了，成功或者失败，先删除进度条。
+                uploader.on( 'uploadComplete', function( file ) {
+                    $( '#'+file.id ).find('.progress').remove();
+                });
+
+            }
+
+        });
+
+    }
+
+</script>
+<script>
+    // 初始化Web Uploader
+    var uploader = WebUploader.create({
+
+        // 选完文件后，是否自动上传。
+        auto: true,
+
+        // 文件接收服务端。
+        server: "{:url('upload/uploadImg')}",
+
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: {
+            id:'#wxFilePicker',
+            multiple:true
+        },
+
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/jpg,image/jpeg,image/png'
+        }
+    });
+    var $list = $('#wxFilePicker');
+    var thumbnailWidth =300;
+    var thumbnailHeight = 300;
+    // 当有文件添加进来的时候
+    uploader.on( 'fileQueued', function( file ) {
+        var $li = $(
+            '<div id="' + file.id + '" class="col-sm-5">' +
+            '<img width="200px">' +
+            '<br><a href="javascript:;" onclick="deleteImag1(this);">删除</a>' +
+            '</div>'
+            ),
+            $img = $li.find('img');
+
+
+        // $list为容器jQuery实例
+        $list.append( $li );
+
+        // 创建缩略图
+        // 如果为非图片文件，可以不用调用此方法。
+        // thumbnailWidth x thumbnailHeight 为 100 x 100
+        uploader.makeThumb( file, function( error, src ) {
+            if ( error ) {
+                $img.replaceWith('<span>不能预览</span>');
+                return;
+            }
+
+            $img.attr( 'src', src );
+        }, thumbnailWidth, thumbnailHeight );
+    });
+    // 文件上传过程中创建进度条实时显示。
+    uploader.on( 'uploadProgress', function( file, percentage ) {
+        var $li = $( '#'+file.id ),
+            $percent = $li.find('.progress span');
+
+        // 避免重复创建
+        if ( !$percent.length ) {
+            $percent = $('<p class="progress"><span></span></p>')
+                .appendTo( $li )
+                .find('span');
+        }
+
+        $percent.css( 'width', percentage * 100 + '%' );
+    });
+
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploader.on( 'uploadSuccess', function( file ,data) {
+        console.log(11);
+        if(data.errno == 0){
+            $( '#'+file.id ).addClass('upload-state-done');
+            $( '#'+file.id ).attr('data-id',data.data);
+            console.log($('#path_wx').val());
+            $('#path_wx').val(data.data);
+            $('#wxFilePicker').hide();
+        }
+    });
+
+    // 文件上传失败，显示上传出错。
+    uploader.on( 'uploadError', function( file ) {
+        var $li = $( '#'+file.id ),
+            $error = $li.find('div.error');
+
+        // 避免重复创建
+        if ( !$error.length ) {
+            $error = $('<div class="error"></div>').appendTo( $li );
+        }
+
+        $error.text('上传失败');
+    });
+
+    // 完成上传完了，成功或者失败，先删除进度条。
+    uploader.on( 'uploadComplete', function( file ) {
+        $( '#'+file.id ).find('.progress').remove();
+    });
+    //删除图片
+    function deleteImag1(dom){
+        var _this = $(dom);
+        $.confirm({
+            title: '<strong style="color: #c7254e;font-size: 16px">温馨提示</strong>',
+            content: '<div class="text-center" style="border-top:1px solid #eee;padding-top: 20px">确定删除</div>',
+            confirmButton: '确定',
+            confirmButtonClass: 'btn btn-info',
+            cancelButton: '取消',
+            cancelButtonClass: 'btn btn-danger',
+            animation: 'scaleY',
+            theme: 'material',
+            confirm: function () {
+                $('#path_wx').val('');
+                $('#wxFilePicker').show();
+                _this.parent('div').remove();
+                var uploader = WebUploader.create({
+
+                    // 选完文件后，是否自动上传。
+                    auto: true,
+
+                    // 文件接收服务端。
+                    server: "{:url('upload/uploadImg')}",
+
+                    // 选择文件的按钮。可选。
+                    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                    pick: {
+                        id:'#wxFilePicker',
+                        multiple:true
+                    },
+
+                    // 只允许选择图片文件。
+                    accept: {
+                        title: 'Images',
+                        extensions: 'gif,jpg,jpeg,bmp,png',
+                        mimeTypes: 'image/jpg,image/jpeg,image/png'
+                    }
+                });
+                var $list = $('#fileList1');
+                var thumbnailWidth =200;
+                var thumbnailHeight = 200;
+// 当有文件添加进来的时候
+                uploader.on( 'fileQueued', function( file ) {
+                    var $li = $(
+                        '<div id="' + file.id + '" class="">' +
+                        '<img>' +
+                        '<br><a href="javascript:;" onclick="deleteImag1(this);">删除</a>' +
+                        '</div>'
+                        ),
+                        $img = $li.find('img');
+
+
+                    // $list为容器jQuery实例
+                    $list.append( $li );
+
+                    // 创建缩略图
+                    // 如果为非图片文件，可以不用调用此方法。
+                    // thumbnailWidth x thumbnailHeight 为 100 x 100
+                    uploader.makeThumb( file, function( error, src ) {
+                        if ( error ) {
+                            $img.replaceWith('<span>不能预览</span>');
+                            return;
+                        }
+
+                        $img.attr( 'src', src );
+                    }, thumbnailWidth, thumbnailHeight );
+                });
+// 文件上传过程中创建进度条实时显示。
+                uploader.on( 'uploadProgress', function( file, percentage ) {
+                    var $li = $( '#'+file.id ),
+                        $percent = $li.find('.progress span');
+
+                    // 避免重复创建
+                    if ( !$percent.length ) {
+                        $percent = $('<p class="progress"><span></span></p>')
+                            .appendTo( $li )
+                            .find('span');
+                    }
+
+                    $percent.css( 'width', percentage * 100 + '%' );
+                });
+
+// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+                uploader.on( 'uploadSuccess', function( file ,data) {
+                    if(data.errno == 0){
+                        $( '#'+file.id ).addClass('upload-state-done');
+                        $( '#'+file.id ).attr('data-id',data.data);
+                        $('#path_wx').val(data.data);
+                        $('#filePicker1').hide();
+                    }
+                });
+
+// 文件上传失败，显示上传出错。
+                uploader.on( 'uploadError', function( file ) {
+                    var $li = $( '#'+file.id ),
+                        $error = $li.find('div.error');
+
+                    // 避免重复创建
+                    if ( !$error.length ) {
+                        $error = $('<div class="error"></div>').appendTo( $li );
+                    }
+
+                    $error.text('上传失败');
+                });
+
+// 完成上传完了，成功或者失败，先删除进度条。
+                uploader.on( 'uploadComplete', function( file ) {
+                    $( '#'+file.id ).find('.progress').remove();
+                });
+
+            }
+
+        });
+
+    }
+
+</script>
+{/block}

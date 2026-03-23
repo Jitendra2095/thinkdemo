@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/layer.js"></script>
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<style>
+		.login_bj{
+			overflow: hidden;
+		}
+		.login_bj img{
+			width: 3rem;
+			display: block;
+			margin: auto;
+			margin-top: 1.4rem;
+		}
+		.login_srk{
+			margin-left: -.6rem;
+		}
+	</style>
+	<body onresize="document.activeElement.scrollIntoView(true);">
+		
+		<div class="login_bj">
+			<img src="/zc/img/logo_w.png">
+		</div>
+		
+		<div class="login_srk">
+			<div class="login_zh">
+				<p>账号：</p>
+				<input type="text" class="account" placeholder="请输入您的账号" />
+			</div>
+			<div class="login_mm">
+				<p>密码：</p>
+				<input type="password" class="password" placeholder="请输入您的密码"/>
+			</div>
+			<div class="wjmm"><a style="text-decoration: none;" href="Forget.html">忘记密码？</a></div>
+		</div>
+		
+		<div class="dlan">
+			<button type="button">登录</button>
+		</div>
+		
+		<div class="zc">还没有账号？<a style="text-decoration: none;" href="register.html">立即注册</a></div>
+		<script>
+		$(function () {
+            $('.dlan').off().on('click',function(){
+                var nick_name=$('.account').val();
+                var password=$('.password').val();
+                if(!nick_name){
+					layer.open({
+								content: '账号不能为空',
+								skin: 'msg',
+								time: 2
+                            }); 
+                }
+                if(!password){
+					layer.open({
+								content: '密码不能为空',
+								skin: 'msg',
+								time: 2
+                            }); 
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "{:url('index/publics/login')}",
+                    data: { mobile: nick_name,password: password},
+                    success: function (res) {
+                        if(res.code==0){
+							layer.open({
+								content: '登录成功',
+								skin: 'msg',
+								time: 2
+                            }); 
+                            setTimeout(function(){
+                                location.href="{:url('index/index/index')}";
+                            }, 300);
+                        }else{
+                            layer.open({
+								content: res.message,
+								skin: 'msg',
+								time: 2
+                            }); 
+                        }
+                    }
+                });
+            });
+        }); 
+		</script>
+	</body>
+</html>

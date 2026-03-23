@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>划转</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="screen-orientation" content="portrait">
+	<meta name="full-screen" content="yes">
+	<meta name="browsermode" content="application">
+	<meta name="x5-orientation" content="portrait">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="x5-page-mode" content="app">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!-- css -->
+    <link href="/zc/css/mui.min.css" rel="stylesheet">
+    <link href="/zc/css/login.css" rel="stylesheet">
+    <link href="/zc/css/base.css" rel="stylesheet">
+    <link href="/zc/css/mobileSelect.css" rel="stylesheet" />
+    <!-- js -->
+	<script src="/zc/js/jquery.min.js"></script>
+    <script src="/zc/js/mui.min.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/flexible.js"></script>
+    <script src="/zc/js/flexible_css.js"></script>
+    <script src="/zc/js/foot_bar.js"></script>
+    <script src="/zc/js/mobileSelect.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        mui.init();
+    </script>
+    <style>
+        #app{
+            margin-top: 
+        }
+        .ws_small{
+            width: 92%;
+            margin: auto;
+            margin-top: .4rem;
+        }
+        :-ms-input-placeholder{color: #D9D9D9}
+        ::-webkit-input-placeholder{color: #D9D9D9}
+        input{width: 100%;height: 1.013333rem;font-size: .346667rem;border: 1px solid #D9D9D9;border-radius: 3px}
+        #upload_file{position: absolute;width: 1.333333rem;height: 1.333333rem;opacity: 0;}
+        .sc_img img{width: 1.333333rem;height: 1.333333rem}
+        .gg_btn{margin-top: 4rem;}
+        .sc_img .ns1{width: 100%;height: 100%}
+    </style>
+</head>
+<body>
+	<div id="app">
+        <div class="trading_head">
+            <div class="left open_cbl">
+                <a href="javascript:history.back(-1)" style="margin-top: .2rem">
+                    <img src="/zc/img/fh.png" alt="">
+                </a>
+                <span>划转</span>
+            </div>
+        </div>
+        <div class="ws_small">
+            <div>划转方向</div>
+            <div id='trigger1' class="o_qbzh">
+                <div class="ns1">从</div>
+                <div class="ns2 c_qbdz">
+                    <span id='user1' data-type='1'>钱包账户</span>
+                    <img src="/zc/img/yjt_h.png" alt="">
+                </div>
+            </div>
+            <div class="o_qbzh" id='trigger2'>
+                <div class="ns1">转至</div>
+                <div class="ns2 z_qbdz">
+                    <span id='user2' data-type='3'>OTC账户</span>
+                    <img src="/zc/img/yjt_h.png" alt="">
+                </div>
+            </div>
+            <!-- 币种 -->
+            <div style="margin-top:.4rem" id='user3'>币种</div>
+            <div class="o_qbzh" id='trigger3'>
+                <div class="ns1">请选择币种</div>
+                <div class="ns2 c_qbdz">
+                    <img src="/zc/img/yjt_h.png" alt="">
+                </div>
+            </div>
+            <div class="hz_sm">
+                <div class="ns1">!</div>
+                <div class="ns2">挖矿账户转出T+1到账</div>
+            </div>
+            <!-- 数量 -->
+            <div>划转数量</div>
+            <div class="o_qbzh">
+                <input class="sr_num" style="border:none;background: transparent;height: .8rem;margin:0;padding:0" type="number" placeholder="请输入划转数量">
+                <div class="all_hz">
+                    全部划转
+                </div> 
+            </div>
+            <div>可转0</div>
+            <div class="gg_btn">确认划转</div>
+        </div>
+        
+    </div>
+    <script type="text/html" id="tpl-info">
+    
+    </script>
+    <script>      
+        $.ajax({
+            type: "POST",
+            url:"/index/asset/getallbtype",
+            data:{},
+            dataType: "jsonp", 
+            success: function (res) {
+                var weekdayArr=[];
+                console.log(res);
+                console.log(res.info.length)
+                for(var i=0;i<res.info.length;i++){
+                    console.log(res.info[0].text)
+                    weekdayArr.push(res.info[i].text);
+                }
+                console.log(weekdayArr)
+                var mobileSelect1 = new MobileSelect({
+                        trigger: '#trigger1',
+                        title: '请选择账户',
+                        wheels: [
+                                    {data: weekdayArr}
+                        ],
+                        
+                        transitionEnd: function (indexArr, data) {
+
+                        },
+                        callback: function (indexArr, data) {
+                            $('.selectContainer li').eq(0).data('type','1');
+                            console.log($('.selectContainer li').eq(0).data('type'));
+                            $('.qufu').val(data[0]);
+                            console.log(indexArr[0])
+                            var num1=indexArr[0]+1;
+                            var tpl='<div class="ns1">从</div>'
+                                     +'<div class="ns2 c_qbdz">'
+                                        +'<span id="user1" data-type='+num1+'>'+ data[0]+'</span>'
+                                        +'<img src="/zc/img/yjt_h.png" alt="">'
+                                     +'</div>'
+                            $('#trigger1').html(tpl);
+                        }
+                    });
+                    var mobileSelect1 = new MobileSelect({
+                        trigger: '#trigger2',
+                        title: '请选择账户',
+                        wheels: [
+                                    {data: weekdayArr}
+                        ],
+                        
+                        transitionEnd: function (indexArr, data) {
+
+                        },
+                        callback: function (indexArr, data) {
+                            $('.selectContainer li').eq(0).data('type','1');
+                            console.log($('.selectContainer li').eq(0).data('type'));
+                            $('.qufu').val(data[0]);
+                            console.log(indexArr[0])
+                            var num1=indexArr[0]+1;
+                            var tpl='<div class="ns1">从</div>'
+                                     +'<div class="ns2 c_qbdz">'
+                                        +'<span id="user2" data-type='+num1+'>'+ data[0]+'</span>'
+                                        +'<img src="/zc/img/yjt_h.png" alt="">'
+                                     +'</div>'
+                            $('#trigger2').html(tpl);
+                            console.log(data[0]);
+                        }
+                    });
+                var stype = $('#user1').data('type');//转出的钱包
+                var etype = $('#user2').data('type');//转入的钱包
+                 //  获取两个钱包都有的币种
+                $.ajax({
+                type: "POST",
+                url:"/index/asset/cruintersect",
+                data:{stype:stype,etype:etype},
+                dataType: "jsonp", 
+                success: function (res) {
+                    console.log(res)
+                    var bzhong=[];
+                    for(var i=0;i<res.info.length;i++){
+                        bzhong.push(res.info[i].text);
+                    }
+                    console.log(bzhong)
+                var mobileSelect1 = new MobileSelect({
+                        trigger: '#trigger3',
+                        title: '请选择币种',
+                        wheels: [
+                                    {data: bzhong}
+                        ],
+                        
+                        transitionEnd: function (indexArr, data) {
+
+                        },
+                        callback: function (indexArr, data) {
+                            $('.selectContainer li').eq(0).data('type','1');
+                            console.log($('.selectContainer li').eq(0).data('type'));
+                            $('.qufu').val(data[0]);
+                            console.log(indexArr[0])
+                            var num1=indexArr[0]+1;
+                            var tpl='<div class="ns1" id="user3" data-type='+num1+'>'+ data[0]+'</div>'
+                                     +'<div class="ns2 c_qbdz">'
+                                        +'<img src="/zc/img/yjt_h.png" alt="">'
+                                     +'</div>'
+                            $('#trigger3').html(tpl);
+                        }
+                    });
+                    $('.all_hz').click(function (e) { 
+                        var btype3=$('#user1').data('type');
+                        var ftype3=$('#trigger3 .ns1').data('type');
+                        console.log(btype3)
+                            $.ajax({
+                                type: "POST",
+                                url: "/index/asset/crubalance",
+                                data: {btype:btype3,ftype:ftype3},
+                                dataType: "jsonp",
+                                success: function (res) {
+                                    if(res.code==0){ 
+                                        $('.sr_num').val(res.info)                                       
+                                    }
+                                }
+                            });
+                 });
+                }
+            });
+                        }
+        });
+        $('.gg_btn').click(function (e) { 
+            e.preventDefault();
+            var stype=$('#user1').data('type');
+            var etype=$('#user2').data('type');
+            var fieltype=$('#trigger3 .ns1').data('type');
+            var number=$('.sr_num').val();
+            if(fieltype==''){
+                return mui.toast('请选择币种');
+            }
+            if(number==''){
+                return mui.toast('请输入划转数量');
+            }
+            $.ajax({
+                type: "POST",
+                url: "/index/asset/transfer",
+                data: {
+                    stype:stype,
+                    etype:etype,
+                    fieltype:fieltype,
+                    number:number,
+                },
+                dataType: "jsonp",
+                success: function (res) {
+                    if(res.code=0){
+                        mui.toast(res.msg);
+                        setTimeout(function(){
+                            window.location.href=history.go(-1);
+                        },1500)
+                    }else{
+                        mui.toast(res.msg);
+                    }
+                }
+            });
+        });
+</script>
+</body>
+</html>
+

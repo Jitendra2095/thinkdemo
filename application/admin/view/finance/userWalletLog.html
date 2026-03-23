@@ -1,0 +1,144 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<script src="__PUBLIC__/admin/js/laydate/laydate.js"></script>
+<section class="panel">
+    <header class="panel-heading">
+        <h4>会员财务记录</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('userWalletLog')}" >
+            <div class="form-group">
+                <div class="col-xs-1 no-pd-r">
+                    <select name="types" id="types" class="form-control">
+                        <option  value="0">流水类型</option>
+                        {foreach $types as $i=>$m}
+                        <option {if $Request.get.types == $i}selected{/if} value="{$i}">{$m}</option>
+                        {/foreach}
+                    </select>
+                </div>
+
+                <div class="col-xs-1 no-pd-r">
+                    <select name="type" id="type" class="form-control">
+                        <option {if $Request.get.type == 'nick_name'} selected {/if} value="nick_name">用户名称</option>
+                        <option {if $Request.get.type == 'mobile'} selected {/if} value="mobile">手机号</option>
+                    </select>
+                </div>
+                <div class="col-xs-3 no-pd-l">
+                    <input type="text" value="{$Request.get.keyword}" name="keyword" id="keyword" class="form-control" placeholder="请输入关键词搜索">
+                </div>
+                <div class="col-xs-2 no-pd-2">
+                    <input type="text" value="{$Request.get.startTime}" name="startTime" id="startTime" class="form-control" placeholder="请输入开始时间">
+                </div>
+                <div class="col-xs-2 no-pd-2">
+                    <input type="text" value="{$Request.get.endTime}" name="endTime" id="endTime" class="form-control" placeholder="请输入结束时间">
+                </div>
+                <button type="submit" class="btn btn-color">搜索</button>
+                <button type="button" class="btn btn-success" id="export">导出</button>
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">用户信息</th>
+                    <th class="text-center">来自</th>
+                    <th class="text-center">流水类型</th>
+                    <th class="text-center">原来的金额</th>
+                    <th class="text-center">变化的金额</th>
+                    <th class="text-center">变化后的金额</th>
+                    <th class="text-center">备注</th>
+                    <th class="text-center">时间</th>
+                </tr>
+            </thead>
+            <tbody>
+            {if $list}
+                {foreach $list as $order}
+                    <tr>
+                        <td class="text-center">{$order->id}</td>
+                        <td class="text-center">
+                            手机号：{$order->mobile}<br>
+                            昵称：{$order->nick_name}
+                        </td>
+                        <td class="text-center">
+                            {if($order->types == 5 || $order->types == 4)}
+                            手机号：{$user->getUserInfo($order->froms)['mobile']}<br>
+                            昵称：{$user->getUserInfo($order->froms)['nick_name']}
+                            {/if}
+                        </td>
+                        <td class="text-center">
+                            {$order->getType($order->types)}
+                        </td>
+                        <td class="text-center">{$order->original_money}</td>
+                        <td class="text-center">{if $order->op_type == 1}-{else}+{/if}{$order->change_money}</td>
+                        <td class="text-center">{$order->after_change_money}</td>
+
+
+
+                        <td class="text-center">
+                           {$order->remarks}
+                        </td>
+                        <td class="text-center">
+                           {$order->createtime}
+                        </td>
+                    </tr>
+                {/foreach}
+            {else /}
+                <tr class="text-center">
+                    <td colspan="8">暂无数据</td>
+                </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+<script>
+    laydate.render({
+        elem: '#startTime',
+        type: 'datetime'
+    });
+    laydate.render({
+        elem: '#endTime',
+        type: 'datetime'
+    });
+</script>
+{/block}
+
+
+{block name="footer"}
+<form action="{:url('admin/Finance/exportUserWalletLog')}" id="exportForm">
+    <input type="hidden" name="types" id="e_types">
+    <input type="hidden" name="status" id="e_status">
+    <input type="hidden" name="keyword" id="e_keyword">
+    <input type="hidden" name="type" id="e_type">
+    <input type="hidden" name="startTime" id="e_startTime">
+    <input type="hidden" name="endTime" id="e_endTime">
+    <input type="hidden" name="page" value="{$Request.get.page}">
+</form>
+<script>
+    //导出奖金记录
+    $("#export").click(function(){
+        var types = $("#types").val();
+        var keyword = $("#keyword").val();
+        var type = $("#type").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        var page = $("#page").val();
+        $('#e_types').val(types);
+        $('#e_keyword').val(keyword);
+        $('#e_type').val(type);
+        $('#e_startTime').val(startTime);
+        $('#e_endTime').val(endTime);
+        $('#e_page').val(page);
+        $("#exportForm").submit();
+    })
+
+</script>
+{/block}

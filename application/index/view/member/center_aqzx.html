@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>安全中心</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link rel="stylesheet" href="/zc/css/center_gywm.css" />
+	<link rel="stylesheet" href="/zc/css/center_lxkf.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_aqzx.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<body>
+		<div class="header">
+			<span>安全中心</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		<div class="kh"></div>
+		
+		<a href="center_aqzx_xgmm.html">
+		<div class="xgmm">
+			<p>修改登录密码</p>
+			<div class="yjt"><img src="/zc/img/yjt_h.png"></div>
+		</div>
+		</a>
+		
+		<a href="center_aqzx_jymm.html">
+		<div class="xgmm">
+			<p>交易密码</p>
+			<div class="yjt"><img src="/zc/img/yjt_h.png"></div>
+		</div>
+		</a>
+		
+		<!--<div class="xgmm">
+			<p>谷歌二次验证</p>
+			<div class="yjt"><span>未开启</span><img src="/zc/img/yjt_h.png"></div>
+		</div>
+		
+		<div class="xgmm">
+			<p>手势密码</p>
+			<div class="yjt">
+				<div class="kg_on"><img src="/zc/img/center25.png"></div>
+				<div class="kg_off"><img src="/zc/img/center26.png"></div>
+			</div>
+		</div>-->
+		
+		<!--
+		<div class="xgmm">
+			<p>修改手势密码</p>
+			<div class="yjt"><img src="/zc/img/yjt_h.png"></div>
+		</div>
+		-->
+	</body>
+	
+	<script>
+		$(document).ready(function(){
+			$(".kg_off").click(function(){
+				$(".kg_off").hide();
+				$(".kg_on").show();
+			});
+		});
+		
+		$(document).ready(function(){
+			$(".kg_on").click(function(){
+				$(".kg_on").hide();
+				$(".kg_off").show();
+			});
+		}); 
+	</script>
+	
+	<script>
+		$(document).ready(function(){
+			$(".kg_off,.kg_on").click(function(){
+				window.location.href="center_ssjs.html"; 
+			})
+		})
+	</script>
+</html>

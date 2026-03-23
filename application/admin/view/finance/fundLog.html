@@ -1,0 +1,117 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<script src="__PUBLIC__/admin/js/laydate/laydate.js"></script>
+<section class="panel">
+    <header class="panel-heading">
+        <h4>公益基金记录</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('fundLog')}" >
+            <div class="form-group">
+                <div class="col-xs-1 no-pd-r">
+                    <select name="type" id="type" class="form-control">
+                        <option {if $Request.get.type == 'user_id'} selected {/if} value="user_id">奖励用户</option>
+                    </select>
+                </div>
+                <div class="col-xs-3 no-pd-l">
+                    <input type="text" value="{$Request.get.keyword}" name="keyword" id="keyword" class="form-control" placeholder="请输入关键词搜索">
+                </div>
+                <div class="col-xs-2 no-pd-2">
+                    <input type="text" value="{$Request.get.startTime}" name="startTime" id="startTime" class="form-control" placeholder="请输入开始时间">
+                </div>
+                <div class="col-xs-2 no-pd-2">
+                    <input type="text" value="{$Request.get.endTime}" name="endTime" id="endTime" class="form-control" placeholder="请输入结束时间">
+                </div>
+                <button type="submit" class="btn btn-color">搜索</button>
+                <button type="button" class="btn btn-success" id="export">导出</button>
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">奖励人</th>
+                    <th class="text-center">总消费金额</th>
+                    <th class="text-center">贡献公益基金</th>
+                    <th class="text-center">备注</th>
+                    <th class="text-center">创建时间</th>
+                </tr>
+            </thead>
+            <tbody>
+            {if $list}
+                {foreach $list as $order}
+                    <tr>
+                        <td class="text-center">{$order->id}</td>
+                        <td class="text-center">
+                            ID：{$order->user_id}<br>
+                            手机号：{$user->getUserInfo($order->user_id)['mobile']}<br>
+                            昵称：{$user->getUserInfo($order->user_id)['nick_name']}
+                        </td>
+                        <td class="text-center">
+                            {$order->all_total}
+                        </td>
+                        <td class="text-center">
+                            {$order->fund_total}
+                        </td>
+                        <td class="text-center">
+                            {$order->remarks}
+                        </td>
+                        <td class="text-center">
+                            {$order->create_time}
+                        </td>
+                    </tr>
+                {/foreach}
+            {else /}
+                <tr class="text-center">
+                    <td colspan="8">暂无数据</td>
+                </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+<script>
+    laydate.render({
+        elem: '#startTime',
+        type: 'datetime'
+    });
+    laydate.render({
+        elem: '#endTime',
+        type: 'datetime'
+    });
+</script>
+{/block}
+{block name="footer"}
+<form action="{:url('admin/Finance/exportFundLog')}" id="exportForm">
+    <input type="hidden" name="keyword" id="e_keyword">
+    <input type="hidden" name="type" id="e_type">
+    <input type="hidden" name="startTime" id="e_startTime">
+    <input type="hidden" name="endTime" id="e_endTime">
+    <input type="hidden" name="page" value="{$Request.get.page}">
+</form>
+<script>
+    //导出奖金记录
+    $("#export").click(function(){
+        var keyword = $("#keyword").val();
+        var type = $("#type").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        var page = $("#page").val();
+        $('#e_keyword').val(keyword);
+        $('#e_type').val(type);
+        $('#e_startTime').val(startTime);
+        $('#e_endTime').val(endTime);
+        $('#e_page').val(page);
+        $("#exportForm").submit();
+    })
+
+</script>
+{/block}

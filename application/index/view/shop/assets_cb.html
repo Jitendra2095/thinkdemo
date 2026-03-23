@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>充币</title>
+		<link rel="stylesheet" href="/zc/css/style.css" />
+		<link rel="stylesheet" href="/zc/css/index.css" />
+		<link rel="stylesheet" href="/zc/css/login.css" />
+		<link href="/zc/css/swiper.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/zc/css/swiper-3.2.7.min.css" />
+		<script src="/zc/js/flexible.js"></script>
+		<script src="/zc/js/flexible_css.js"></script>
+		<script src="/zc/js/template.js"></script>
+		<script src="/zc/js/jquery-1.11.1.min.js"></script>
+		<script src="/zc/js/unslider.min.js"></script>
+	    <script src="/zc/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/zc/js/swiper-3.4.0.jquery.min.js" ></script>
+		
+		<script src="/zc/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="/zc/js/jquery.qrcode.min.js"></script>
+
+		<style>
+			.cb{
+				width: 100%;
+				margin: auto;
+			}
+			.cb_box{
+				width: 95%;
+				margin: auto;
+			}
+			.cb_box01{
+				font-size: .4rem;
+				color: #333;
+				font-weight: bold;
+			}
+			#output{
+				width: 3rem;
+				height: 3rem;
+				margin: auto;
+				margin-top: .5rem;
+			}
+			#output *{
+				width: 3rem;
+				height: 3rem;
+				margin: auto;
+			}
+			.cb_box02,.cb_box03,.cb_box04{
+				font-size: .35rem;
+				color: #18C78D;
+				text-align: center;
+				line-height: .7rem;
+			}
+			.cb_box03{
+				width: 95%;
+				margin: auto;
+			}
+			.cb_box03 p{
+				width: 20%;
+				font-size: .35rem;
+				color: #333;
+				line-height: 1rem;
+			}
+			.cb_box03_x{
+				width: 100%;
+				height: 1rem;
+				overflow: hidden;
+				border-bottom: 1px solid #dcdcdc;
+			}
+			.cb_box03 input,.cb_box03 img{
+				float: left;
+			}
+			.cb_box03 input{
+				width: 80%;
+				font-size: .35rem;
+				color: #999;
+				line-height: 1rem;
+				background: #fff;
+				border: 0;
+				border-bottom: 1px solid #999;
+			}
+			.cb_box03 img{
+				width: .5rem;
+				float: right;
+				margin-top: .2rem;
+			}
+			.scpz{
+			width: 95%;
+			margin: auto;
+			margin-top: .1rem;
+			}
+			.scpz_bt{
+				font-size: .4rem;
+				color: #333;
+				line-height: .8rem;
+			}
+			.scpz_k{
+				width: 100%;
+				height: 4rem;
+				border: 1px solid #dcdcdc;
+				position: relative;
+			}
+			.scpz_k img{
+				width: 1.2rem;
+				display: block;
+				position: absolute;
+				left: 50%;
+				top: 1.2rem;
+				transform: translate(-50%);
+			}
+			.scpz_k input{
+				width: 100%;
+				height: 4rem;
+				opacity: 0;
+			}
+			.tssm{
+				width: 100%;
+				margin-top: .5rem;
+			}
+			.tssm p{
+				font-size: .35rem;
+				line-height: .6rem;
+				color: #666;
+				margin-left: .3rem;
+			}
+			.qd{
+				width: 90%;
+				height: 1rem;
+				margin: auto;
+				margin-top: .5rem;
+				    margin-bottom: 15px;
+			}
+			.qd input{
+				width: 100%;
+				background: #18C78D;
+				height: 1rem;
+				border: 0;
+				font-size: .4rem;
+				color: #fff;
+			}
+			.sl{
+				width: 95%;
+				margin: auto;
+				margin-top: .3rem;
+				height: 1rem;
+			}
+			.sl input{
+				width: 100%;
+				height: 1rem;
+				font-size: .4rem;
+				line-height: 1rem;
+				border: 0;
+				border-bottom: 1px solid #dcdcdc;
+			}
+			.ewm01{
+				width: 100%;
+			}
+			.ewm01 img{
+				width: 3rem;
+				margin: auto;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<span>充币</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>	
+		
+		<div class="cb">
+			<div class="cb_box">
+				
+				<p class="cb_box01">USDT</p>
+				
+				<div class="ewm01"><img src="/zc/img/ewm01.png" id="img"></div>
+				<!--<div class="ewm" id="output"></div>-->
+				
+				<p class="cb_box02">保存二维码</p>
+				
+				<div class="cb_box03">
+					<p>充币地址：</p>
+					<div class="cb_box03_x">
+						<input type="text" disabled="disabled" value="1FipwJLyF2kVK4uLvyWZZfygMr3W5Ast8" class="inp">
+						<img src="/zc/img/fz.png" class="huizhi" />
+					</div>
+					
+				</div>
+				
+				<!--<p class="cb_box04">复制地址</p>-->
+				
+				<div class="sl"><input placeholder="请输入充币数量" class="num"></div>
+				
+				<div class="scpz">
+					<p class="scpz_bt">上传凭证</p>
+					<div class="scpz_k">
+						<img src="/zc/img/tj.png">
+						<input type="file" accept="/images*" / class="uploaderInput">
+					</div>
+				</div>
+				
+				<div class="tssm">
+					<p style="color: red;">温馨提示:</p>
+					<p>备注和地址必须填写，否则无法转账，甚至造成损失。</p>
+					<p>请勿向上述地址充值任何非USDT资产，否则资产将不可找回。 您充值至上述地址后，需要整个网络节点的确认，1次网络确认后到账，6次网络确认后可提币您的充值地址不会经常改变，可以重复充值，若有更改，我们会尽量通过网站公告或邮件通知你，请务必确认电脑及浏览器安全，防止信息被篡改或泄漏。</p>
+				</div>
+				
+				
+				<div class="qd"><input type="submit" value="确定"></div>
+			</div>
+		</div>
+		
+		
+	</body>
+	
+	<script>
+		$.ajax({
+		    url:"/index/asset/geterweima",
+		    type:"post",
+		    dataType:'jsonp',
+		    data:{},
+		    success: function(res) {
+		        console.log(res)
+		      	$('.inp').val(res.info.address);
+		      	// $('#img').val(res.info.path);
+		      	$('#img').attr('src',res.info.path);
+		    },
+		    error:function(err){
+		       
+		    }
+
+		});
+	jQuery(function(){
+	
+		jQuery('#output').qrcode("http://www.jq22.com");
+	
+	})
+
+	function copyText(obj) {
+   	if (!obj) {
+     return false;
+   }
+   var text;
+   if (typeof(obj) == 'object') {
+     if (obj.nodeType) { // DOM node
+       obj = $(obj); // to jQuery object
+     }
+     try {
+       text = obj.text();
+       if (!text) { // Maybe <textarea />
+         text = obj.val();
+       }
+     } catch (err) { // as JSON
+       text = JSON.stringify(obj);
+     }
+   } else {
+     text = obj;
+   }
+   //var $temp = $('<input>'); // Line feed is not supported
+   var $temp = $('<textarea>');
+   $('body').append($temp);
+   $temp.val(text).select();
+   var res = document.execCommand('copy');
+   $temp.remove();
+   return res;
+ }
+ $(".huizhi").on("click",function(){
+  copyText($(".inp").val());
+  alert("复制成功")
+ })
+ var pic
+ $('.uploaderInput').on('change', function(){
+		var file = $(this)[0];
+		var formData = new FormData();
+		formData.append('file', file.files[0]);
+		// alert(1)
+		$.ajax({
+			url: "/index/upload/uploadimg",
+			type: 'post',
+			data: formData,
+			contentType: false, // 注意这里应设为false
+			processData: false,
+
+			success: function(res){
+				// console.log(res);
+				 pic = res.data;
+	          
+	                $('.scpz_k').html('<img src="'+res.data+'" class="img_zm" style="width:100%;height:100%;margin-top:-92px;">');
+	           
+			},
+			error: function(XHR, textStatus, errorThrown) {
+			  	layer.open({
+			  		content: '网络错误',
+					skin: 'msg',
+					time: 2
+				});
+			}	
+		});
+	});
+ $('.qd').click(function(){
+ 	var num=$('.num').val()
+ 	var address=$('.inp').val()
+ 	$.ajax({
+	    url:"/index/asset/czb",
+	    type:"post",
+	    dataType:'jsonp',
+	    data:{number:num,path:pic,address:address},
+	    success: function(res) {
+	        alert(res.message)
+	      
+	    },
+	    error:function(err){
+	        alert(err.message)
+	    }
+
+		});
+ })
+
+	</script>
+
+
+</html>

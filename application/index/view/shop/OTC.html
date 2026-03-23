@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>OTC</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link rel="stylesheet" href="/zc/css/center_gywm.css" />
+	<link rel="stylesheet" href="/zc/css/center_lxkf.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_aqzx.css" />
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/layer.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	
+	<link rel="stylesheet" href="/zc/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/zc/css/pignose.tab.min.css" />
+	
+	<style>
+		
+		.pignose-tab-wrapper .pignose-tab-group{
+			border: 0;
+		}
+		.pignose-tab-wrapper .pignose-tab-btn.active{
+			background: #03BE87;
+			border: #03BE87;
+			color: #fff;
+		}
+		.pignose-tab-wrapper .pignose-tab-bbn{
+			border: 0;
+		}
+		.pignose-tab-wrapper .pignose-tab-bbn.active{
+			background: #fff;
+			border-bottom: 1px solid #03BE87;
+			color: #03BE87;
+		}
+		.pignose-tab-wrapper .pignose-tab-group{
+			width: 100%;
+			margin: auto;
+		}
+		.pignose-tab-wrapper .pignose-tab-group .pignose-tab-list{
+			width: 25%;
+		}
+		#wrapper{
+			margin-top: .2rem;
+		}
+		.usdt{
+			width: 100%;
+			padding: .5rem 0;
+			border-top: .1rem solid #f2f2f2;
+			border-bottom: .1rem solid #f2f2f2;
+		}
+		.foot_block p{
+			margin: 0;
+		}
+		.usdt_box{
+			width: 90%;
+			margin: auto;
+		}
+		.usdt_box_dyt{
+			width: 100%;
+			overflow: hidden;
+		}
+		.usdt_box_dyt_lt,.usdt_box_dyt_z,.usdt_box_dyt_rt{
+			float: left;
+		}
+		.usdt_box_dyt_lt{
+			width: .7rem;
+			height: .7rem;
+			background: #03BE87;
+			border-radius: .4rem;
+		}
+		.usdt_box_dyt_lt p{
+			font-size: .35rem;
+			color: #fff;
+			text-align: center;
+			line-height: .8rem;
+		}
+		.usdt_box_dyt_z{
+			height: .8rem;
+			margin-left: .1rem;
+		}
+		.usdt_box_dyt_z p{
+			font-size: .35rem;
+			color: #333;
+			line-height: .8rem;
+		}
+		.usdt_box_dyt_rt{
+			float: right;
+			height: .8rem;
+		}
+		.usdt_box_dyt_rt p{
+			font-size: .35rem;
+			color: #999;
+			line-height: .8rem;
+		}
+		
+		.usdt_box_deh{
+			width: 100%;
+			overflow: hidden;
+			margin-top: .4rem;
+		}
+		.usdt_box_deh_lt,.usdt_box_deh_rt{
+			float: left;
+		}
+		.usdt_box_deh_lt p{
+			font-size: .3rem;
+			color: #999;
+		}
+		.usdt_box_deh_rt{
+			float: right;
+			color: #999;
+		}
+		.usdt_box_dsh{
+			width: 100%;
+			overflow: hidden;
+		}
+		.usdt_box_dsh_lt,.usdt_box_dsh_rt{
+			float: left;
+		}
+		.usdt_box_dsh_lt p{
+			font-size: .3rem;
+			color: #999;
+		}
+		.usdt_box_dsh_rt{
+			float: right;
+		}
+		.usdt_box_dsh_rt p span{
+			font-size: .4rem;
+			color: #333;
+			font-weight: bold;
+		}
+		.usdt_box_dsh_rt p{
+			font-size: .3rem;
+		}
+		.usdt_box_dsih{
+			width: 100%;
+			overflow: hidden;
+			margin-top: .2rem;
+		}
+		.usdt_box_dsih_lt,.usdt_box_dsih_rt{
+			float: left;
+		}
+		.usdt_box_dsih_lt{
+			overflow: hidden;
+		}
+		.usdt_box_dsih_lt img{
+			float: left;
+			width: .7rem;
+			height: .7rem;
+			display: block;
+			margin-left: .1rem;
+		}
+		.usdt_box_dsih_rt{
+			float: right;
+		}
+		.usdt_box_dsih_rt button{
+			width: 1.5rem;
+			font-size: .35rem;
+			height: .8rem;
+			line-height: .8rem;
+			color: #fff;
+			border-radius: .1rem;
+			background: #03BE87;
+			border: 1px solid #03BE87;
+		} 
+		.usdt_box_dsih_rt .mc{
+			background: red;
+			border: 1px solid red;
+		} 
+		.ysj{
+			width: .7rem;
+			height: .7rem;
+			z-index: 1000;
+			position: absolute;
+			right: .3rem;
+			top: .3rem;
+		}
+		.ysj img{
+			width: 100%;
+		}
+		.wswc{   
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            position: fixed;
+            background: rgba(0,0,0,0.3);
+            left: 0;
+		}
+		.m-megess{
+			background: #fff;
+			border-radius: .133333rem;
+			position: absolute;
+			right: 4%;
+			top: .4rem;
+			z-index: 9999;
+			padding: .4rem;
+			display: none;
+		}
+		.m-megess .m-block{
+			display: flex;
+			display: -webkit-flex;
+			align-items: center;
+			line-height: 2;
+			color: #333;
+		}
+		.mr_mc{
+			display: flex;
+			display: -webkit-flex;
+			justify-content: center;
+			font-size: .373333rem;
+		}
+		.mr_mc .buy{	
+			height: 1.04rem;
+			width: 2.4rem;	
+			border: 1px solid #C6C6C6;
+			text-align: center;
+			line-height: 1.04rem;
+			color: #999999;
+		}
+		.juea{
+			border-bottom-right-radius: 5px;
+			border-top-right-radius: 5px;
+		}
+		.jueb{
+			border-bottom-left-radius: 5px;
+			border-top-left-radius: 5px;
+		}
+		.mr_mc .sell{	
+			height: 1.04rem;
+			width: 2.4rem;
+			text-align: center;
+			line-height: 1.04rem;
+			border: 1px solid #C6C6C6;
+			border-radius:0 3px 3px 0;
+			color: #999999;
+		}
+		.mr_mc .buy.active,.mr_mc .sell.active{
+			background: #03BE87;
+			color: #fff;
+		}
+		.woaaa{
+			display: flex;
+			display: -webkit-flex;
+			margin-left: 5%;
+			margin-top: 1rem;
+			padding-bottom: .3rem
+		}
+		.woaaa li{
+			font-size: .4rem;
+			margin-right: .4rem;
+			color: #666;
+		
+		}
+		.woaaa li.active{
+			
+			color: #03BE87;
+		}
+		.m-block img{
+			width: .4rem;
+			display: block;
+			margin-right: .1rem;
+		}
+		.ts{
+			width: 80%;
+			height: 5rem;
+			margin: auto;
+			border-radius: .2rem;
+			background: #fff;
+			margin-top: 6rem;
+		}
+		.ts img{
+			width: 50%;
+			display: block;
+			position: absolute;
+			left: 50%;
+			top: 3.7rem;
+			transform: translate(-50%);
+		}
+		.ts p{
+			font-size: .4rem;
+			color: #333;
+			text-align: center;
+			padding-top: 2rem;
+		}
+		.ts .ts_dj{
+			border-top: 1px solid #aaa;
+			height: 1.2rem;
+			overflow: hidden;
+			margin-top: 1.24rem;
+		}
+		.ts .ts_dj .ts_dj_lt{
+			font-size: .35rem;
+			line-height: 1.2rem;
+			width: 49%;
+			text-align: center;
+			color: #999;
+			border-right: 1px solid #aaa;
+			padding: 0;
+		}
+		.ts .ts_dj .ts_dj_rt{
+			font-size: .35rem;
+			line-height: 1.2rem;
+			width: 49%;
+			text-align: center;
+			color: #03BE87;
+			padding: 0;
+		}
+		.ts .ts_dj .ts_dj_lt,.ts .ts_dj .ts_dj_rt{
+			float: left;
+		}
+		.wswc{   
+				display: none;
+				justify-content: center;
+				align-items: center;
+				height: 100%;
+				width: 100%;
+				top: 0;
+				position: fixed;
+				background: rgba(0,0,0,0.3);
+				left: 0;
+		}
+	.message1,.message2{
+		background: #fff;
+		width: 100%;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		display: none;
+	}
+	.zzmr01{
+		text-align: center;
+		font-size: .4rem;
+		line-height: .8rem;
+		color: #333;
+	}
+	.zzmr02{
+		text-align: center;
+		font-size: .35rem;
+		color: #999;
+	}
+	.zzmr03{
+		text-align: center;
+		font-size: .35rem;
+		line-height: .3rem;
+	}
+	.zzmr04{
+		text-align: center;
+		font-size: .35rem;
+		line-height: .3rem;
+	}
+	.zzmr05{
+		height: 1rem;
+		overflow: hidden;
+	}
+	.zzmr05 p,.zzmr05 input{
+		float: left;
+		line-height: 1rem;
+	}
+	.zzmr05 p{
+		font-size: .35rem;
+		color: #333;
+		margin-left: 2rem;
+	}
+	.zzmr05 input{
+		background: #f2f2f2;
+		border: 0;
+		margin-left: .3rem;
+	}
+	.zzmr06{
+		width: 100%;
+		overflow: hidden;
+		margin-top: .3rem;
+	}
+	.zzmr06_lt,.zzmr06_rt{
+		float: left;
+	}
+	.zzmr06_lt{
+		width: 50%;
+		height: 1rem;
+		background: ;
+		border: 0;
+		color: #333;
+		font-size: .35rem;
+		line-height: 1rem;
+	}
+	.zzmr06_rt{
+		width: 50%;
+		height: 1rem;
+		background: #03BE87;
+		border: 0;
+		color: #fff;
+		font-size: .35rem;
+		line-height: 1rem;
+	}
+	</style>
+	
+
+
+	
+	<body>
+	<div class="ysj"><img src="/zc/img/mm04.png"></div>
+	
+	<div id="wrapper">	
+		<div class="article">
+			<div class="tab">
+				<ul>
+					<li>
+						<div class="mr_mc">
+							
+							<div class="buy jueb active" data-type='2'>我要买入</div>
+							<div class="buy juea" data-type='1'>我要卖出</div>
+						</div>
+						<div>
+							<div class="tab" id = "buyinfo">
+							</div>
+						</div>
+						<div class="orderdata">
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- 底部导航 -->
+		<div class="foot_bar">
+			<div class="foot_block">
+				<img class="ws1" src="/zc/img/a_icon1.png" alt="">
+				<p>首页</p>
+			</div>
+			<div class="foot_block active">
+				<img class="ws2" src="/zc/img/b_icon2.png" alt="">
+				<p>OTC</p>
+			</div>
+			<div class="foot_block" id="jy">
+				<img class="ws3" src="/zc/img/a_icon3.png" alt="">
+				<p>交易</p>
+			</div>
+			<div class="foot_block">
+				<img class="ws4" src="/zc/img/a_icon4.png" alt="">
+				<p>资产</p>
+			</div>
+			<div class="foot_block">
+				<img class="ws5" src="/zc/img/a_icon5.png" alt="">
+				<p>我的</p>
+			</div>            
+		</div>
+	</div>
+	
+		<div class="wswc"></div>
+		<div class="m-megess">
+			<a style="text-decoration: none;" href="apply.html">
+				<div class="m-block" id="shsq"><img src="/zc/img/otc01.png" alt=""><span>商家申请</span></div>
+			</a>
+			<a style="text-decoration: none;" href="otc_order.html">
+				<div class="m-block"><img src="/zc/img/otc02.png" alt=""><span>OTC订单</span></div>
+			</a>
+			<a style="text-decoration: none;" href="myotc_order.html">
+				<div class="m-block" id="ggrz01"><img src="/zc/img/otc03.png" alt=""><span>我的广告</span></div>
+			</a>
+			<a style="text-decoration: none;" href="javascript:;">
+				<div class="m-block" id="ggrz02"><img src="/zc/img/otc04.png" alt=""><span>发布求购广告</span></div>
+			</a>
+			<a style="text-decoration: none;" href="javascript:;">
+				<div class="m-block" id="ggrz03"><img src="/zc/img/otc05.png" alt=""><span>发布出售广告</span></div>
+			</a>
+		</div>
+		
+		
+		<!--发布广告提示认证-->
+		<div class="dongjie" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.6);z-index: 11111;position: fixed;left: 0;top:0;display: none;">
+		<div class="ts">
+			<img src="/zc/img/otc06.png">
+			<p>未完成C2认证</p>
+			<div class="ts_dj">
+				<a class="ts_dj_lt">暂不认证</a>
+				<a href="c1rz.html" class="ts_dj_rt">确定认证</a>
+			</div>
+		</div>
+		</div>
+		<!-- 买入 -->
+		<!--<div class="message1">
+			<p class="zzmr01">正在买入</p>-->
+			<!-- <p class="zzmr02">余额：545</p>
+			<p class="zzmr03">单价：3.00</p>
+			<p class="zzmr04">数量：65.00</p> -->
+			<!--<div class="zzmr05">
+				<p>交易密码</p>
+				<input type="password" class="trad_password" id="trad_password1" placeholder="请输入交易密码" />
+			</div>
+			<div class="zzmr06">
+				<button type="submit" class="zzmr06_lt">取消</button>
+				<button type="submit" class="zzmr06_rt" id="zz12">确定</button>
+				<!-- onclick="location.href='OTC_fk.html'" -->
+			<!--</div>
+		</div>-->
+		<!-- 卖出 -->
+		<!--<div class="message2">
+			<p class="zzmr01">正在卖出</p>-->
+			<!-- <p class="zzmr02">余额：545</p>
+			<p class="zzmr03">单价：3.00</p>
+			<p class="zzmr04">数量：65.00</p> -->
+			<!--<div class="zzmr05">
+				<p>交易密码</p>
+				<input type="password" class="trad_password" id="trad_password2" placeholder="请输入交易密码" />
+			</div>
+			<div class="zzmr06">
+				<button type="submit" class="zzmr06_lt">取消</button>
+				<button type="submit" class="zzmr06_rt" id="zz123" >确定</button>
+			</div>
+		</div>-->
+		<!-- <input type="hidden" id="orderid" value=""> -->
+		<!--结束-->
+	</body>
+	<script>
+		$(document).ready(function(){
+			$("#shsq").click(function(){
+				// alert("已提交申请")
+			})
+		})
+	</script>
+	<script type="text/html" id="info">
+		
+		<ul class="woaaa">
+			
+			{{each info v  k }}
+			<li  class="type_buy" data-type="{{k}}">
+				{{v}}
+			</li>
+			{{/each}}
+			
+		</ul>
+			
+	</script>
+	<script type="text/html" id="orderdata">
+		
+		<div>
+		{{each info v  k }}
+			<!--我要卖出-USDT-->
+			<div class="usdt">
+				<div class="usdt_box">
+					<!--第一行-->
+					<div class="usdt_box_dyt">
+						<div class="usdt_box_dyt_lt"><p>李</p></div>
+						<div class="usdt_box_dyt_z"><p>{{v.title}}</p></div>
+						<div class="usdt_box_dyt_rt"><p>交易笔数<span>{{v.buynum}}</span></p></div>
+					</div>
+					<!--结束-->
+					
+					<!--第二行-->
+					<div class="usdt_box_deh">
+						<div class="usdt_box_deh_lt"><p>数量 <span>{{v.num}}</span>{{v.fieltype}}</p></div>
+						<div class="usdt_box_deh_rt"><p>价格</p></div>
+					</div>
+					<!--结束-->
+					
+					<!--第三行-->
+					<div class="usdt_box_dsh">
+						<div class="usdt_box_dsh_lt"><p>限额 <span>{{v.min}}~{{v.max}}</span> CNY</p></div>
+						<div class="usdt_box_dsh_rt"><p><span>{{v.price}}</span>CNY</p></div>
+					</div>
+					<!--结束-->
+					
+					<!--第四行-->
+					<div class="usdt_box_dsih">
+						<div class="usdt_box_dsih_lt">
+							<img src="/zc/img/mm01.png">
+							<img src="/zc/img/mm02.png">
+							<img src="/zc/img/mm03.png">
+						</div>
+						<% if(v.type == '1'){%>
+						<div class="usdt_box_dsih_rt" data-orderid="{{v.id}}" ><button class="mc" type="submit" class="wsmc" >卖出</button></div>
+						<!-- onclick="location.href='otc_mc'" -->
+						<%}else{%>
+						<div class="usdt_box_dsih_rt" data-orderid="{{v.id}}"><button type="submit" class="wsmr"  >买入</button></div>
+						<!-- onclick="location.href='otc_mr'" -->
+						<%}%>
+					</div>
+					<!--结束-->
+				</div>
+			</div>
+			<!--结束-->
+		{{/each}}
+
+		</div>
+		
+	</script>
+	<script type="text/javascript" src="/zc/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/zc/js/pignose.tab.min.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#jy").click(function(){
+			alert("暂未开放");
+		});
+	});
+	
+		
+	$(function() {
+		$('.ysj').click(function (e) { 
+			$('.m-megess').show();
+			$('.wswc').show();
+		});
+		
+		$('.zzmr06_lt,.wswc').click(function (e) { 
+			$('.m-megess').hide();
+			$('.wswc').hide();
+		});
+		
+		$('.zzmr06_lt,.wswc').click(function (e) { 
+			$('.message1').hide();
+			$('.message2').hide();
+		});
+		var status = true;
+		var type = 1;
+		var ftype=1;
+		var param = {
+			page:1,
+			limit:15,
+			type:type,
+			fieltype:ftype
+		} 
+		function getbuy(type){
+			// 先获取币种
+			$.ajax({
+                type: "POST",
+                url:"/index/otcexchange/getCurTypeBuy",
+                dataType: "jsonp", 
+                success: function (res) {
+                    $('#buyinfo').html(template("info",res));
+					$('.woaaa li').eq(0).addClass('active');
+                    getOrder(type,ftype);
+                    $('.type_buy').click(function(){
+						$('.orderdata').empty();
+                    	var ftype =$(this).data('type');
+						 $('.type_buy').removeClass('active');
+						 $(this).addClass('active');
+						 param.page=1;
+                    	 getOrder(type,ftype);
+                    })
+
+                }
+            });
+		}
+		// 买卖 、币种
+		function getOrder(type,ftype){
+			param.type=type;
+			param.ftype=ftype;
+			$.ajax({
+                type: "POST",
+                url:"/index/otcexchange/orderlist",
+                data:param,
+                dataType: "jsonp", 
+                success: function (res) {                  
+                    $('.orderdata').append(template("orderdata",res));
+					if(!res.info || res.info.length<param.limit){
+                                status = false;
+							} 
+//					$('.wsmr').click(function (e) { 
+//						$('.message1').show();
+//						var orderid = $(this).data('orderid');
+//						// $('#orderid').val($orderid)
+//						$('.wswc').show();
+//					});
+//					$('.mc').click(function (e) { 
+//						$('.message2').show();
+//						var orderid = $(this).data('orderid');
+//						// $('#orderid').val($orderid)
+//						// alert(orderid)
+//						$('.wswc').show();
+//					});
+					$('.zzmr06_lt').click(function (e) { 
+						e.preventDefault();
+						$('.message1').hide();
+						$('.message2').hide();
+					});
+                    $('.type_buy').click(function(){
+                    	var ftype =$(this).data('type');
+						 // 下拉加载
+						 $(window).off("scroll").on("scroll", function(e){
+								var totalheight = parseFloat($(this).height()) + parseFloat($(this).scrollTop());
+								if (($(document).height()<=totalheight && status)){
+									status = true;
+									param.page++;
+									getOrder(type,ftype);
+								}
+							});                  	
+                    })
+                }
+            });
+		}
+		$('.buy').click(function(){
+			 $('.orderdata').empty();
+			 var type=$(this).data('type');
+			 getbuy(type);
+			 $('.buy').removeClass('active');
+			 $(this).addClass('active');
+		})
+
+		$("body").on('click','.usdt_box_dsih_rt',function(){
+			var orderid = $(this).data('orderid');
+		
+			// /index/shop/otc_order.html
+			$.ajax({
+	            type: "POST",
+	            url:"/index/otcexchange/matchorder",
+	            data:{orderid:orderid},
+	            dataType: "jsonp", 
+	            success: function (res) { 
+	                if(res.code==0){
+						
+						layer.open({ 
+							content: '成功',
+							skin: 'msg',
+							time: 2
+						}); 
+						window.location.href = '/index/shop/otc_order.html';
+					}else{
+						layer.open({
+							content: res.msg,
+							skin: 'msg',
+							time: 2
+						}); 
+					}
+
+	            }
+            });
+		})
+		$("body").on('click','#zz123',function(){
+		// $('.zzmr06_rt').click(function(){
+		 
+		 	var trad_password = $('#trad_password2').val();
+		 	var orderid = $('#orderid').val();
+		 	console.log(orderid)
+		 	$.ajax({
+	            type: "POST",
+	            url:"/index/otcexchange/matchorder",
+	            data:{},
+	            dataType: "jsonp", 
+	            success: function (res) { 
+	                if(res.code==0){
+						
+						layer.open({ 
+							content: '成功',
+							skin: 'msg',
+							time: 2
+						}); 
+					}else{
+						layer.open({
+							content: res.msg,
+							skin: 'msg',
+							time: 2
+						}); 
+					}
+
+	            }
+            });
+		})
+		
+		getbuy(2)
+	});
+	
+	
+	$(function(){
+		$('#ggrz01').click(function(){
+		})
+		$('#ggrz02').click(function(){
+			console.log(1)
+			$.ajax({
+                type: "POST",
+                url:"/index/usercenter/index",
+                dataType: "json", 
+                success: function (res) {                  
+                	console.log(res)
+                	if( res.info.real_pass == 2 ){
+                		window.location.href='/index/shop/fbcsgg?type=1'
+                	}else{
+						$('.dongjie').show();
+                	}
+                }
+            })
+		});
+		$('#ggrz03').click(function(){
+			console.log(1)
+			$.ajax({
+                type: "POST",
+                url:"/index/usercenter/index",
+                dataType: "json", 
+                success: function (res) {                  
+                	console.log(res)
+                	if( res.info.real_pass == 2 ){
+                		window.location.href='/index/shop/fbcsgg?type=2'
+                	}else{
+						$('.dongjie').show();
+                	}
+                }
+            })
+		});
+		$('.ts_dj_lt').click(function (e) { 
+			$('.dongjie').hide();
+		});
+	})
+	</script>
+
+
+	
+	
+</html>

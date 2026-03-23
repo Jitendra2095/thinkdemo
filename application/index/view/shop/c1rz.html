@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>C1认证</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_sfrz.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<script src="/zc/js/layer.js"></script>
+	<style>
+		.ywc{
+			width: 100%;
+			height: 1rem;
+			border-bottom: 1px solid #f2f2f2;
+		}
+		.ywc p{
+			font-size: .4rem;
+			color: #03BE87;
+			line-height: 1rem;
+			margin-left: .3rem;
+		}
+		.rzxx_xhx{
+			width: 100%;
+			height: auto;
+			border-bottom: 1px solid #f2f2f2;
+		}
+		.rzxx{
+			width: 90%;
+			margin: auto;
+		}
+		.rzxx_box{
+			width: 100%;
+			height: 1.2rem;
+			overflow: hidden;
+		}
+		.rzxx_box_lt,.rzxx_box_rt{
+			float: left;
+			font-size: .4rem;
+			line-height: 1.2rem;
+		}
+		.rzxx_box_lt{
+			color: #999;
+		}
+		.rzxx_box_rt{
+			float: right;
+			color: #333;
+		}
+		.rztx{
+			width: 90%;
+			margin: auto;
+			margin-top: .5rem;
+		}
+		.rztx p{
+			font-size: .35rem;
+			color: #333;
+		}
+		.rztx p span{
+			color: #999 !important;
+		}
+		.wszjxx{
+			width: 100%;
+			margin-top: 1rem;
+			text-align: center;
+		}
+		.wszjxx button{
+			width: 90%;
+			height: 1rem;
+			border-radius: .1rem;
+			background: #03BE87;
+			font-size: .4rem;
+			line-height: 1rem;
+			border: 1px solid #03be87;
+			color: #fff;
+		}
+		.zjsc{
+			width: 90%;
+			margin: auto;
+			margin-top: .5rem;
+		}
+		.zjsc_bt{
+			font-size: .4rem;
+			color: #03be87;
+			margin-left: .3rem;
+			line-height: 1rem;
+			margin-top: .5rem;
+		}
+		.zjsc img{
+			width: 90%;
+			margin: auto;
+		}
+		.zmz{
+			width: 100%;
+			height: 5rem;
+			background: url(/zc/img/center28.png)no-repeat center;
+			background-size: 100%;
+			margin: .5rem 0;
+			position: relative;
+		}
+		
+		.fmz{
+			width: 100%;
+			height: 5rem;
+			background: url(/zc/img/center29.png)no-repeat center;
+			background-size: 100%;
+			margin: .5rem 0;
+		}
+		.scz{
+			width: 100%;
+			height: 5rem;
+			background: url(/zc/img/center30.png)no-repeat center;
+			background-size: 100%;
+			margin: .5rem 0;
+		}
+		.zmz input,.fmz input,.scz input{
+			width: 100%;
+			height: 5rem;
+			opacity: 0;
+		}
+		.zjzmz{
+			font-size: .4rem;
+			color: #333;
+			text-align: center;
+		}
+	</style>
+	
+	<body>
+		<div class="header">
+			<span>C1认证</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		<div class="ywc"><p>C1认证</p></div>
+		
+		<div class="xm"><input type="text" placeholder="请输入您的姓名" id="name"></div>
+		<div class="xm"><input type="number" placeholder="请输入您的身份证号码" id="zjh"></div>
+		
+		<div class="rztx">
+			<p>现在您可以进行充值交易，但完善证件信息后才可进行提币。<span>您已进行C1认证，请完善证件信息来获得更多用户权限！</span></p>
+		</div>
+		
+		
+		<p class="zjsc_bt">C2认证（请拍摄或上传您的证件照）</p>
+		
+		<div class="zjsc">
+			
+			<div class="zmz">
+				<input type="file" accept="image/*" id="upload_file1">
+				<img src="" id="zmz1" style="width: 100%;height: 5rem;position: absolute;display: none">
+				<input type="hidden" name="zz1" id="zz1" value="">
+			</div>
+
+			<p class="zjzmz">证件正面照</p>
+			
+			<div class="fmz" style="position: relative">
+				<input type="file" accept="image/*" id="upload_file2">
+				<img src="" id="zmz2" style="width: 100%;height:5rem;position: absolute;display: none">
+				<input type="hidden" name="zz2" id="zz2" value="">
+			</div>
+			<p class="zjzmz">证件反面照</p>
+			
+			<div class="scz" style="position: relative">
+				<input type="file" accept="image/*" id="upload_file3">
+				<img src="" id="zmz3" style="width: 100%;height: 5rem;position: absolute;display: none">
+				<input type="hidden" name="zz3" id="zz3" value="">
+			</div>
+			<p class="zjzmz">手持证件正面照</p>
+		</div>
+		<div id="emp"></div>
+		
+		
+		<div class="wszjxx" style="margin-bottom: .4rem"><button class="tjssb" type="submit">提交审核</button></div>
+	</body>
+	
+</html>
+
+<script>
+	$.ajax({
+		type: "POST",
+		url: "/index/usercenter/real",
+		data:{},
+		dataType: "json",
+		success: function (res) {
+			
+			if(res.code==0){
+				if(res.info.status == 1){
+					$('.zjsc').hide();
+					$('.zjsc_bt').html('审核中')
+					
+					$('.wszjxx').hide();
+				}else if(res.info.status == 2){
+					$('.zjsc').hide();
+					$('.zjsc_bt').html('审核通过')
+					$('.wszjxx').hide();
+				}
+				var nick_name=$('#name').val(res.info.real_name);
+				var id_num=$('#zjh').val(res.info.id_num);
+				$('#zmz1').attr('src',res.info.positive);
+				$('#zmz2').attr('src',res.info.back);
+				$('#zmz3').attr('src',res.info.szz);
+				$('#upload_file1').hide();
+				$('#upload_file2').hide();
+				$('#upload_file3').hide();
+				
+			}
+		}
+	});
+
+	$('#upload_file1').on('change', function(){
+
+		var file = $(this)[0];
+		var formData = new FormData();
+		formData.append('file', file.files[0]);
+		$.ajax({
+			url: "/index/upload/uploadimg",
+			type: 'POST',
+			data: formData,
+			contentType: false, // 注意这里应设为false
+			processData: false,
+			success: function(res){
+				console.log(res);
+				if(res.code==0){
+					$('#zmz1').attr('src',res.data);
+					$('#zmz1').show();
+					$('#upload_file1').hide();
+					var lenth = $('.img-box .img-item').length;
+					if(lenth>=5){
+						$('#upload_file1').hide();
+					} 
+					$('#zz1').val(res.data);
+					$('#img-total').html(lenth);
+					file.value = '';
+					layer.open({
+						content: '上传成功',
+						skin: 'msg',
+						time: 2
+					}); 
+				}else{
+					layer.open({
+						content: res.fail,
+						skin: 'msg',
+						time: 2
+					}); 
+				}
+			},
+			error: function(XHR, textStatus, errorThrown) {
+			  	layer.open({
+			  		content: '网络错误',
+					skin: 'msg',
+					time: 2
+				});
+			}	
+		});
+	});
+	$('#upload_file2').on('change', function(){
+
+		var file = $(this)[0];
+		var formData = new FormData();
+		formData.append('file', file.files[0]);
+		// alert(1)
+		$.ajax({
+			url: "/index/upload/uploadimg",
+			type: 'POST',
+			data: formData,
+			contentType: false, // 注意这里应设为false
+			processData: false,
+			success: function(res){
+				console.log(res);
+				if(res.code==0){
+			
+					$('#zmz2').attr('src',res.data);
+					$('#zmz2').show();
+					$('#upload_file2').hide();
+					$('#zz2').val(res.data);
+					file.value = '';
+					layer.open({
+						content: '上传成功',
+						skin: 'msg',
+						time: 2
+					}); 
+				}else{
+					layer.open({
+						content: res.fail,
+						skin: 'msg',
+						time: 2
+					}); 
+				}
+			},
+			error: function(XHR, textStatus, errorThrown) {
+			  	layer.open({
+			  		content: '网络错误',
+					skin: 'msg',
+					time: 2
+				});
+			}	
+		});
+	});
+	$('#upload_file3').on('change', function(){
+
+		var file = $(this)[0];
+		var formData = new FormData();
+		formData.append('file', file.files[0]);
+		// alert(1)
+		$.ajax({
+			url: "/index/upload/uploadimg",
+			type: 'POST',
+			data: formData,
+			contentType: false, // 注意这里应设为false
+			processData: false,
+			success: function(res){
+				console.log(res);
+				if(res.code==0){
+					$('#zmz3').attr('src',res.data);
+					$('#zmz3').show();
+					$('#upload_file3').hide();
+					$('#zz3').val(res.data);
+					file.value = '';
+					layer.open({
+						content: '上传成功',
+						skin: 'msg',
+						time: 2
+					}); 
+				}else{
+					layer.open({
+						content: res.fail,
+						skin: 'msg',
+						time: 2
+					}); 
+				}
+			},
+			error: function(XHR, textStatus, errorThrown) {
+			  	layer.open({
+			  		content: '网络错误',
+					skin: 'msg',
+					time: 2
+				});
+			}	
+		});
+	});
+
+	$('.tjssb').on('click',function(){
+			var nick_name=$('#name').val();
+			var id_num=$('#zjh').val();
+			// var positive=$('#img1').attr('src');
+			// var back=$('#img2').attr('src');
+			// var back1=$('#img3').attr('src');
+			var positive=$('#zz1').val();
+			var back=$('#zz2').val();
+			var back1=$('#zz3').val();
+			if(!nick_name){
+				return layer.open({
+						content: '请输入姓名',
+						skin: 'msg',
+						time: 2
+					});
+			} 
+			if(!id_num){
+				return layer.open({
+						content: '请输入证件号',
+						skin: 'msg',
+						time: 2
+					});
+				}
+			
+			if(!positive){
+					return layer.open({
+								content: '正面照不能为空',
+								skin: 'msg',
+								time: 2
+							});
+			} 
+			if(!back){
+				return layer.open({
+								content: '反面照不能为空',
+								skin: 'msg',
+								time: 2
+							});
+			} 
+			if(!back1){
+				return  layer.open({
+								content: '手持证件正面照不能为空',
+								skin: 'msg',
+								time: 2
+							});
+			} 
+
+			$.ajax({
+				type: "POST",
+				url: "/index/apiindex/real_appeal",
+				data:{ nick_name:nick_name , id_num:id_num , positive:positive , back:back },
+				dataType: "json",
+				success: function (res) {
+					
+					if(res.code==0){
+						layer.open({
+							content: '上传成功',
+							skin: 'msg',
+							time: 2
+						}); 
+						setTimeout(() => {
+							window.location.href=history.back(-1);
+						}, 1000);
+						
+					}else{
+						layer.open({
+							content:res.msg,
+							skin: 'msg',
+							time: 2
+						});
+					}
+				}
+			});
+		})
+</script>

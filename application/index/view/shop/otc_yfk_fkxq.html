@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>付款详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<style>
+		
+		.xq{
+			width: 95%;
+			background: #03be870f;
+			margin: auto;
+			border-radius: .1rem;
+			margin-top: .3rem;
+			padding-bottom: .2rem;
+		}
+		.xq_box{
+			width: 90%;
+			margin: auto;
+		}
+		.xq01{
+			width: 100%;
+			height: 1.3rem;
+			overflow: hidden;
+		}
+		.xq01 img,.xq01 p{
+			float: left;
+		}
+		.xq01 img{
+			width: .6rem;
+			display: block;
+			margin-top: .35rem;
+		}
+		.xq01 p{
+			font-size:.4rem ;
+			color: #333;
+			line-height: 1.3rem;
+			margin-left: .2rem;
+		}
+		.xq02{
+			width: 100%;
+			overflow: hidden;
+			margin-top: .3rem;
+			margin-bottom: .3rem;
+		}
+		.xq02_lt,.xq02_rt{
+			float: left;
+		}
+		.xq02_lt{
+			font-size: .35rem;
+			color: #999;
+		}
+		.xq02_rt{
+			width: 6rem;
+			float: right;
+			overflow: hidden;
+		}
+		.xq02_rt p,.xq02_rt img{
+			float: left;
+		}
+		.xq02_rt p{
+			width: 5.4rem;
+			font-size: .35rem;
+			color: #333;
+			margin-right: .1rem;
+			text-align: right;
+		}
+		.xq02_rt img{
+			width: .45rem;
+			display: block;
+			float: right;
+		}
+		.xq03{
+			font-size: .35rem;
+			color: #999;
+			line-height: 1rem;
+			border-top: 1px solid #fff;
+		}
+		.gmxx_box{
+			width: 95%;
+			margin: auto;
+			margin-top: .3rem;
+		}
+		.gmxx{
+			width: 100%;
+			margin-top: .2rem;
+			height: 1rem;
+			overflow: hidden;
+		}
+		.gmxx_lt,.gmxx_rt{
+			float: left;
+		}
+		.gmxx_lt p{
+			font-size: .4rem;
+			line-height: 1rem;
+			color: #999;
+		}
+		.gmxx_rt{
+			float: right;
+			overflow: hidden;
+		}
+		.gmxx_rt p,.ggxx_img{
+			float: left;
+		}
+		.gmxx_rt p{
+			font-size: .4rem;
+			line-height: 1rem;
+			color: #333;
+		}
+		.gmxx_rt img{
+			width: .45rem;
+			display: block;
+			margin-top: .28rem;
+		}
+		.scpz{
+			width: 95%;
+			margin: auto;
+			border-top: 1px solid #f2f2f2;
+			margin-top: .1rem;
+		}
+		.scpz_bt{
+			font-size: .4rem;
+			color: red;
+			line-height: .8rem;
+		}
+		.scpz_k{
+			width: 2rem;
+			height: 2rem;
+			border: 1px solid #999;
+			position: relative;
+		}
+		.scpz_k img{
+			width: 1.2rem;
+			display: block;
+			position: absolute;
+			left: 50%;
+			top: .3rem;
+			transform: translate(-50%);
+		}
+		.scpz_k input{
+			width: 2rem;
+			height: 2rem;
+			opacity: 0;
+		}
+		.qzf{
+			width: 100%;
+			height: 1.2rem;
+			overflow: hidden;
+			border-top: 1px solid #f2f2f2;
+			position: fixed;
+			bottom: 0;
+		}
+		.qzf_lt,.qzf_z,.qzf_rt{
+			float: left;
+		}
+		.qzf_lt{
+			width: 20%;
+			height: 1.2rem;
+			background: #fff;
+		}
+		.qzf_lt img{
+			width: 35%;
+			display: block;
+			margin: auto;
+			margin-top: 10%;
+		}
+		.qzf_z{
+			width: 40%;
+			background: #e4e4e4;
+		}
+		.qzf_z p{
+			font-size: .4rem;
+			color: #03BE87;
+			text-align: center;
+			line-height: 1.2rem;
+		}
+		.qzf_rt{
+			width: 40%;
+			background: #03be87;
+		}
+		.qzf_rt p{
+			font-size: .4rem;
+			color: #fff;
+			text-align: center;
+			line-height: 1.2rem;
+		}
+	</style>
+	
+	<body>
+		<div class="header">
+			<span>付款详情</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+	
+		
+		
+		<div class="xq">
+			<ul class="xq_box">
+				<li class="xq01">
+					<img src="/zc/img/mm01.png">
+					<p>银行转账</p>
+				</li>
+				<li class="xq02">
+					<p class="xq02_lt">收款人</p>
+					<div class="xq02_rt">
+						<p>张三</p>
+						<img src="/zc/img/fz.png">
+					</div>
+				</li>
+				<li class="xq02">
+					<p class="xq02_lt">银行卡信息</p>
+					<div class="xq02_rt">
+						<p>商家小号和搬砖户不交易，请自觉取消！XX银行XX支行</p>
+						<img src="/zc/img/fz.png">
+					</div>
+				</li>
+				<li class="xq02">
+					<p class="xq02_lt">银行卡号</p>
+					<div class="xq02_rt">
+						<p>515665446654654</p>
+						<img src="/zc/img/fz.png">
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+		
+		<div class="gmxx_box">
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>卖家</p></div>
+				<div class="gmxx_rt">
+					<p>张三</p>
+					<img src="/zc/img/yjt_h.png">
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>交易金额</p></div>
+				<div class="gmxx_rt">
+					<p style="color: #03BE87;">378.000.00 CNY</p>
+					<img class="fz" src="/zc/img/fz.png">
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>单价</p></div>
+				<div class="gmxx_rt">
+					<p>1CNY/USDT</p>
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>数量</p></div>
+				<div class="gmxx_rt">
+					<p>2USDT</p>
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>订单号</p></div>
+				<div class="gmxx_rt">
+					<p>#111</p>
+					<img class="fz" src="/zc/img/fz.png">
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>订单时间</p></div>
+				<div class="gmxx_rt">
+					<p>2019-06-06-00:00:00</p>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		<div class="qzf">
+			<a href="tel:13212345678"><div class="qzf_lt"><img src="/zc/img/kfdh.png"></div></a>
+			<div class="qzf_z"><p>取消交易</p></div>
+			<a href="###"><div class="qzf_rt"><p>申诉</p></div></a>
+		</div>
+	</body>
+	
+			
+	<script>
+	</script>
+	
+</html>

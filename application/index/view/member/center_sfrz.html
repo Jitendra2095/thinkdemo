@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>身份认证</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_sfrz.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_aqzx.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<script src="/zc/js/jquery-2.1.4.min.js"></script>
+	<script src="/zc/js/jquery.gesture.password.js"></script>
+	
+	<style>
+		.ts{font-size: .35rem;color: #333;text-align: center;padding: 2rem 0 3rem 0;}
+		#gesturepwd{margin: auto;}
+	</style>
+	<body>
+		<div class="header">
+			<span>身份认证</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		
+		<div class="rzts">
+			<div class="rzts_box">
+				<img src="/zc/img/center27.png">
+				<p>请拿出本人有限证件准备拍摄，拍摄时请确保证件边框 完整，字体清晰，亮度均匀，确保照片和个人签字的内 容清晰可见。</p>
+			</div>		
+		</div>
+		
+		<div class="xm"><input type="text" placeholder="请输入您的姓名"></div>
+		<div class="xm"><input type="number" placeholder="请输入您的身份证号码"></div>
+		
+		<div class="zjsc">
+			<div class="zjsc_lt"><span>上传身份证正面</span><input type="file" accept="image/*"></div>
+			<div class="zjsc_rt"><span>上传身份证反面</span><input type="file" accept="image/*"></div>
+		</div>
+		
+		<div class="sczj"><span>上传本人手持证件照</span><input type="file" accept="image/*"></div>
+		
+		<div class="xfts">本人手持证件照内容包含：</br><p>本人签名，电话，身份证号和当前日期</p></div>
+		
+		<div class="sftj"><button type="submit" onclick="location.href='center_sfrz_sh.html'">提交</button></div>
+	</body>
+</html>

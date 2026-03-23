@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>发布出售广告</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_sfrz.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<script src="/zc/js/layer.js"></script>
+	
+	
+	<style>
+		.dj{
+			width:90%;
+			margin: auto;
+			margin-top: .5rem;
+		}
+		.dj p{
+			font-size: .4rem;
+			color: #333;
+			line-height: 1rem;
+		}
+		.dj input{
+			font-size: .4rem;
+			line-height: 1rem;
+			width: 100%;
+			border: 0;
+			border-bottom: 1px solid #f2f2f2;
+		}
+		.dj .yzm{
+			overflow: hidden;
+			width: 100%;
+			border-bottom: 1px solid #f2f2f2;
+		}
+		.dj .yzm input,.dj .yzm button{
+			float: left;
+		}
+		.dj .yzm input{
+			width: 70%;
+			border: 0;
+		}
+		.dj .yzm button{
+			width: 30%;
+			line-height: 1rem;
+			float: right;
+			background: #fff;
+			border: 0;
+		}
+		.zffs{
+			width: 90%;
+			margin: auto;
+			margin-top: 1rem;
+		}
+		.zffs p{
+			font-size: .4rem;
+			color: #333;
+		}
+		.zffs_1{
+			width: 90%;
+			height: 1rem;
+			margin: auto;
+			overflow: hidden;
+			margin-top: .3rem;
+			border-bottom: 1px solid #f2f2f2;
+			
+		}
+		.zffs_1 img,.zffs_1 p,.zffs_1 input{
+			float: left;
+		}
+		.zffs_1 img{
+			width: .6rem;
+			display: block;
+			margin-top: .2rem;
+		}
+		.zffs_1 p{
+			font-size: .4rem;
+			line-height: 1rem;
+			color: #333;
+			margin-left: .3rem;
+		}
+		.zffs_1 input{
+			float: right;
+			margin-top: .3rem;
+		}
+		.qd{
+			width: 90%;
+			margin: auto;
+			margin-top: 1rem;
+		}
+		.qd button{
+			width: 100%;
+			background: #03BE87;
+			border-radius: .1rem;
+			height: 1rem;
+			font-size: .4rem;
+			color: #fff;
+			border: 1px solid #03BE87;
+			line-height: 1rem;
+			text-align: center;
+		}
+		#xzbz{
+			width: 90%;
+			margin: auto;
+			overflow: hidden;
+			margin-top: .5rem;
+			margin-bottom: .2rem;
+		}
+		#xzbz p,#xzbz_rt{
+			float: left;
+		}
+		#xzbz p{
+			width: 20%;
+			font-size: .4rem;
+			color: #333;
+		}
+		#xzbz_rt{
+			width: 20%;
+			height: .8rem;
+			float: right;
+			text-align: right;
+		}
+		#xzbz_rt select{
+			width: 100%;
+			height: .8rem;
+			background: #18C78D;
+			border: 1px solid #18C78D;
+			color: #fff;
+			border-radius: .1rem;
+		}
+		#zffs{
+			width: 90%;
+			margin: auto;
+			overflow: hidden;
+			margin-top: .5rem;
+			margin-bottom: .2rem;
+		}
+		#zffs p,#zffs_rt{
+			float: left;
+		}
+		#zffs p{
+			width: 20%;
+			font-size: .4rem;
+			color: #333;
+		}
+		#zffs_rt{
+			width: 20%;
+			float: right;
+			text-align: right;
+		}
+		#zffs_rt select{
+			width: 100%;
+			height: .8rem;
+			background: #18C78D;
+			border: 1px solid #18C78D;
+			color: #fff;
+			border-radius: .1rem;
+			
+		}
+	</style>
+	<body>
+		<div class="header">
+			<span id="tit">发布出售广告</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		<!--<div class="dj">
+			<p>标题</p>
+			<input class="biaoti title" type="text" placeholder="请输入标题" />
+		</div>-->
+		<div class="dj">
+			<p>单价</p>
+			<input class="danjia" type="number" placeholder="请输入您卖单单价" />
+		</div>
+		
+		<div class="dj">
+			<p>数量</p>
+			<input class="number" type="number" placeholder="请输入您卖单数量" />
+		</div>
+		
+		<div class="dj">
+			<p>验证码</p>
+			<div class="yzm">
+				<input class="yzm" id="yzm" type="number" placeholder="请输入验证码" />
+				<button type="submit" class="get_code">获取验证码</button>
+			</div>
+		</div>
+		
+		<div class="dj">
+			<p>交易密码</p>
+			<input class="password" type="password" placeholder="请输入交易密码" />
+		</div>
+
+		<div class="zffs" id="xzbz">
+			<p>选择币种</p>
+			<div class="zffsaa2" id="xzbz_rt">
+						
+			</div>
+		</div>
+		
+		
+		<div class="zffs" id="zffs">
+			<p>支付方式</p>
+			<div id="zffs_rt">
+			<select id="paytype">
+				<option value="3">微信</option>
+				<option value="2">支付宝</option>
+				<option value="1">银行卡</option>
+			</select>
+		</div>
+		</div>
+			
+		
+		
+		
+		<div class="qd"><button type="submit" class="fbcsa">确定</button></div>
+		<script type="text/html" id="tpl2">
+			<div class="zffs_2">
+				<select name="" id="ftype">
+					{{each info v k}}
+						<option value="{{k}}">{{v}}</option>
+					{{/each}}
+				</select>
+			</div>	
+		</script>
+		<script type="text/html" id="tpl">
+			{{each info v}}
+			<div class="zffs_1">
+				<div>
+					
+					<img src="/zc/img/mm0{{v.types}}.png">
+					<p>{{v.bank_name}}</p>
+				</div>
+				<img data-id={{v.id}} class="xzt" style="float:right;width:.4rem;margin-top: .3rem;" src="/zc/img/xz.png" alt="">
+			</div>	
+			{{/each}}
+		</script>
+		<script>
+			$(function () {
+				function getQueryString(name){
+				    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+				    var r = window.location.search.substr(1).match(reg);
+				    if (r!=null) return r[2]; return '';
+				}
+				
+				var type = getQueryString('type');
+				if(type == 1){
+					$('#tit').html('发布求购广告')
+				 	$(document).attr("title","发布求购广告")
+				}else{
+					$('#tit').html('发布出售广告')
+					$(document).attr("title","发布出售广告")
+				}
+				$.ajax({
+					type: "post",
+					url: "/index/otcexchange/getCurTypeBuy",
+					data: "data",
+					dataType: "jsonp",
+					success: function (res) {
+						if(res.code==0){
+							// console.log(res)
+							if(res.code==0){
+								$('.zffsaa2').html(template("tpl2",res));
+								$(this).find('.xzt').eq(0).addClass('active');
+								$('.zffs_2').click(function (e) { 
+									$('.zffs_2').find('.xzt').attr('src','/zc/img/wxz.png');
+									$('.zffs_2').find('.xzt').removeClass('active');
+									$(this).find('.xzt').attr('src','/zc/img/xz.png');
+									$(this).find('.xzt').addClass('active');
+								});
+							}
+						}
+					}
+				});
+				$('.get_code').click(function (e) { 
+					e.preventDefault();
+					$.ajax({
+						type: "post",
+						url: "/index/otcexchange/sendcode",
+						dataType: "jsonp",
+						success: function (res) {
+							if(res.code==0){
+								console.log(res)
+							}
+						}
+					});
+				});
+				$.ajax({
+					type: "post",
+					url: "/index/otcexchange/buy",
+					data: "data",
+					dataType: "jsonp",
+					success: function (res) {
+						if(res.code==0){
+							// console.log(res)
+						}
+					}
+				});
+				
+				if(type == 2){
+
+					$.ajax({
+						type: "post",
+						url: "/index/usercenter/accountslist",
+						data: {},
+						dataType: "json",
+						success: function (res) {
+							// alert(1);
+							// console.log(res);
+							if(res.code==0){
+								$('.zffsaa').html(template("tpl",res));
+								// $(this).find('.xzt').eq(0).addClass('active');
+								$('.zffs_1').click(function (e) { 
+									$('.zffs_1').find('.xzt').attr('src','/zc/img/wxz.png');
+									$('.zffs_1').find('.xzt').removeClass('active');
+									$(this).find('.xzt').attr('src','/zc/img/xz.png');
+									$(this).find('.xzt').addClass('active');
+								});
+							}
+						}
+					});
+				}
+				$('.fbcsa').click(function (e) { 
+					var title=$('.title').val();
+					var num=$('.number').val();
+					var price=$('.danjia').val();
+					var code=$('#yzm').val();
+					
+					var trad_password=$('.password').val();
+					var title=$('.title').val();
+					var account_id=$('.zffs_1').find('.xzt.active').data('id');
+					var fiel_type = $('#ftype').val();
+					var paytype = $('#paytype').val();
+					// alert(type)
+					$.ajax({
+						type: "POST",
+						url: "/index/otcexchange/buy",
+						data: {type:type,title:title,num:num,price:price,code:code,trad_password:trad_password,account_id:account_id,fiel_type:fiel_type,paytype:paytype},
+						dataType: "jsonp",
+						success: function (res) {
+							if(res.code==0){
+								layer.open({
+									content:res.msg,
+									skin: 'msg',
+									time: 2
+								});
+								setTimeout(function(){
+									// window.location.href=history.back(-1);
+									window.location.href= '/index/shop/OTC';
+								},2000)
+							}else{
+								layer.open({
+									content:res.msg,
+									skin: 'msg',
+									time: 2
+								});
+							}
+						}
+					});
+				});
+			});
+		</script>
+		
+	</body>
+</html>

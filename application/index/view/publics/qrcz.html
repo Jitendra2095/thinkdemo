@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>重置密码</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	
+	<style>
+		.login_zh p{width: 33%;}
+		.login_zh input{width: 65%;margin-left: 1%;}
+	</style>
+	
+	<body>
+		
+		<div class="header">
+			<span>重置密码</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		
+		<div class="login_srk" style="margin-top:1.6rem;">
+			<div class="login_zh">
+				<p>新密码：</p>
+				<input class="new_pwd" type="password" placeholder="请输入您的新密码" />
+			</div>
+			<div class="login_zh">
+				<p>确认密码：</p>
+				<input class="new_pwd1" type="password" placeholder="请再次输入新密码" />
+			</div>
+		</div>
+		
+		<div class="dlan">
+			<button type="button">确认重置</button>
+		</div>
+		<script>
+		$(function () {
+			function getQueryString(name) { 
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+				var r = window.location.search.substr(1).match(reg); 
+				if (r != null) return unescape(r[2]); 
+				return null; 
+			} 
+			var mobile=getQueryString('phone');
+			var code=getQueryString('code');
+			var password=$('.new_pwd').val();
+			var password1=$('.new_pwd1').val();
+			if(!password) return layer.open({content:'请输入密码'});
+			if(password!=password1) return layer.open({content:'两次密码不一致'});
+			$.ajax({
+                    type: "POST",
+                    url: "/index/publics/changeSave",
+                    data: {mobile:mobile,new_pwd:password,code:code},
+                    success: function (res) {
+                        if(res.code==0){
+							mui.toast(res.message);
+							setTimeout(function(){
+								window.location.href="/index/publics/index";
+							})
+                        }else{
+                            mui.toast(res.message);
+                        }
+                    }
+                });
+		});
+		</script>
+	</body>
+</html>

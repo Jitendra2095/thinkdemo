@@ -1,0 +1,54 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>银行列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">银行名称</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($list)}
+            {foreach $list as $entity}
+            <tr>
+                <td class="text-center">{$entity.id}</td>
+                <td class="text-center">{$entity.bankname}</td>
+      
+                <td class="text-center">
+                    <a href="{:url('index/editbank',['id'=>$entity.id])}" class="btn btn-xs btn-info">编辑</a>
+                    <a data-url="{:url('index/delbanks',['id'=>$entity.id])}" onclick="main.ajaxDelete(this)"
+                       data-msg="确定要删除该公告吗？" class="btn btn-xs btn-danger">删除</a>
+                </td>
+            </tr>
+            {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="5">暂无数据</td>
+            </tr>
+            {/if}
+            <a href="{:url('index/addbank')}" class="btn btn-xs btn-info">添加银行</a>
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+
+{/block}

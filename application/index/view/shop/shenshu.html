@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>申诉</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_sfrz.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<script src="/zc/js/layer.js"></script>
+	<style>
+		.ywc{
+			width: 100%;
+			height: 1rem;
+			border-bottom: 1px solid #f2f2f2;
+		}
+		.ywc p{
+			font-size: .4rem;
+			color: #03BE87;
+			line-height: 1rem;
+			margin-left: .3rem;
+		}
+		.rzxx_xhx{
+			width: 100%;
+			height: auto;
+			border-bottom: 1px solid #f2f2f2;
+		}
+		.rzxx{
+			width: 90%;
+			margin: auto;
+		}
+		.rzxx_box{
+			width: 100%;
+			height: 1.2rem;
+			overflow: hidden;
+		}
+		.rzxx_box_lt,.rzxx_box_rt{
+			float: left;
+			font-size: .4rem;
+			line-height: 1.2rem;
+		}
+		.rzxx_box_lt{
+			color: #999;
+		}
+		.rzxx_box_rt{
+			float: right;
+			color: #333;
+		}
+		.rztx{
+			width: 90%;
+			margin: auto;
+			margin-top: .5rem;
+		}
+		.rztx p{
+			font-size: .35rem;
+			color: #333;
+		}
+		.rztx p span{
+			color: #999 !important;
+		}
+		.wszjxx{
+			width: 100%;
+			margin-top: 1rem;
+			text-align: center;
+		}
+		.wszjxx button{
+			width: 90%;
+			height: 1rem;
+			border-radius: .1rem;
+			background: #03BE87;
+			font-size: .4rem;
+			line-height: 1rem;
+			border: 1px solid #03be87;
+			color: #fff;
+		}
+		.zjsc{
+			width: 90%;
+			margin: auto;
+			margin-top: .5rem;
+		}
+		.zjsc_bt{
+			font-size: .4rem;
+			color: #03be87;
+			margin-left: .3rem;
+			line-height: 1rem;
+			margin-top: .5rem;
+		}
+		.zjsc img{
+			width: 90%;
+			margin: auto;
+		}
+		.zmz{
+			width: 100%;
+			height: 5rem;
+			background: url(/zc/img/center28.png)no-repeat center;
+			background-size: 100%;
+			margin: .5rem 0;
+			position: relative;
+		}
+		
+		.fmz{
+			width: 100%;
+			height: 5rem;
+			background: url(/zc/img/center29.png)no-repeat center;
+			background-size: 100%;
+			margin: .5rem 0;
+		}
+		.scz{
+			width: 100%;
+			height: 5rem;
+			background: url(/zc/img/center30.png)no-repeat center;
+			background-size: 100%;
+			margin: .5rem 0;
+		}
+		.zmz input,.fmz input,.scz input{
+			width: 100%;
+			height: 5rem;
+			opacity: 0;
+		}
+		.zjzmz{
+			font-size: .4rem;
+			color: #333;
+			text-align: center;
+		}
+
+		/*.img_name{
+			color: #fff;
+			font-size: 0.3rem;
+			margin: 0.4rem 0 0.24rem 0.3rem;
+		}*/
+		.img_img span{
+			position: absolute;
+			top: 10%;
+			color: #999;
+			font-size: 0.48rem;
+			left:50%;
+			margin: -0.32rem 0 0 -0.48rem;
+			z-index: 1;
+		}
+	</style>
+	
+	<body>
+		<div class="header">
+			<span>申诉</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		<div class="ywc"><p>申诉</p></div>
+		
+		<textarea name="" id="content" cols="100%" rows="10">
+		</textarea>
+
+		<div style="height: 1rem;"></div>
+
+		<div class="img_img">
+			<!-- <span>图片</span> -->
+			<div class="weui-uploader__input-box">
+		        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="" text-indent="100%">
+		        <img src="" alt="" id="path">
+		        <input type="hidden" id="pap" value="">
+		     </div>
+		</div>
+		<div class="wszjxx" style="margin-bottom: .4rem"><button class="tjssb" type="submit" id="bb">提交</button></div>
+	</div>
+	</body>
+	
+</html>
+
+<script>
+$('#xzz').hide();
+	function getQueryString(name) {   
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = window.location.search.substr(1).match(reg);
+		if (r != null) return unescape(r[2]); return null;
+	}
+	$('#uploaderInput').on('change', function(){
+		var file = $(this)[0];
+		var formData = new FormData();
+		formData.append('file', file.files[0]);
+
+		$.ajax({
+			url: "/index/upload/uploadimg",
+			type: 'post',
+			data: formData,
+			contentType: false, // 注意这里应设为false
+			processData: false,
+			success: function(res){
+				console.log(res);
+				 pic = res.data;
+	        
+	          $('#path').attr('src',res.data);
+	          $('#pap').val(res.data);
+	                // $('.weui-uploader__input-box').html('<img src="'+res.data+'" class="img_zm">');
+	           
+			},
+			error: function(XHR, textStatus, errorThrown) {
+			  	layer.open({
+			  		content: '网络错误',
+					skin: 'msg',
+					time: 2
+				});
+			}	
+		});
+	});
+
+	$('#bb').click(function(){
+		var path = $('#pap').val();
+		var content = $('#content').val();
+		var orderid = getQueryString("orderid");
+		// alert(orderid)
+		$.ajax({
+			type: "POST",
+			url: "/index/otcexchange/explains",
+			data:{ orderid:orderid , content:content , path:path  },
+			dataType: "jsonp",
+			success: function (res) {
+				console.log(res)
+				if(res.code==0){
+					layer.open({
+						content: '上传成功',
+						skin: 'msg',
+						time: 2
+					}); 
+					setTimeout(() => {
+						window.location.href="/index/shop/myotc_order.html";
+					}, 1000);
+					
+				}else{
+					layer.open({
+						content:res.msg,
+						skin: 'msg',
+						time: 2
+					});
+				}
+			}
+		});
+	})	
+
+
+</script>

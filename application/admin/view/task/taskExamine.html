@@ -1,0 +1,145 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<script src="__PUBLIC__/admin/js/laydate/laydate.js"></script>
+<section class="panel" >
+
+    <header class="panel-heading">
+        <h4>任务审核列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="" >
+            <div class="form-group">
+                <div class="col-xs-1">
+                    <select name="status" class="form-control">
+                        <option value="">全部任务状态</option>
+                        {foreach $allStatus as $key=>$item}
+                        <option {if $Request.get.status == $key &&$Request.get.status != ''}selected{/if} value="{$key}">{$item}</option>
+                        {/foreach}
+                    </select>
+                </div>
+
+                <!--<div class="col-xs-1 no-pd-r">-->
+                    <!--<select name="type" id="type" class="form-control">-->
+                        <!--<option {if $Request.get.type == 'type_name'} selected {/if} value="type_name">需求分类名称</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+                <!--<div class="col-xs-3 no-pd-l">-->
+                    <!--<input type="text" value="{$Request.get.keyword}" name="keyword" id="keyword" class="form-control" placeholder="请输入关键词搜索">-->
+                <!--</div>-->
+                <div class="col-xs-2 no-pd-2">
+                    <input type="text" value="{$Request.get.startTime}" name="startTime" id="startTime" class="form-control" placeholder="请输入开始时间">
+                </div>
+                <div class="col-xs-2 no-pd-2">
+                    <input type="text" value="{$Request.get.endTime}" name="endTime" id="endTime" class="form-control" placeholder="请输入结束时间">
+                </div>
+                <button type="submit" class="btn btn-color">搜索</button>
+                <!--<a type="button" href="{:url('createTask')}" class="btn btn-info">添加任务</a>-->
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin" >
+            <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">用户信息</th>
+                    <th class="text-center">任务奖励</th>
+                    <th class="text-center">任务凭证</th>
+                    <th class="text-center">领取时间</th>
+                    <th class="text-center">审核时间</th>
+                    <th class="text-center">状态</th>
+                    <th class="text-center">操作</th>
+                </tr>
+            </thead>
+            <tbody >
+            {if $list}
+                {foreach $list as $order}
+                    <tr>
+                        <td class="text-center">{$order->id}</td>
+                        <td class="text-center">
+                            ID:  {$order->uid}<br>
+                            手机号：  {$order->mobile}
+                        </td>
+                        <td class="text-center">
+                            {$order->realprice}
+                        </td>
+                        <td class="text-center">
+                            <img src=" {$order->image_id}" width="100px">
+
+                        </td>
+                        <td class="text-center">
+                            {$order->receivetime|date='Y-m-d H:i:s',###}
+                        </td>
+                        <td class="text-center">
+                            {if $order->status == 2 || $order->status == -1}
+                            {$order->examinetime|date='Y-m-d H:i:s',###}
+                            {/if}
+                        </td>
+                        <td class="text-center">
+                            {$order->getStatus($order->status)}
+                        </td>
+                        <td class="text-center">
+                            {if $order->status == 1}
+                            <a data-url="{:url('editTaskExamine',['id'=>$order->id,'status'=>2])}" onclick="main.ajaxDelete(this)" data-msg="确定要通过此审核吗？" class="btn btn-xs btn-info">通过</a>
+
+                            <a data-url="{:url('editTaskExamine',['id'=>$order->id,'status'=>-1])}" onclick="main.ajaxDelete(this)" data-msg="确定要拒绝此审核吗？" class="btn btn-xs btn-danger">拒绝</a>
+                            {/if}
+                        </td>
+                    </tr>
+                {/foreach}
+            {else /}
+                <tr class="text-center">
+                    <td colspan="8">暂无数据</td>
+                </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+<script>
+    laydate.render({
+        elem: '#startTime',
+        type: 'datetime'
+    });
+    laydate.render({
+        elem: '#endTime',
+        type: 'datetime'
+    });
+    $(function(){
+        $(".image_click").zoomify();
+    });
+</script>
+
+{/block}
+{block name="footer"}
+<form action="{:url('admin/Finance/exportFundLog')}" id="exportForm">
+    <input type="hidden" name="keyword" id="e_keyword">
+    <input type="hidden" name="type" id="e_type">
+    <input type="hidden" name="startTime" id="e_startTime">
+    <input type="hidden" name="endTime" id="e_endTime">
+    <input type="hidden" name="page" value="{$Request.get.page}">
+</form>
+<script>
+    //导出奖金记录
+    $("#export").click(function(){
+        var keyword = $("#keyword").val();
+        var type = $("#type").val();
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        var page = $("#page").val();
+        $('#e_keyword').val(keyword);
+        $('#e_type').val(type);
+        $('#e_startTime').val(startTime);
+        $('#e_endTime').val(endTime);
+        $('#e_page').val(page);
+        $("#exportForm").submit();
+    })
+
+</script>
+{/block}

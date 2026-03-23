@@ -1,0 +1,93 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>{if $render == "game"}游戏{/if}{if $render == "match"}比赛{/if}{if $render == "mobile"}端游{/if}{if $render == "roomgame"}房间赛制{/if}类型分类列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('Roomclassify/index')}">
+            <div class="form-group">
+                {if $render != "game"}
+                <a type="button" href="{:url('/admin/roomclassify/create',['render'=>$render])}" class="btn btn-info">添加{if $render == "game"}游戏{/if}{if $render == "match"}比赛{/if}{if $render == "mobile"}端游{/if}{if $render == "roomgame"}房间赛制{/if}类型分类</a>
+                {/if}
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">分类名称</th>
+                {if $render == "match"}
+                <th class="text-center">父级分类</th>
+                {/if}
+                <th class="text-center">状态</th>
+                <th class="text-center">比赛方式</th>
+                <th class="text-center">创建时间</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($items)}
+            {foreach $items as $entity}
+            <tr>
+                <td class="text-center">{$entity['id']}</td>
+                <td class="text-center">{$entity['title']}</td>
+                {if $render == "match"}
+                <td class="text-center">{$entity['parent_name']}</td>
+                {/if}
+                <td class="text-center">
+                    {if $entity['status'] == 1}
+                    <a class="btn btn-xs btn-primary">显示</a>
+                    {else /}
+                    <a class="btn btn-xs btn-warning">不显示</a>
+                    {/if}
+
+                </td>
+                <td class="text-center">
+                    {if $entity['vip_type'] == 1}
+                    <a class="btn btn-xs btn-primary">1V1</a>
+                    {else /}
+                    <a class="btn btn-xs btn-warning">PVP</a>
+                    {/if}
+
+                </td>
+                <td class="text-center">{:date("Y-m-d H:i",$entity['createtime'])}</td>
+                <td class="text-center">
+                    <a href="{:url('Roomclassify/edit',['id'=>$entity['id'],'render'=>$render])}" class="btn btn-xs btn-info">编辑</a>
+                    {if $render != "game" && $render != "mobile"}
+                    <a data-url="{:url('Roomclassify/delete',['id'=>$entity['id']])}" onclick="main.ajaxDelete(this)"
+                       data-msg="确定要删除该分类吗？" class="btn btn-xs btn-danger">删除</a>
+                    {/if}
+                </td>
+            </tr>
+            {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="5">暂无数据</td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+<script>
+    function showContent(e){
+        $.dialog({
+            title: '文章内容',
+            content: $(e).prev().html()
+        });
+    }
+</script>
+{/block}

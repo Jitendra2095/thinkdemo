@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>付款</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_sfrz.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<style>
+		.qrzf{
+			width: 100%;
+		}
+		.qrzf01{
+			font-size: .45rem;
+			color: #333;
+			line-height: 1rem;
+			text-align: center;
+		}
+		.qrzf02{
+			font-size: .35rem;
+			color: #999;
+			line-height: .6rem;
+			text-align: center;
+		}
+		.qrzf03{
+			font-size: .8rem;
+			color: #03be87;
+			line-height: 2rem;
+			text-align: center;
+			font-weight: bold;
+		}
+		.jymm{
+			text-align: center;
+		}
+		.jymm p{
+			text-align: left;
+			font-size: .35rem;
+			color: #03BE87;
+			line-height: .6rem;
+			margin-left: 1.5rem;
+		}
+		.jymm input{
+			font-size: .35rem;
+			margin-top: .3rem;
+			width: 70%;
+			border: 1px solid #f2f2f2;
+			height: 1rem;
+			line-height: 1rem;
+		}
+		.qr{
+			width: 70%;
+			height: 1rem;
+			margin: auto;
+			margin-top: 1rem;
+		}
+		.qr button{
+			width: 100%;
+			height: 1rem;
+			background: #03be87;
+			font-size: .4rem;
+			color: #fff;
+			line-height: 1rem;
+			border: 0;
+			border-radius: .2rem;
+		}
+	</style>
+	
+	<body>
+		<div class="header">
+			<span>付款</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		<div class="qrzf">
+			<p class="qrzf01">确认支付</p>
+			<p class="qrzf02">支付金额</p>
+			<p class="qrzf03">999</p>
+		</div>
+		
+		<div class="jymm">
+			<p>交易密码</p>
+			<input type="number" placeholder="请输入交易密码" />
+		</div>
+		
+		<div class="qr"><button type="submit">确认</button></div>
+	</body>
+	
+	<script>
+		$(document).ready(function(){
+			$(".qr").click(function(){
+				alert("付款成功")
+			})
+		})
+	</script>
+	
+</html>
+

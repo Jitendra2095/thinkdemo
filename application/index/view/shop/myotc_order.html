@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>我的广告</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="screen-orientation" content="portrait">
+	<meta name="full-screen" content="yes">
+	<meta name="browsermode" content="application">
+	<meta name="x5-orientation" content="portrait">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="x5-page-mode" content="app">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <!-- css -->
+    <link href="/zc/css/mui.min.css" rel="stylesheet">
+    <link href="/zc/css/footer.css" rel="stylesheet">
+    <link href="/zc/css/base.css" rel="stylesheet">
+    <!-- js -->
+	<script src="/zc/js/jquery.min.js"></script>
+    <script src="/zc/js/mui.min.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+</head>
+<style>
+    .mui-segmented-control.mui-scroll-wrapper .mui-scroll,.mui-segmented-control.mui-scroll-wrapper{
+        height: 1.533333rem;
+    }
+    .mui-segmented-control.mui-scroll-wrapper{
+        border-bottom: .16rem solid #f1f1f1;
+    }
+    .trading_head a{
+    	text-decoration: none;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
+<body>
+	<div id="app">
+		<!-- 头部 -->
+		<div class="trading_head">
+            <a href="javascript:history.go(-1)">
+			<div class="left">
+				<img src="/zc/img/fh.png" alt="">
+				<span>我的广告</span>
+            </div>
+            </a>
+		</div>
+		<!-- 内容 -->
+		<div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+            <div class="mui-scroll">
+                <div class="otc_order active">
+                    未付款
+                </div>
+                <div class="otc_order">
+                                    已付款
+                </div>
+                <div class="otc_order">
+                                    已完成
+                </div>
+                <div class="otc_order">
+                                    已取消
+                </div>
+                <div class="otc_order">
+                                    申诉中
+                </div>
+                <div class="otc_order">
+                                    所有订单
+                </div>
+            </div>
+        </div>
+        <div class="otc_order1">
+            
+        </div>
+		 <div style="height: 1.66667rem"></div>
+         <!-- 底部导航 -->
+		<div class="foot_bar">
+			<div class="foot_block">
+				<img class="ws1" src="/zc/img/a_icon1.png" alt="">
+				<p>首页</p>
+			</div>
+			<div class="foot_block active">
+				<img class="ws2" src="/zc/img/b_icon2.png" alt="">
+				<p>OTC</p>
+			</div>
+			<div class="foot_block ">
+				<img class="ws3" src="/zc/img/a_icon3.png" alt="">
+				<p>交易</p>
+			</div>
+			<div class="foot_block">
+				<img class="ws4" src="/zc/img/a_icon4.png" alt="">
+				<p>资产</p>
+			</div>
+			<div class="foot_block">
+				<img class="ws5" src="/zc/img/a_icon5.png" alt="">
+				<p>我的</p>
+			</div>            
+        </div>
+	</div>
+</body>
+</html>
+	
+
+<script type="text/html" id="tpl">
+    
+    {{each info v }}
+    <a href="otc_order_ddxq.html?orderid={{v.id}}" style="text-decoration: none;">
+	<div class="order_block">
+        <div class="left">
+            <div>
+                <%if(v.type==1){%>    
+                <span style="color:#03BE87;font-size: .48rem">买入</span>
+                <%}else{%>
+                <span style="color:#03BE87;font-size: .48rem">卖出</span>
+                <%}%>
+                <span style="color:#333;font-size: .48rem;font-weight: bold">{{v.ftypename}}</span>
+                <span class="nine">{{v.addtime}}</span>
+            </div>
+            <p class="nine">交易单价</p>
+            <p class="six">{{v.price}}</p>
+            <p class="nine">订单编号</p>
+            <p class="six">{{v.ordersn}}</p>
+        </div>
+        <div class="right">
+            <div class="ns1">
+                <span class="six">
+                <%if(v.status==2){%>
+                    未付款
+                <%}else if(v.status==3){%>
+                    已付款
+                <%}else if(v.status==4){%>
+                    已完成
+                <%}else if(v.status==1){%>
+                    挂单中
+                <%}else if(v.status==5){%>
+                    已取消
+                <%}%>
+                </span>
+                <img src="/zc/img/yjt_h.png" alt="">
+            </div>
+            <p class="nine">数量</p>
+            <p class="six">{{v.num}}</p>
+            <p class="nine">姓名</p>
+            <p class="six">{{v.nick_name}}</p>
+        </div>
+    </div>
+    </a>
+    {{/each}}
+</script>
+<script type="text/html" id="tpl1">
+<div class="zcmx_block1">
+        <img src="/zc/img/zwsj.png" alt="">
+        <div class="wz">暂无数据</div>
+</div>
+</script>
+<script type="text/javascript">
+		
+	$(function(){ 
+        var status = true;
+            var param = {
+                page:1,
+                limit:10,
+                status:2
+            }
+        function loadList(){
+            console.log(param)
+            $.ajax({
+                type: "POST",
+                data: param,
+                dataType: "jsonp",
+                url: "/index/otcexchange/mypushorder",
+                success: function (res) {
+                    console.log(res)
+                    if(res.code==0){
+                        $('.otc_order1').append(template("tpl", res));
+                        if(!res.info || res.info.length<param.limit){
+                            status = false;
+                        } 
+                    }else{
+                        // $('.otc_order1').html(template("tpl1", res));
+                    }
+                }
+            });
+        }
+        loadList();
+        $('.otc_order').eq(0).click(function (e) { 
+            $('.otc_order').removeClass('active');
+            $(this).addClass('active');
+            param.page = 1;
+            param.status=2;
+            $('.otc_order1').empty();
+            loadList();
+        });
+        $('.otc_order').eq(1).click(function (e) { 
+            $('.otc_order').removeClass('active');
+            $(this).addClass('active');
+            param.page = 1;
+            param.status=3;
+            $('.otc_order1').empty();
+            loadList();
+        });
+        $('.otc_order').eq(2).click(function (e) { 
+            $('.otc_order').removeClass('active');
+            $(this).addClass('active');
+            param.page = 1;
+            param.status=4;
+            $('.otc_order1').empty();
+            loadList();
+        });
+        $('.otc_order').eq(3).click(function (e) { 
+            $('.otc_order').removeClass('active');
+            $(this).addClass('active');
+            param.page = 1;
+            param.status=5;
+            $('.otc_order1').empty();
+            loadList();
+        });
+        $('.otc_order').eq(4).click(function (e) { 
+            $('.otc_order').removeClass('active');
+            $(this).addClass('active');
+            param.page = 1;
+            param.status=6;
+            $('.otc_order1').empty();
+            loadList();
+        });
+        $('.otc_order').eq(5).click(function (e) { 
+            $('.otc_order').removeClass('active');
+            $(this).addClass('active');
+            param.page = 1;
+            param.status=0;
+            $('.otc_order1').empty();
+            loadList();
+        });
+        // 下拉加载
+        $(window).off("scroll").on("scroll", function(e){
+            var totalheight = parseFloat($(this).height()) + parseFloat($(this).scrollTop());
+            if (($(document).height()<=totalheight && status)){
+                status = true;
+                param.page++;
+                loadList();
+            }
+        });
+	})
+</script>

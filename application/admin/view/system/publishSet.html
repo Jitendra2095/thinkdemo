@@ -1,0 +1,67 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>发布管理配置</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">名称</th>
+                <th class="text-center">条数</th>
+                <th class="text-center">价格</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach $list as $key=>$config}
+            <tr>
+                <td class="text-center" style="vertical-align: middle; ">发布管理{$config['id']}</td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="num{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['num']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="price{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['price']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <a onclick="updateConfig(this)" data-id="{$config['id']}" class="btn btn-xs btn-primary">确认修改</a>
+                </td>
+            </tr>
+            {/foreach}
+            </tbody>
+        </table>
+
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+<script>
+    function updateConfig(e) {
+        var id = $(e).attr('data-id');
+        var num = $("#num" + id).val();
+        var price = $("#price" + id).val();
+        var team_profit = $("#team_profit" + id).val();
+        var level_profit = $("#level_profit" + id).val();
+        $.post("{:url('editConfigPublish')}", {num: num,price: price,id:id}, function (data) {
+            if (data.code == 1) {
+                main.waringAlert(data.message);
+            } else {
+                main.waringAlert(data.message);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000)
+            }
+        }, 'json')
+    }
+</script>
+{/block}

@@ -1,0 +1,101 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<style type="text/css">
+    .link-th{
+        color:blue;
+    }
+</style>
+<section class="panel">
+    <header class="panel-heading">
+        <h4>云仓管理</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="">
+            <div class="form-group">
+                <div class="col-xs-1 no-pd-r">
+                    <select name="type" id="type" class="form-control">
+                        <option {if $Request.get.type == 'good_name'} selected {/if} value="good_name">商品名称</option>
+                    </select>
+                </div>
+                <div class="col-xs-3 no-pd-l">
+                    <input type="text" id="keyword" value="{$Request.get.keyword}" name="keyword" class="form-control" placeholder="请输入关键词搜索">
+                </div>
+                <button type="submit" class="btn btn-color">搜索</button>
+                <a type="button" class="btn btn-success" href="{:url('user/index')}">返回</a>
+                <!--<a type="button" href="/admin/user/create" class="btn btn-info">添加会员</a>-->
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">会员信息</th>
+                <th class="text-center">商品名称</th>
+                <th class="text-center">商品图片</th>
+                <th class="text-center">库存</th>
+                <th class="text-center">时间</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($list)}
+                {foreach $list as $entity}
+                <tr>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->id}<br>
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        昵称：{$entity->nick_name}<br>
+                        手机号：{$entity->mobile}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                       {$entity->good_name}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        <img src="{$entity->good_pic}" width="200" alt="">
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                       {$entity->good_num}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->create_time}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+
+                        <a data-url="{:url('user/editYuncang',['id'=>$entity->id])}" onclick="showContent(this)"
+                           data-content="{$entity->feedback($entity->uid,$entity->good_id)}" class="btn btn-xs btn-info">修改</a>
+                    </td>
+                </tr>
+                {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="9">暂无数据</td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+<script>
+    function showContent(e){
+        $.dialog({
+            title: '库存',
+            content: $(e).attr('data-content')
+        });
+    }
+</script>
+{/block}
+
+{block name="footer"}
+
+
+
+{/block}

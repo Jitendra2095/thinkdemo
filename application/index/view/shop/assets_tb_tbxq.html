@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>提币</title>
+		<link rel="stylesheet" href="/zc/css/style.css" />
+		<link rel="stylesheet" href="/zc/css/index.css" />
+		<link rel="stylesheet" href="/zc/css/login.css" />
+		<link href="/zc/css/swiper.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/zc/css/swiper-3.2.7.min.css" />
+		<script src="/zc/js/flexible.js"></script>
+		<script src="/zc/js/flexible_css.js"></script>
+		<script src="/zc/js/template.js"></script>
+		<script src="/zc/js/unslider.min.js"></script>
+	    <script src="/zc/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/zc/js/swiper-3.4.0.jquery.min.js" ></script>
+		
+		<script src="/zc/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="/zc/js/jquery.qrcode.min.js"></script>
+
+		<style>
+			.tb{
+				width: 95%;
+				margin: auto;
+			}
+			.tb01{
+				
+				font-size: .4rem;
+				font-weight: bold;
+				color: #333;
+				margin-top: .3rem;
+			}
+			.tb02{
+				width: 100%;
+				height: 1rem;
+				background: #f7f7f7;
+				border-radius: .2rem;
+				overflow: hidden;
+				margin-top: .3rem;
+			}
+			.tb02 p,.tb02 select,.tb02 img{
+				float: left;
+			}
+			.tb02 p{
+				font-size: .4rem;
+				color: #333;
+				line-height: 1rem;
+				margin-left: .3rem;
+			}
+			.tb02 select{
+				height: 1rem;
+				margin-left: 5.5rem;
+				background: #f7f7f7;
+				border: 0;
+			}
+			.tb02 select option{
+				font-size: .4rem;
+				line-height: 1rem;
+				color: #999;
+			}
+			.tb02 img{
+				width: .4rem;
+				display: block;
+				float: right;
+				margin-right: .3rem;
+				margin-top: .3rem;
+			}
+			.tbdz{
+				width: 95%;
+				margin: auto;
+				margin-top: .3rem;
+			}	
+			.tbdz01{
+				height: 1rem;
+				font-size: .35rem;
+				color: #333;
+				line-height: 1rem;
+			}
+			.tbdz02{
+				width: 100%;
+				height: 1rem;
+				overflow: hidden;
+				border-bottom: 1px solid #dcdcdc;
+			}
+			.tbdz02_lt,.tbdz02_rt{
+				float: left;
+			}
+			.tbdz02_lt{
+				width: 80%;
+				height: 1rem;
+			}
+			.tbdz02_lt input{
+				font-size: .35rem;
+				line-height: 1rem;
+				color: #999;
+				background: #fff;
+				border: 0;
+			}	
+			.tbdz02_rt{
+				width: 20%;
+				overflow: hidden;
+			}
+			.tbdz02_rt_z,.tbdz02_rt_y{
+				float: left;
+			}
+			.tbdz02_rt img{
+				width: .5rem;
+				display: block;
+				margin-top: .25rem;
+			}
+			.tbdz02_rt_y{
+				float: right;
+			}	
+			.tbdz02_rt_z P{
+				font-size: .35rem;
+				color: #999;
+				line-height: 1rem;
+			}
+			.tbdz02_rt_y P{
+				font-size: .35rem;
+				color: #333;
+				line-height: 1rem;
+			}
+			.tbdz03{
+				font-size: .35rem;
+				color: #999;
+				line-height: .6rem;
+			}
+			.tbdz02_lt P{
+				font-size: .35rem;
+				color: #333;
+				line-height: 1rem;
+			}
+			.dzsl{
+				width: 95%;
+				height: 1rem;
+				margin: auto;
+				margin-top: .5rem;
+				overflow: hidden;
+			}
+			.dzsl_lt,.dzsl_rt{
+				float: left;
+			}
+			.dzsl_lt{
+				font-size: .4rem;
+				color: #666;
+				line-height: 1rem;
+			}
+			.dzsl_rt{
+				float: right;
+				font-size: .4rem;
+				color: #333;
+				line-height: 1rem;
+			}
+			.tban{
+				width: 95%;
+				margin: auto;
+				margin-top: 1rem;
+				height: 1rem;
+			}
+			.tban input{
+				width: 100%;
+				background: #18C78D;
+				font-size: .4rem;
+				color: #fff;
+				line-height: 1rem;
+				border: 0;
+			}
+			.wxts{
+				width: 95%;
+				margin: auto;
+				margin-top: .3rem;
+			}
+			.wxts p{
+				font-size: .35rem;
+				color: #333;
+				line-height: .6rem;
+			}
+			.wxts .wxts01{
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<span>提币</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>	
+		
+		<div class="tb">
+			<p class="tb01">提币</p>
+			
+			<div class="tb02">
+				<p>USDT</p>
+				<!--<select>
+					<option>选择币种</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+				</select>
+				<img src="/zc/img/yjt_h.png">-->
+			</div>
+		</div>
+		
+		<div class="tbdz">
+			<p class="tbdz01">提币地址</p>
+			<div class="tbdz02">
+				<div class="tbdz02_lt"><input type="text" placeholder="输入或长按粘贴地址" class="inp" /></div>
+				
+			</div>
+		</div>
+		
+		<div class="tbdz">
+			<p class="tbdz01">数量</p>
+			<div class="tbdz02">
+				<div class="tbdz02_lt"><input type="text" placeholder="最小提币数量200" class="num" /></div>
+				<div class="tbdz02_rt">
+					<div class="tbdz02_rt_z"><p>USDT</p></div>
+					<div class="tbdz02_rt_y"><p>全部</p></div>
+				</div>
+			</div>
+			<p class="tbdz03">可用0.0000 USDT</p>
+		</div>
+		
+		<div class="tbdz">
+			<p class="tbdz01">手续费</p>
+			<div class="tbdz02">
+				<div class="tbdz02_lt"><p>5</p></div>
+				<div class="tbdz02_rt">
+					<div class="tbdz02_rt_y"><p>USDT</p></div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="dzsl">
+			<p class="dzsl_lt">到账数量</p>
+			<p class="dzsl_rt">0.0000 USDT</p>
+		</div>
+		
+		<div class="tban"><input type="submit" value="提币"></div>
+		
+		<div class="wxts">
+			<p class="wxts01">温馨提示:</p>
+			<p class="wxts02">备注和地址必须填写，否则无法转账，甚至造成损失。</p>
+			<p class="wxts02">为保障资金安全，当您账户安全策略变更，密码修改，使用新地址提币。我们会对你提币进行人工审核，请耐心等待工作人员电话或邮件联系。请务必确认电脑及浏览器安全，防止信息被篡改或泄漏。</p>
+		</div>
+	</body>
+	
+<script>
+	$.ajax({
+
+	    url:"/index/asset/crubalance",
+	    type:"post",
+	    dataType:'jsonp',
+	    data:{btype:3,ftype:1},
+	    success: function(res) {
+	    	
+	    	console.log(res)
+	        // alert(res.message)
+	        $('.tbdz03').html('可用'+res.info+' USDT')	      
+	             
+	    },
+	    error:function(err){
+	        alert(err.message)
+	    } 
+
+		});
+	$('.num').blur(function(){
+		var num=$('.num').val()
+	    	var numa=num-5;
+	    	if(numa<0){
+	    		$('.dzsl_rt').html('0.0000 USDT')
+	    	}else{
+	    		$('.dzsl_rt').html(numa +'.0000USDT')
+	    	}
+	    		 
+	})
+	$.ajax({
+		type: "POST",
+		dataType:'jsonp',
+		url: "/index/asset/crubalance",
+		success: function (res) {
+			if(res.code==0){
+				$('.tbdz02_rt_y').click(function (e) { 
+					console.log(res.info);
+					$('.num').val(res.info);
+				});
+			}
+		}
+	});
+	
+	$('.tban').click(function(){
+		var num=$('.num').val()
+	 	var address=$('.inp').val()
+	 	if(num==''&&address==""){
+	 		alert("金币或地址不能为空")
+	 	}else{
+	 		$.ajax({
+		    url:"/index/asset/tb",
+		    type:"post",
+		    dataType:'jsonp',
+		    data:{ftype:1,number:num,address:address},
+		    success: function(res) {
+		        alert("提领成功")
+		    },
+		    
+			});
+	 	}
+	 	
+	})
+
+</script>
+</html>

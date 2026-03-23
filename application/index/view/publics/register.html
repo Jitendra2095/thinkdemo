@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/build/css/intlTelInput.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/layer.js"></script>
+	<script src="/zc/build/js/intlTelInput.js"></script>
+	<script src="/zc/js/jq-slideVerify.js"></script>
+	
+	<style>
+		.login_bj{
+			overflow: hidden;
+		}
+		.login_bj img{
+			width: 3rem;
+			display: block;
+			margin: auto;
+			margin-top: 1.4rem;
+		}
+		.xzzy{
+			width: 73.33%;
+			height: 1rem;
+			margin: auto;
+			overflow: hidden;
+		}
+		.xzzy_lt,.xzzy_rt{
+			float: left;
+			width: 46%;
+			height: 1rem;
+			background: #03BE87;
+			border: 0;
+			border-radius: .1rem;
+		}
+		.xzzy_lt{
+			overflow: hidden;
+		}
+		.xzzy_lt p,.xzzy_lt input{
+			float: left;
+		}
+		.xzzy_lt p{
+			font-size: .4rem;
+			color: #fff;
+			margin-left: .3rem;
+			line-height: 1rem;
+		}
+		.xzzy_lt input{
+			border: 1px solid #03be87;
+			line-height: 1rem;
+			float: right;
+			height: 1rem;
+			margin-right: .3rem;
+		}
+		.xzzy_rt{
+			overflow: hidden;
+			float: right;
+		}
+		.xzzy_rt p,.xzzy_rt input{
+			float: left;
+		}
+		.zcqh{
+			display: flex;
+			display: -webkit-flex;
+			justify-content: center
+		}
+		.zcqh .zc1{
+			color: #999;
+			font-size: .45rem;
+			height: .5rem;
+			margin:0 .533333rem;
+			padding-bottom: .68rem;
+		}
+		.zcqh .zc1.active{
+			color:#03BE87;
+			border-bottom: 2px solid #03BE87;
+		}
+		#getcode,#mcode {
+			position: absolute;
+			right: 0;
+			bottom: 1px;
+			line-height: 1rem;
+			color: #F65656;
+			background: none;
+			border: none;
+		}
+		.qhdhq{
+			width: 80%;
+			margin: auto;
+			border: none;
+		}
+	</style>
+	<body >
+		
+		<div class="login_bj">
+			<img src="/zc/img/logo_w.png">
+		</div>
+		<div class="zcqh">
+			<div class="zc1 active">手机注册</div>
+			<div class="zc1">邮箱注册</div>
+		</div>
+		<div class="login_srk sjzc" style="margin-left: -.4rem;">
+			<div class="login_zh">
+				<p>手机号码：</p>
+				<input type="text" placeholder="请输入手机号" class="nick_name" />
+			</div>
+			<div class="login_mm" style="position: relative;">
+				<p>验证号码：</p>
+				<input type="password" placeholder="请输入验证码" class="get_code" />
+				<button type="button" id="getcode" class="waves-effect">点击获取</button>
+			</div>
+			<div class="login_mm">
+				<p>登录密码：</p>
+				<input type="password" placeholder="请设置密码" class="password" />
+			</div>
+			<div class="login_mm">
+				<p>确认密码：</p>
+				<input type="password" placeholder="请确认密码" class="password2" />
+			</div>
+			
+			<div class="login_yqm">
+				<p>邀请号码：</p>
+				<input type="number" placeholder="请输入邀请码" class="invite_code1" />
+			</div>
+		</div>
+		<div class="login_srk yxzc" style="display: none">
+			<div class="login_zh">
+				<p>邮箱地址：</p>
+				<input type="text" placeholder="请输入邮箱地址" class="m_address" />
+			</div>
+			<div class="login_mm" style="position: relative;">
+				<p>邮箱验证：</p>
+				<input type="password" placeholder="请输入验证码" class="m_code" />
+				<button type="button" id="mcode" class="waves-effect">点击获取</button>
+			</div>
+			<div class="login_mm">
+				<p>登录密码：</p>
+				<input type="password" placeholder="请设置密码" class="m_password" />
+			</div>
+			<div class="login_mm">
+				<p>确认密码：</p>
+				<input type="password" placeholder="请确认密码" class="m_password2" />
+			</div>
+			<div class="login_yqm">
+				<p>邀请号码：</p>
+				<input type="number" placeholder="请输入邀请码" class="invite_code2" />
+			</div>
+		</div>
+		<!--<div class="xzzy">
+			<button class="xzzy_lt">
+				<p>左区</p>
+				<input type="radio" name="1" value="1" />
+			</button>
+			<button class="xzzy_rt">
+				<p>右区</p>
+				<input type="radio" name="1" value="2" />
+			</button>
+		</div>-->
+		<div style="width: 80%;margin-left: 10%">
+			<div class="verify-wrap" id="verify-wrap"></div>
+		</div>
+		<div class="dlan">
+			<button type="button" class="login">注册</button>
+		</div>
+		
+		<div class="xy" style="display: flex;margin-bottom: .2rem; display: -webkit-flex;align-items: center;margin-left: 2rem;margin-top: .4rem">
+			<img class="wsxy" data-type="0" style="width: .4rem;margin-right: .2rem" src="/zc/img/wxz.png" alt="">
+			<div >我已阅读并<a href="">同意《用户协议》</a></div></a> 
+		</div>
+	</body>
+	
+	
+	<script type="text/javascript">
+
+	</script>
+
+
+	<script>
+ $("#phone").intlTelInput({
+      // allowDropdown: false,
+      // autoHideDialCode: false,
+      // autoPlaceholder: "off",
+      // dropdownContainer: "body",
+      // excludeCountries: ["us"],
+      // formatOnDisplay: false,
+      // geoIpLookup: function(callback) {
+      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+      //     var countryCode = (resp && resp.country) ? resp.country : "";
+      //     callback(countryCode);
+      //   });
+      // },
+      // initialCountry: "auto",
+      // nationalMode: false,
+      // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+      // placeholderNumberType: "MOBILE",
+      // preferredCountries: ['cn', 'jp'],
+      // separateDialCode: true,
+      utilsScript: "/zc/build/js/utils.js"
+    });
+        function getQueryString(name) { 
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+        var r = window.location.search.substr(1).match(reg); 
+        if (r != null) return unescape(r[2]); 
+        return null; 
+        } 
+		if(getQueryString('invite_code')){
+			var invite_code=getQueryString('invite_code');
+			$('.invite_code1').val(invite_code);
+			$('.invite_code2').val(invite_code);
+			}
+		if(getQueryString('around')){
+            var around=getQueryString('around');
+        }else{
+			around=1;
+		}
+        var token=getQueryString('token');
+
+
+        $(function () {
+			$('.wsxy').click(function (e) { 
+				if($(this).data('type')==0){
+					$(this).data('type','1');
+					$(this).attr('src','/zc/img/xz.png');
+				}else{
+					$(this).data('type','0');
+					$(this).attr('src','/zc/img/wxz.png');
+				}
+			});
+			$('.zc1').eq(0).click(function (e) { 
+				e.preventDefault();
+				$('.zc1').removeClass('active');
+				$(this).addClass('active');
+				$('.sjzc').show();
+				$('.yxzc').hide();
+			});
+			$('.zc1').eq(1).click(function (e) { 
+				e.preventDefault();
+				$('.zc1').removeClass('active');
+				$(this).addClass('active');
+				$('.sjzc').hide();
+				$('.yxzc').show();
+			});
+            // $('.login_close').on('click',function(){
+            //     $('.nick_name').val('');
+            // })
+            // 验证码
+        $('#getcode').on('click', function(){
+            var that = $(this);
+            var mobile = $('.nick_name').val();
+            if(!mobile) return layer.open({content:'请输入手机号码'});
+				$.ajax({
+					type: "POST",
+					url: "/index/publics/send",
+					data: {mobile:mobile},
+					success: function (res) {
+						if (res.code=='0') {
+						that.html('60s').attr('disabled', true);
+						var timer = setInterval(function(){
+							var num = parseInt(that.text());
+							if (num <= 1) {
+								that.html('重新发送').removeAttr('disabled');
+								clearInterval(timer);
+							} else {
+								that.html(--num+'s');
+							}
+						}, 1000);
+					}
+					layer.open({content:res.message});
+					}
+				});
+			})
+         // 邮箱验证码
+		 $('#mcode').on('click', function(){
+            var that = $(this);
+            var mobile = $('.m_address').val();
+            if(!mobile) return layer.open({content:'请输入邮箱地址'});
+				$.ajax({
+					type: "POST",
+					url: "/index/publics/sendEmail",
+					data: {email:mobile},
+					success: function (res) {
+						if (res.code=='0') {
+						that.html('60s').attr('disabled', true);
+						var timer = setInterval(function(){
+							var num = parseInt(that.text());
+							if (num <= 1) {
+								that.html('重新发送').removeAttr('disabled');
+								clearInterval(timer);
+							} else {
+								that.html(--num+'s');
+							}
+						}, 1000);
+					}
+					layer.open({content:res.msg});
+					}
+				});
+			})
+		var SlideVerifyPlug = window.slideVerifyPlug;
+		var slideVerify = new SlideVerifyPlug('#verify-wrap',{
+			initText:'滑动验证',  //设置  初始的 显示文字
+			sucessText:'验证通过',//设置 验证通过 显示的文字
+		});
+        $('.login').click(function(){
+			if(!slideVerify.slideFinishState){
+				return layer.open({content:'未通过滑动验证'});
+			};
+			if($('.wsxy').data('type')=='0'){
+				return layer.open({content:'需同意用户协议'});
+			}
+			if($('.zc1').eq(0).hasClass('active')){
+				var mobile=$('.nick_name').val();
+				var code=$('.get_code').val();
+				var password=$('.password').val();
+				var password2=$('.password2').val();
+				var invite_code=$('.invite_code1').val();
+				if(!mobile) 	return layer.open({content:'请输入手机号'});
+				if(!code) return layer.open({content:'请输入验证码'});
+				if(!password) return layer.open({content:'请输入密码'});
+				if(!password2) return layer.open({content:'请输入确定密码'});
+				if(password2 !==password){
+					return layer.open({content:'两次密码不一致'});
+				}
+				if(!invite_code) return layer.open({content:'邀请码不能为空'});
+				$.ajax({
+					type: "POST",
+					url: "/index/publics/doRegister",
+					   data: {type:1,around:around,mobile:mobile,password:password,invite_code:invite_code,code:code},
+					success: function (res) {
+						 if(res.code==0){
+                         	 alert(res.message);
+                            setTimeout(() => {
+                                window.location.href="/index/publics/index";
+                            }, 1000);
+                        }else{
+                         	 alert(res.message);
+                        }
+						
+					}
+				});
+			}else{
+				var mobile1=$('.m_address').val();
+				var code1=$('.m_code').val();
+				var password1=$('.m_password').val();
+				var password21=$('.m_password2').val();
+				var invite_code=$('.invite_code2').val();
+				if(!mobile1) 	return layer.open({content:'请输入邮箱地址'});
+				if(!code1) return layer.open({content:'请输入验证码'});
+				if(!password1) return layer.open({content:'请输入密码'});
+				if(!password21) return layer.open({content:'请输入确定密码'});
+				if(password21 !==password1){
+					return layer.open({content:'两次密码不一致'});
+				}
+				
+				$.ajax({
+					type: "POST",
+					url: "/index/publics/doRegister",
+					data: {type:2,around:around,mobile:mobile1,password:password1,invite_code:invite_code,code:code1},
+					success: function (res) {
+						 if(res.code==0){
+                         	 alert(res.message);
+                            setTimeout(() => {
+                                window.location.href="/index/publics/index";
+                            }, 1000);
+                        }else{
+                         	 alert(res.message);
+                        }
+						
+					}
+				});
+			}
+           
+			
+        })
+        });       
+    </script>
+</html>

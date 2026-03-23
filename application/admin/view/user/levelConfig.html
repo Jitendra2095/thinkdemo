@@ -1,0 +1,170 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<link rel="stylesheet" href="http://cdn.staticfile.org/webuploader/0.1.5/webuploader.css">
+<script type="text/javascript" src='http://cdn.staticfile.org/webuploader/0.1.5/webuploader.min.js'></script>
+<style type="text/css">
+</style>
+<section class="panel">
+    <header class="panel-heading">
+        <h4>会员权益登记配置</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">等级大小(数字越大等级越高)</th>
+                <th class="text-center">等级名称</th>
+                <th class="text-center">是否开启云仓</th>
+                <th class="text-center">条件(满足任一条件)</th>
+                <th class="text-center">条件(招直属下一权益人数)</th>
+                <th class="text-center">赠送商品</th>
+                <th class="text-center">赠送商品数量</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach $list as $key=>$config}
+            <tr>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="id{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['id']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="level_name{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['level_name']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <select name="description" id="description{$config['id']}" class="form-control" style="text-align:center;text-align-last:center;">
+                        <option value="">——请选择——</option>
+                        <option value="1" {if($config['description'] ==1)}selected{/if}>是</option>
+                        <option value="0" {if($config['description'] ==0)}selected{/if}>否</option>
+                    </select>
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="condition{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['condition']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="next_num{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['next_num']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <select name="good_id" id="good_id{$config['id']}" class="form-control" style="text-align:center;text-align-last:center;">
+                        <option value="">——请选择——</option>
+                        {foreach $goods as $good}
+                        <option value="{$good->id}"
+                                {if($good->id ==$config['good_id'])}selected{/if}>{$good['good_name']}</option>
+                        {/foreach}
+                    </select>
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="good_num{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['good_num']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <a onclick="updateConfigCopy(this)" data-level_name="{$config['level_name']}"
+                       data-description="{$config['description']}" data-condition="{$config['condition']}" id-data="{$config['id']}"
+                       class="btn btn-xs btn-primary">确认修改</a>
+                    <a data-url="{:url('delLevelConfig',['id'=>$config->id])}" onclick="main.ajaxDelete(this)"
+                       data-msg="确定要删除该配置吗？" class="btn btn-xs btn-danger">删除</a>
+                </td>
+            </tr>
+            {/foreach}
+            <tr>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="id" style="text-align: center" class="form-control">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="level_name" style="text-align: center" class="form-control">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <select name="description" id="description" class="form-control" style="text-align:center;text-align-last:center;">
+                        <option value="">——请选择——</option>
+                        <option value="1" >是</option>
+                        <option value="0">否</option>
+                    </select>
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="condition" style="text-align: center" class="form-control">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="next_num" style="text-align: center" class="form-control">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <select name="good_id" id="good_id" class="form-control" style="text-align:center;text-align-last:center;">
+                        <option value="">——请选择——</option>
+                        {foreach $goods as $good}
+                        <option value="{$good->id}"
+                                >{$good['good_name']}</option>
+                        {/foreach}
+                    </select>
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="good_num" style="text-align: center" class="form-control">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <a onclick="addConfig(this)" class="btn btn-xs btn-primary">确认添加</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<script>
+    function updateConfigCopy(e) {
+        var oldId = $(e).attr('id-data');
+        var id = $("#id" + oldId).val();
+        var level_name = $("#level_name" + oldId).val();
+        var description = $("#description" + oldId).val();
+        var condition = $("#condition" + oldId).val();
+        var next_num = $("#next_num" + oldId).val();
+        var good_id = $("#good_id" + oldId).val();
+        var good_num = $("#good_num" + oldId).val();
+        $.post("{:url('editLevelConfig')}", {level_name: level_name, description:description,
+            good_id:good_id,next_num:next_num,good_num:good_num,condition:condition,id:id,oldId:oldId},
+            function (data) {
+                if (data.code == 1) {
+                    main.waringAlert(data.message);
+                } else {
+                    main.waringAlert(data.message);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1000)
+                }
+        }, 'json')
+    }
+    function addConfig(e) {
+
+        var id = $('#id').val();
+        var level_name = $('#level_name').val();
+        var description = $('#description').val();
+        var condition = $('#condition').val();
+        var next_num = $('#next_num').val();
+        var good_id = $('#good_id').val();
+        var good_num = $('#good_num').val();
+        $.post("{:url('addLevelConfig')}", {
+            id: id,level_name: level_name,description:description,
+            condition:condition,next_num:next_num,good_id:good_id,good_num:good_num
+        }, function (data) {
+
+            if (data.code == 1) {
+                main.waringAlert(data.message);
+            } else {
+                main.waringAlert(data.message);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000)
+            }
+        }, 'json')
+    }
+</script>
+{/block}
+
+{block name="footer"}
+
+{/block}

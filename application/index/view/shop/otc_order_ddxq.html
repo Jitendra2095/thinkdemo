@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订单详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link rel="stylesheet" href="/zc/css/center_gywm.css" />
+	<!-- <link rel="stylesheet" href="/zc/css/center_lxkf.css" /> -->
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_aqzx.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<script src="./api.js"></script>	
+	<script src="/zc/js/layer.js"></script>
+
+	<style>
+		.ddxx{
+			width: 95%;
+			height: 1rem;
+			margin: auto;
+			overflow: hidden;
+		}
+		.ddxx_lt,.ddxx_rt{
+			float: left;
+		}
+		.ddxx_lt{
+			font-size: .45rem;
+			line-height: 1rem;
+			color: #333;
+		}
+		.ddxx_rt{
+			float: right;
+			font-size: .35rem;
+			color: #03BE87;
+			border: 1px solid #03be87;
+			padding: .1rem;
+			margin-top: .1rem;
+			border-radius: .1rem;
+		}
+		.mr{
+			width: 95%;
+			height: 1rem;
+			margin: auto;
+			margin-top: .3rem;
+		}
+		.mr p{
+			font-size: .4rem;
+			font-weight: bold;
+			color: #03be87;
+			line-height: 1rem;
+		}
+		.mr p span{
+			color: #333;
+		}
+		.jyje{
+			width: 95%;
+			height: 1rem;
+			margin: auto;
+			overflow: hidden;
+			border-bottom: 1px solid #f2f2f2;
+			margin-top: .2rem;
+		}
+		.jyje_lt,.jyje_rt{
+			float: left;
+		}
+		.jyje_lt{
+			font-size: .35rem;
+			line-height: 1rem;
+			color: #999;
+		}
+		.jyje_rt{
+			float: right;
+			line-height: 1rem;
+			font-size: .35rem;
+			color: #333;
+		}
+		.tbtx{
+			width: 95%;
+			height: 1.4rem;
+			margin: auto;
+			overflow: hidden;
+			border-bottom: 1px solid #f2f2f2;
+			margin-top: .2rem;
+		}
+		.tbtx_lt,.tbtx_rt{
+			float: left;
+		}
+		.tbtx_lt{
+			font-size: .35rem;
+			line-height: 1rem;
+			color: #999;
+		}
+		.tbtx_rt{
+			width: 70%;
+			float: right;
+			line-height: .6rem;
+			font-size: .35rem;
+			color: #333;
+		}
+		.hs{
+			width: 100%;
+			height: .1rem;
+			background: #f2f2f2;
+		}
+		.skf{
+			width: 95%;
+			margin: auto;
+			border-bottom: 1px solid #f2f2f2;
+			margin-top: .5rem;
+		}
+		.skf_bt{
+			font-size: .45rem;
+		    line-height: 1rem;
+		    color: #333;
+		}
+		.skf_zh{
+			width: 100%;
+			overflow: hidden;
+		}
+		.skf_zh_lt,.skf_zh_rt{
+			float: left;
+		}
+		.skf_zh_lt{
+			height: 1rem;
+		}
+		.skf_zh_lt p{
+			font-size: .35rem;
+			color: #999;
+			line-height: 1rem;
+		}
+		.skf_zh_rt{
+			height: 1rem;
+			float: right;
+			overflow: hidden;
+		}
+		.skf_zh_rt p,.skf_zh_rt img{
+			float: left;
+		}
+		.skf_zh_rt p{
+			font-size: .35rem;
+			color: #333;
+			line-height: 1rem;
+		}
+		.skf_zh_rt img{
+			width: .5rem;
+			display: block;	
+			margin-top: .25rem;
+		}
+		.czts{
+			width: 95%;
+			margin: auto;
+			margin-top: 1rem;
+			padding-bottom: .5rem;
+		}
+		.czts p{
+			font-size: .35rem;
+			color: #999;
+		}
+		.footer{
+			height:1.5rem;
+			width: 100%;
+			font-size: 0.5rem;
+			font-weight: bold;
+			line-height: 1.5rem;
+			background: #18C78D;
+			color: #eee;
+			text-align: center;
+			margin-top: 20px;
+			display: block;
+		}
+		.img{
+			margin-top:10px;
+			background: #ededed;
+			border-top: 1px solid #fff;
+			padding-bottom: 20px;
+		}
+		.img_img{
+			width: 90%;
+			height:0.34rem;
+			/*background:#4F525B;*/
+			margin: 2rem auto;
+			position: relative;
+		}
+		/*.img_name{
+			color: #fff;
+			font-size: 0.3rem;
+			margin: 0.4rem 0 0.24rem 0.3rem;
+		}*/
+		.img_img span{
+			position: absolute;
+			top: 50%;
+			color: #999;
+			font-size: 0.48rem;
+			left:50%;
+			margin: -0.32rem 0 0 -0.48rem;
+			z-index: 1;
+		}
+		.weui-uploader__input-box{
+			position: absolute;
+			width: 100%;
+			height:2rem;
+			
+			z-index: 2;
+		}
+		#uploaderInput{
+			position: absolute;
+			width: 100%;
+			height:100%;
+			border: none;
+			z-index: 3;
+			opacity: 0;
+			/*background: #4F525B;*/
+		}
+		.weui-uploader__input-box img{
+			width: 112%;
+			height:258%;
+			margin: -80px 0 0 -20px;
+		}
+		a{text-decoration: none !important;}
+
+	</style>
+	<body>
+		<div id="detail">
+		</div>
+
+		<script type="text/html" id="tpl">
+			<div class="header">
+				<span>订单详情</span>
+				<a href="javascript:history.go(-1)" class="return"></a>
+			</div>
+			<div style="height: 1rem;"></div>
+			
+			<div class="ddxx">
+				<p class="ddxx_lt">订单信息</p>
+				<%if(info.status!=4 ||info.status!=5 ){%> 
+				<a href="shenshu.html?orderid={{info.id}}">
+					<p class="ddxx_rt" style="margin-left: 10px; ">
+						申诉
+					</p>
+				</a>
+				<%}%>
+				<%if(info.status==1){%> 
+				<p class="ddxx_rt" style="margin-left: 10px; ">
+					挂单中
+				</p>
+
+				<p class="ddxx_rt cxdd">
+					撤销订单
+				</p>
+				<%}else if(info.status==2){%>
+				<p class="ddxx_rt">
+					未付款
+					</p>
+				<%}else if(info.status==3){%>
+				<p class="ddxx_rt">
+					已付款
+					</p>
+				<%}else if(info.status==4){%>
+				<p class="ddxx_rt">
+					已完成
+					</p>
+				<%}else if(info.status==5){%>
+				<p class="ddxx_rt">
+					已撤销
+				</p>
+				<%}%>
+			</div>
+			
+			<div class="mr">
+				<p>
+					<%if(info.type==1){%> 
+						买入
+					<%}else if(info.type==2){%>
+						卖出
+					<%}%>
+
+					<span>USDT</span>
+				</p>
+			</div>
+			
+			<div class="jyje">
+				<p class="jyje_lt">交易金额</p>
+				<p class="jyje_rt">{{info.price}}CNY</p>
+			</div>
+			
+			<div class="jyje">
+				<p class="jyje_lt">交易数量</p>
+				<p class="jyje_rt">{{info.num}}USDT</p>
+			</div>
+			
+			<!-- <div class="jyje">
+				<p class="jyje_lt">交易价格</p>
+				<p class="jyje_rt">6.78CNY/USDT</p>
+			</div> -->
+			
+			<div class="jyje">
+				<p class="jyje_lt">订单号</p>
+				<p class="jyje_rt">{{info.ordersn}}</p>
+			</div>
+			
+			<div class="tbtx">
+				<p class="tbtx_lt">特别提醒</p>
+				<p class="tbtx_rt">打款时，请用实名认证账户打款。不要备注任何信息！这很重要！</p>
+			</div>
+			
+			<div class="hs"></div>
+			
+			<!--收款方信息-->
+			<div class="skf">
+
+				<p class="skf_bt">收款方信息</p>
+				
+				<div class="skf_zh">
+					<div class="skf_zh_lt"><p>手机号</p></div>
+					<div class="skf_zh_rt" id="fz">
+						<input type="text" disabled="disabled" value="{{info.umobile}}" class="umobile" style="background: #fff;float: left;text-align: right;border: none;margin-top: 10px;">
+						
+				
+					</div>
+				</div>
+			<%if(info.types==1){%> 
+					
+				<div class="skf_zh">
+					<div class="skf_zh_lt"><p>账户名</p></div>
+					<div class="skf_zh_rt" id="fz">
+						<input type="text" disabled="disabled" value="{{info.realname}}" class="mingzi" style="background: #fff;float: left;text-align: right;border: none;margin-top: 10px;">
+						
+						<img src="/zc/img/fz.png" class="fuzhia">
+					</div>
+				</div>
+				
+				<div class="skf_zh">
+					<div class="skf_zh_lt"><p>账户类型</p></div>
+					<div class="skf_zh_rt">
+						<p>平安银行</p>
+					</div>
+				</div>
+				
+				<div class="skf_zh">
+					<div class="skf_zh_lt"><p>开户行</p></div>
+					<div class="skf_zh_rt">
+						<p>{{info.bank_open}}</p>
+					</div>
+				</div>
+				
+				<div class="skf_zh">
+					<div class="skf_zh_lt"><p>账号</p></div>
+					<div class="skf_zh_rt" id="fz01">
+					<input type="text" disabled="disabled" value="{{info.bank_number}}" class="zhanghao" style="background: #fff;float: left;text-align: right;border: none;margin-top: 10px;">
+						<img src="/zc/img/fz.png" class="fuzhib">
+					</div>
+				</div>
+				
+			</div>
+			
+			<!--结束-->
+			<%}else if(info.types==2){%>
+			<div class="jyje">
+				<p class="jyje_lt">支付宝账户</p>
+				<p class="jyje_rt">
+					<%if(info.status==1){%> 
+					该用户未添加支付宝账户
+					<%}else{%>
+					{{info.realname}}/{{info.bank_name}}
+					<%}%>
+				</p>
+			</div>
+			<%}else if(info.types==3){%>
+			<div class="jyje">
+				<p class="jyje_lt">微信账户</p>
+				<p class="jyje_rt">
+					<%if(info.status==1){%> 
+					该用户未添加微信账户
+					<%}else{%>
+					{{info.realname}}/{{info.bank_name}}
+					<%}%></p>
+			</div>
+			<%}%>
+			<div class="czts" style="border-bottom: 1px solid #eee;">
+				<p>操作提示：</p>
+				<p style="font-size: 10px;">请用实名认证的银行卡或支付宝付款，否则扣押资金，谢谢！</p>
+				
+			</div>
+
+			<%if(info.status==2 || info.status==3){%> 
+			<div style="width: 95%;margin: auto;margin-top: 30px;font-size: .35rem;border-bottom: 1px solid #eee;padding-bottom: 10px;">支付密码：
+			<input type="text" class="inp" style="border: none;">
+			</div>
+			<%}%>
+			<div class="img_name" style="font-size: .35rem;margin-top: .3rem;width: 95%;margin: auto;margin-top: .3rem;">付款截图:</div>
+			<div class="img">
+		
+		<div class="img_img">
+			<span>图片</span>
+			<div class="weui-uploader__input-box">
+		        <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="" text-indent="100%">
+		        <img src="{{info.path}}" alt="">
+		     </div>
+		</div>
+	</div>
+			<input type="hidden" id="status_id" value="{{info.status}}" />
+			<%if(info.status==2){%> 
+				<div class="footer" >
+				确认付款
+				</div>
+			<%}else if(info.status==3){%>
+				<div class="footer" >
+				确认收款
+				</div>
+			<%}%>
+			
+
+		
+		<script>
+			var pic;
+			function getQueryString(name) {   
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = window.location.search.substr(1).match(reg);
+			if (r != null) return unescape(r[2]); return null;
+		}
+		var id = getQueryString("orderid");
+		$('#uploaderInput').on('change', function(){
+		var file = $(this)[0];
+		var formData = new FormData();
+		formData.append('file', file.files[0]);
+		// alert(1)
+		$.ajax({
+			url: "/index/upload/uploadimg",
+			type: 'post',
+			data: formData,
+			contentType: false, // 注意这里应设为false
+			processData: false,
+			success: function(res){
+				console.log(res);
+				 pic = res.data;
+	          
+	                $('.weui-uploader__input-box').html('<img src="'+res.data+'" class="img_zm">');
+	           
+			},
+			error: function(XHR, textStatus, errorThrown) {
+			  	layer.open({
+			  		content: '网络错误',
+					skin: 'msg',
+					time: 2
+				});
+			}	
+		});
+	});
+		$(".footer").click(function(){
+			var a=$('.inp').val()
+			console.log(pic);
+			
+			var status = $("#status_id").val();
+			var url = "";
+			if(status==3){
+				url ="/index/otcexchange/finishorder";
+			}else{
+				url ="/index/otcexchange/payment";
+			}
+
+			$.ajax({
+				url:url,
+				type:"post",
+				data:{orderid:id,trad_password:a,path:pic},
+				dataType: "jsonp",
+				success: function(res) {
+					console.log(res);
+					alert(res.msg);
+					window.location.href = '/index/shop/otc_order.html';
+				},
+			});
+		})
+		function copyText(obj) {
+   if (!obj) {
+     return false;
+   }
+   var text;
+   if (typeof(obj) == 'object') {
+     if (obj.nodeType) { // DOM node
+       obj = $(obj); // to jQuery object
+     }
+     try {
+       text = obj.text();
+       if (!text) { // Maybe <textarea />
+         text = obj.val();
+       }
+     } catch (err) { // as JSON
+       text = JSON.stringify(obj);
+     }
+   } else {
+     text = obj;
+   }
+   //var $temp = $('<input>'); // Line feed is not supported
+   var $temp = $('<textarea>');
+   $('body').append($temp);
+   $temp.val(text).select();
+   var res = document.execCommand('copy');
+   $temp.remove();
+   return res;
+ }
+ $(".fuzhia").on("click",function(){
+  copyText($(".mingzi").val());
+  alert("复制成功")
+ })
+  $(".fuzhib").on("click",function(){
+  copyText($(".zhanghao").val());
+  alert("复制成功")
+ })
+		</script>
+		</script>
+		
+	</body>
+	
+	<script>
+		function getQueryString(name){
+		    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		    var r = window.location.search.substr(1).match(reg);
+		    if (r!=null) return r[2]; return '';
+		}
+		
+		var orderid = getQueryString('orderid');
+		$(document).ready(function(){
+			$("#fz").click(function(){
+				alert("复制成功");
+			});
+			$.ajax({
+                type: "POST",
+                data: {orderid:orderid},
+                dataType: "jsonp",
+                url: "/index/otcexchange/orderdetail",
+                success: function (res) {
+                	console.log(res)
+                    if(res.code==0){
+                        $('#detail').append(template("tpl", res));
+               			$('.cxdd').click(function(){
+               				$.ajax({
+				                type: "POST",
+				                data: {orderid:orderid},
+				                dataType: "jsonp",
+				                url: "/index/otcexchange/repeals",
+				                success: function (res) {
+				                	alert(1)
+				                	if(res.code==0){
+										layer.open({
+											content:res.msg,
+											skin: 'msg',
+											time: 2
+										});
+										setTimeout(function(){
+											// window.location.href=history.back(-1);
+											window.location.href= '/index/shop/OTC';
+										},2000)
+									}else{
+										layer.open({
+											content:res.msg,
+											skin: 'msg',
+											time: 2
+										});
+									}
+			                	}
+			            	})
+               			});
+                    }else{
+                        $('.detail').html(template("tpl1", res));
+                    }
+                }
+            });
+		});
+		
+		$(document).ready(function(){
+			$("#fz01").click(function(){
+				alert("复制成功");
+			});
+		});
+
+	</script>
+	<script>
+	
+
+	</script>
+</html>

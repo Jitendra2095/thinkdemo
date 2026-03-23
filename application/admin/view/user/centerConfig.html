@@ -1,0 +1,104 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<style type="text/css">
+    .link-th{
+        color:blue;
+    }
+</style>
+<section class="panel">
+    <header class="panel-heading">
+        <h4>运营中心列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('admin/User/centerConfig')}">
+            <div class="form-group">
+                <div class="col-xs-1 no-pd-r">
+                    <select name="type" id="type" class="form-control">
+                        <option {if $Request.get.type == 'center_name'} selected {/if} value="center_name">运营中心名称</option>
+                        <option {if $Request.get.type == 'nick_name'} selected {/if} value="nick_name">用户名</option>
+                        <option {if $Request.get.type == 'mobile'} selected {/if} value="mobile">手机号</option>
+                    </select>
+                </div>
+                <div class="col-xs-3 no-pd-l">
+                    <input type="text" id="keyword" value="{$Request.get.keyword}" name="keyword" class="form-control" placeholder="请输入关键词搜索">
+                </div>
+                <button type="submit" class="btn btn-color">搜索</button>
+                <a type="button" href="{:url('admin/User/addCenter')}" class="btn btn-info">添加运营中心</a>
+                <!--<a type="button" href="/admin/user/create" class="btn btn-info">添加会员</a>-->
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">运营中心名称</th>
+                <th class="text-center">负责人</th>
+                <th class="text-center">详细</th>
+                <th class="text-center">时间</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($list)}
+                {foreach $list as $entity}
+                <tr>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->id}<br>
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->center_name}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {if $entity->mobile}
+                        手机号：{$entity->mobile}<br>
+                        昵称：{$entity->nick_name}
+                        {else /}
+                       <span style="color: red">
+                           占无负责人
+                       </span>
+                        {/if}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        <span style="display:none">{$entity->detail}</span>
+                        <a onclick="showContent(this)"   class="btn btn-xs btn-primary">查看</a>
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        {$entity->create_time}
+                    </td>
+                    <td style="vertical-align: middle" class="text-center">
+                        <a href="{:url('user/editCenter',['id'=>$entity->id])}" class="btn btn-xs btn-info">修改</a>
+                        <a data-url="{:url('user/deleteCenter',['id'=>$entity->id])}" onclick="main.ajaxDelete(this)" data-msg="确定要删除此运营中心吗？" class="btn btn-xs btn-danger">删除</a>
+                    </td>
+                </tr>
+                {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="9">暂无数据</td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+<script>
+    function showContent(e){
+        $.dialog({
+            title: '运营中心详情',
+            content: $(e).prev().html()
+        });
+    }
+</script>
+{/block}
+{block name="footer"}
+
+
+
+{/block}

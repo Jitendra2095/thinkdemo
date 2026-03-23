@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>账户管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link rel="stylesheet" href="/zc/css/center_gywm.css" />
+	<link rel="stylesheet" href="/zc/css/center_lxkf.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_aqzx.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<style>
+		.yhk{
+			width: 90%;
+			margin: auto;
+			margin-top: .2rem;
+			border-radius: .1rem;
+			height: 3rem;
+			overflow: hidden;
+			background: #e46757;
+		}
+		.yhk_lt,.yhk_rt{
+			float: left;
+		}
+		.yhk_lt{
+			width: 1rem;
+			height: 1rem;
+			border-radius: .5rem;
+			background: #fff;
+			margin: .3rem;
+		}
+		.yhk_lt img{
+			width: 100%;
+			display: block;
+			margin: auto;
+		}
+		.yhk_rt{
+			margin-top: .3rem;
+		}
+		.yhk_rt p{
+			color: #fff;
+		}
+		.yhk_rt01{
+			font-size: .4rem;
+		}
+		.yhk_rt02{
+			font-size: .35rem;
+			margin-top: .1rem;
+		}
+		.yhk_rt03{
+			font-size: .45rem;
+			margin-top: .3rem;
+		}
+		.tjan{
+			width: 100%;
+			height: 1rem;
+			text-align: center;
+			margin-top: .3rem;
+		}
+		.tjan button{
+			width: 60%;
+			height: 1rem;
+			background: #18C78D;
+			margin: auto;
+			border-radius: .2rem;
+			font-size: .4rem;
+			color: #fff;
+			border: 1px solid #18c78d;
+		}
+	</style>
+	<body>
+		<div class="header">
+			<span>账户管理</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		<div class="main"></div>
+	<!-- 	<a href="center_yhkgl_jb.html">
+		<div class="yhk">
+			<div class="yhk_lt"><img src="/zc/img/gsyh_h.png"></div>
+			<div class="yhk_rt">
+				<p class="yhk_rt01">工商银行</p>
+				<p class="yhk_rt02">储蓄卡</p>
+				<p class="yhk_rt03">**** **** **** 6666</p>
+			</div>
+		</div>
+		</a>
+		
+		<a href="center_yhkgl_jbzfb.html">
+		<div class="yhk" style="background: #578fe4;">
+			<div class="yhk_lt"><img style="width: .7rem;margin-top: .15rem;" src="/zc/img/mm02.png"></div>
+			<div class="yhk_rt">
+				<p class="yhk_rt01">支付宝</p>
+				<p class="yhk_rt02">张三</p>
+				<p class="yhk_rt03">**** **** 66</p>
+			</div>
+		</div>
+		</a>
+		
+		<a href="center_yhkgl_jbwx.html">
+		<div class="yhk" style="background: #59e457;">
+			<div class="yhk_lt"><img style="width: .7rem;margin-top: .15rem;" src="/zc/img/mm03.png"></div>
+			<div class="yhk_rt">
+				<p class="yhk_rt01">微信</p>
+				<p class="yhk_rt02">李四</p>
+				<p class="yhk_rt03">**** **** 66</p>
+			</div>
+		</div>
+		</a> -->
+		
+		<div class="tjan"><button type="submit" onclick="location.href='center_yhkgl_tjyhk.html?id=1'">+添加银行卡</button></div>
+		<div class="tjan"><button type="submit" onclick="location.href='center_yhkgl_zfb.html?id=2'">+添加支付宝账户</button></div>
+		<div class="tjan"><button type="submit" onclick="location.href='center_yhkgl_wx.html?id=3'">+添加微信账户</button></div>
+	</body>
+	
+</html>
+<script type="text/javascript">
+		var str="";
+		$.ajax({
+	        type: "POST",
+	        data: {},
+	        dataType: "json",
+	        url: "/index/usercenter/accountslist",
+	        success: function (res) {
+	        	console.log(res)
+	        	for(var i=0;i<res.info.length;i++){
+	        	
+				if(res.info[i].types==1){
+				str+='<div class="yhk">'
+				str+='<div class="yhk_lt"><img src="/zc/img/gsyh_h.png"></div>'
+				str+='<div class="yhk_rt">'
+				str+='<p class="yhk_rt01">'+res.info[i].bank_name+'</p>'
+				str+='<p class="yhk_rt02">储蓄卡</p>'
+				str+='<p class="yhk_rt03">'+res.info[i].bank_number+'</p>'
+				str+='</div>'
+			}else if(res.info[i].types==2){
+				str+='<div class="yhk" style="background: #578fe4;">'
+				str+='<div class="yhk_lt"><img style="width: .7rem;margin-top: .15rem;" src="/zc/img/mm02.png"></div>'
+				str+='<div class="yhk_rt">'
+				str+='<p class="yhk_rt01">支付宝</p>'
+				str+='<p class="yhk_rt02">'+res.info[i].realname+'</p>'
+				str+='<p class="yhk_rt03">'+res.info[i].bank_name+'</p>'
+				str+='</div>'
+			}else if(res.info[i].types==3){
+				str+='<div class="yhk" style="background: #59e457;">'
+				str+='<div class="yhk_lt"><img style="width: .7rem;margin-top: .15rem;" src="/zc/img/mm03.png"></div>'
+				str+='<div class="yhk_rt">'
+				str+='<p class="yhk_rt01">微信</p>'
+				str+='<p class="yhk_rt02">'+res.info[i].realname+'</p>'
+				str+='<p class="yhk_rt03">'+res.info[i].bank_name+'</p>'
+				str+='</div>'
+			}
+				
+				str+='</div>'
+	        	}
+				$('.main').html(str)
+	        }
+	    });
+
+</script>

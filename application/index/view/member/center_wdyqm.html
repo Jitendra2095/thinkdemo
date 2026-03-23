@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>我的邀请码</title>
+		<link rel="stylesheet" href="/zc/css/style.css" />
+		<link rel="stylesheet" href="/zc/css/index.css" />
+		<link rel="stylesheet" href="/zc/css/login.css" />
+		<link href="/zc/css/swiper.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/zc/css/swiper-3.2.7.min.css" />
+		<script src="/zc/js/flexible.js"></script>
+		<script src="/zc/js/flexible_css.js"></script>
+		<script src="/zc/js/template.js"></script>
+		<script src="/zc/js/jquery-1.11.1.min.js"></script>
+		<script src="/zc/js/unslider.min.js"></script>
+	    <script src="/zc/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/zc/js/swiper-3.4.0.jquery.min.js" ></script>
+		
+		<script src="/zc/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="/zc/js/jquery.qrcode.min.js"></script>
+
+
+		
+		<style>
+			html{
+				height: 100%;
+			}
+			body{
+				width: 100%;
+				height: 100%;
+				background: url(/zc/img/ewmbj.png)no-repeat center;
+				background-size: 100% 100%;
+			}
+			.header{
+				background: #006143;
+			}
+			.header a{
+				background: url(/zc/img/fh_b.png)no-repeat center center;
+			}
+			.header span{
+				color: #fff;
+			}
+			.yqm{
+				width: 70%;
+				margin: auto;
+				background: #fff;
+				margin-top: .5rem;
+				border-radius: .2rem;
+				border: 2px solid #128764;
+				padding-bottom: .5rem;
+			}
+			.yqm_box{
+				border-bottom: 1px dashed #5f5f5f ;
+				padding-bottom: .3rem;
+			}
+			.inp1{
+				width: 100%;
+				height: 100%;
+				background: #fff;
+				border: none;
+			}
+			.inp2{
+				width: 100%;
+				height: 100%;
+				background: #fff;
+				border: none;
+			}
+			.yqm01{
+				font-size: .5rem;
+				font-weight: bold;
+				color: #333333;
+				text-align: center;
+				margin-top: .3rem;
+			}
+			.yqm02{
+				text-align: center;
+				font-size: .6rem;
+				color: #036145;
+				margin-top: .1rem;
+				font-weight: bold;
+			}
+			.yqm03{
+				font-size: .35rem;
+				color: #999;
+				text-align: center;
+				margin-top: .1rem;
+			}
+			.ewmsc{
+				width: 2.5rem;
+				height: 2.5rem;
+				margin: auto;
+				margin-top: .5rem;
+				border: 1px solid #5f5f5f;
+			}
+			.ewmsc *{
+				width: 2.5rem;
+			}
+			.lj{
+				width: 70%;
+				margin: auto;
+				height: 1rem;
+				overflow: hidden;
+				background: #fff;
+				border: 2px solid #128764;
+				border-radius: .2rem;
+				margin-top: .3rem;
+			}
+			.lj p{
+				width: 90%;
+				text-align: center;
+				font-size: .3.5rem;
+				color: #333;
+				line-height: 1rem;
+			}
+			.ljan{
+				width: 70%;
+				height: 1rem;
+				margin: auto;
+				margin-top: .3rem;
+			}
+			.ljan input{
+				width: 100%;
+				height: 1rem;
+				font-size: .4rem;
+				font-weight: bold;
+				color: #fff;
+				background: #128764;
+				border-radius: .2rem;
+				border: 0;
+			}
+			.qhq{
+				display: flex;
+				display: -webkit-flex;
+				justify-content: center;
+				margin-top: 5.5rem;
+			}
+			.wszq,.wsyq{
+				color: #fff;
+				font-size: .48rem;
+			}
+			.wszq.active,.wsyq.active{
+				color: #999;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<span>我的邀请码</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>	
+		<div class="qhq">
+			<div class="wszq active">共识一</div>
+			<div style="width:20px"></div>
+			<div class="wsyq">共识二</div>
+		</div>
+		<div class="yq1">
+			<div class="yqm">
+				<div class="yqm_box">
+					<p class="yqm01">邀请码</p>
+					<p class="yqm02"></p>
+					<p class="yqm03">您的好友在注册时也可填写邀请码</p>
+				</div>
+				
+				<div class="ewmsc" id="output1"> 
+				</div>
+			</div>
+			
+			<div class="lj"><p><input type="text" disabled="disabled" value="" class="inp1"></p></div>
+			
+			<div class="ljan"><input type="submit" value="复制推荐链接" class="dia1"></div>
+		</div>
+		<div class="yq2" style="display: none">
+			<div class="yqm">
+				<div class="yqm_box">
+					<p class="yqm01">邀请码</p>
+					<p class="yqm02"></p>
+					<p class="yqm03">您的好友在注册时也可填写邀请码</p>
+				</div>
+				
+				<div class="ewmsc" id="output2"> 
+				</div>
+			</div>
+			
+			<div class="lj"><p><input type="text" disabled="disabled" value="" class="inp2"></p></div>
+			
+			<div class="ljan"><input type="submit" value="复制推荐链接" class="dia2"></div>
+		</div>
+	</body>
+	
+	
+	<script>
+
+
+
+
+        $(function () {
+					$('.wszq').click(function (e) { 
+						$(this).addClass('active');
+						$('.wsyq').removeClass('active');
+						$('.yq1').show();
+						$('.yq2').hide();
+					});
+					$('.wsyq').click(function (e) { 
+						$(this).addClass('active');
+						$('.wszq').removeClass('active');
+						$('.yq2').show();
+						$('.yq1').hide();
+					});
+            $.ajax({
+                type: "POST",
+                url: "/index/apiindex/inviteUrl",
+               	dataType: "jsonp",
+                success: function (res) {
+                	
+                    if(res.code==0){
+                         // 复制邀请码
+                         $('.yqm02').html(res.info.invite_code);
+                        invite_code = res.info.invite_code;
+                        // var domain = window.location.host+"/index/publics/register.html?invite_code=";
+                        var text1=res.info.invite_code;
+                     
+
+                        	jQuery(function(){
+	
+		jQuery('#output1').qrcode("http://"+window.location.host+'/index/publics/register.html?invite_code='+res.info.invite_code+'&around=1');
+		jQuery('#output2').qrcode("http://"+window.location.host+'/index/publics/register.html?invite_code='+res.info.invite_code+'&around=2');
+	
+	})
+
+            $('.inp1').val("http://"+window.location.host+'/index/publics/register.html?invite_code='+res.info.invite_code+'&around=1');
+						$('.inp2').val("http://"+window.location.host+'/index/publics/register.html?invite_code='+res.info.invite_code+'&around=2');
+                    }else{
+                        mui.toast(res.message);
+                    }
+                }
+            });
+        });
+        
+
+        
+	function copyText(obj) {
+   if (!obj) {
+     return false;
+   }
+   var text;
+   if (typeof(obj) == 'object') {
+     if (obj.nodeType) { // DOM node
+       obj = $(obj); // to jQuery object
+     }
+     try {
+       text = obj.text();
+       if (!text) { // Maybe <textarea />
+         text = obj.val();
+       }
+     } catch (err) { // as JSON
+       text = JSON.stringify(obj);
+     }
+   } else {
+     text = obj;
+   }
+   //var $temp = $('<input>'); // Line feed is not supported
+   var $temp = $('<textarea>');
+   $('body').append($temp);
+   $temp.val(text).select();
+   var res = document.execCommand('copy');
+   $temp.remove();
+   return res;
+ }
+ $(".dia1").click(function(){
+  copyText($(".inp1").val());
+  	alert("复制成功")
+ })
+ $(".dia2").click(function(){
+  copyText($(".inp2").val());
+  	alert("复制成功")
+ })
+	
+	</script>
+
+
+</html>

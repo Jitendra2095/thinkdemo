@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>搜索</title>
+		<link rel="stylesheet" href="/zc/css/style.css" />
+		<link rel="stylesheet" href="/zc/css/index.css" />
+		<link rel="stylesheet" href="/zc/css/login.css" />
+		<link href="/zc/css/swiper.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/zc/css/swiper-3.2.7.min.css" />
+		<script src="/zc/js/flexible.js"></script>
+		<script src="/zc/js/flexible_css.js"></script>
+		<script src="/zc/js/template.js"></script>
+		<script src="/zc/js/jquery-1.11.1.min.js"></script>
+		<script src="/zc/js/unslider.min.js"></script>
+	    <script src="/zc/js/jquery.min.js"></script>
+		<script type="text/javascript" src="/zc/js/swiper-3.4.0.jquery.min.js" ></script>
+		
+		<style>
+			.ssl{
+				width: 100%;
+				overflow: hidden;
+				border-bottom: 1px solid #e2e2e2;
+			}
+			.sst,.ssl input,.ssl p{
+				float: left;
+			}
+			.sst{
+				width: 10%;
+				height: 1rem;
+			}
+			.sst img{
+				width: 60%;
+				display: block;
+				margin: auto;
+				margin-top: .15rem;
+			}
+			.ssl input{
+				width: 75%;
+				font-size: .4rem;
+				line-height: 1rem;
+				background: #fff;
+				border: 0;
+			}
+			.ssl p{
+				width: 15%;
+				font-size: .4rem;
+				line-height: 1rem;
+				color: #333;
+				text-align: center;
+			}
+			.bz p{
+				font-size: .4rem;
+				line-height: 1.3rem;
+				color: #333;
+				border-bottom: 1px solid #e2e2e2;
+				width: 90%;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="ssl">
+			<div class="sst"><img src="/zc/img/sousuo.png"></div>
+			<input type="text" placeholder="请输入搜索币种"/>
+			<p>取消</p>
+		</div>
+		
+		<div class="bz">
+			<p>USDT</p>
+			<p>ETH</p>
+			<p>BTC</p>
+			<p>EOS</p>
+		</div>
+	</body>
+	
+	<script>
+		$(document).ready(function(){
+			var url = "assets_tb_tbxq.html";//定义一个超链接地址
+			$(".sst").click(function(){
+				window.location.href = url;
+			});
+		});
+		
+		
+	</script>
+	
+	
+</html>

@@ -1,0 +1,83 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+
+    <header class="panel-heading">
+        <h4>会员详情</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" method="post" onsubmit="return false" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$info->nick_name}" name="nick_name" class="form-control"
+                           placeholder="请输入用户名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">交易地址</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$info->trade_address}" name="trade_address" class="form-control"
+                           placeholder="请输入交易地址">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">登录密码</label>
+
+                <div class="col-sm-5">
+                    <input type="password" name="password" class="form-control" placeholder="登录密码">
+                </div>
+                <div class="class-sm-5">
+                    <span class="help-block">如果不填写就不会修改</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">确认密码</label>
+                <div class="col-sm-5">
+                    <input type="password" value="" name="re_password" class="form-control" placeholder="登录密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">交易密码</label>
+
+                <div class="col-sm-5">
+                    <input type="password" name="trad_password" class="form-control" placeholder="交易密码">
+                </div>
+                <div class="class-sm-5">
+                    <span class="help-block">如果不填写就不会修改</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">确认交易密码</label>
+
+                <div class="col-sm-5">
+                    <input type="password" name="re_trad_password" class="form-control" placeholder="交易密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">社交账号</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$info->chat_num}" name="chat_num" class="form-control"
+                           placeholder="请输入社交账号">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" onclick="javascript:history.back(-1);" class="btn btn-warning">返回
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+    <script src="/admin/vendor/fuelux/checkbox.js"></script>
+{/block}

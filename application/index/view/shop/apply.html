@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商家认证</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_sfrz.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<script src="/zc/js/layer.js"></script>
+	<style>
+		.ywc{
+			width: 100%;
+			height: 1rem;
+			border-bottom: 1px solid #f2f2f2;
+		}
+		.ywc p{
+			font-size: .4rem;
+			color: #03BE87;
+			line-height: 1rem;
+			margin-left: .3rem;
+		}
+		.rzxx_xhx{
+			width: 100%;
+			height: auto;
+			border-bottom: 1px solid #f2f2f2;
+		}
+		.rzxx{
+			width: 90%;
+			margin: auto;
+		}
+		.rzxx_box{
+			width: 100%;
+			height: 1.2rem;
+			overflow: hidden;
+		}
+		.rzxx_box_lt,.rzxx_box_rt{
+			float: left;
+			font-size: .4rem;
+			line-height: 1.2rem;
+		}
+		.rzxx_box_lt{
+			color: #999;
+		}
+		.rzxx_box_rt{
+			float: right;
+			color: #333;
+		}
+		.rztx{
+			width: 90%;
+			margin: auto;
+			margin-top: .5rem;
+		}
+		.rztx p{
+			font-size: .35rem;
+			color: #333;
+		}
+		.rztx p span{
+			color: #999 !important;
+		}
+		.wszjxx{
+			width: 100%;
+			margin-top: 1rem;
+			text-align: center;
+		}
+		.wszjxx button{
+			width: 90%;
+			height: 1rem;
+			border-radius: .1rem;
+			background: #03BE87;
+			font-size: .4rem;
+			line-height: 1rem;
+			border: 1px solid #03be87;
+			color: #fff;
+		}
+		.zjsc{
+			width: 90%;
+			margin: auto;
+			margin-top: .5rem;
+		}
+		.zjsc_bt{
+			font-size: .4rem;
+			color: #03be87;
+			margin-left: .3rem;
+			line-height: 1rem;
+			margin-top: .5rem;
+		}
+		.zjsc img{
+			width: 90%;
+			margin: auto;
+		}
+		.zmz{
+			width: 100%;
+			height: 5rem;
+			background: url(/zc/img/center28.png)no-repeat center;
+			background-size: 100%;
+			margin: .5rem 0;
+			position: relative;
+		}
+		
+		.fmz{
+			width: 100%;
+			height: 5rem;
+			background: url(/zc/img/center29.png)no-repeat center;
+			background-size: 100%;
+			margin: .5rem 0;
+		}
+		.scz{
+			width: 100%;
+			height: 5rem;
+			background: url(/zc/img/center30.png)no-repeat center;
+			background-size: 100%;
+			margin: .5rem 0;
+		}
+		.zmz input,.fmz input,.scz input{
+			width: 100%;
+			height: 5rem;
+			opacity: 0;
+		}
+		.zjzmz{
+			font-size: .4rem;
+			color: #333;
+			text-align: center;
+		}
+	</style>
+	
+	<body>
+		<div class="header">
+			<span>商家认证</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		<div class="ywc"><p>保证金</p></div>
+		
+		<div class="xm" ><input type="text" placeholder="" id="name" readonly value=""></div>
+
+		
+		<div class="xm" ><input type="text" placeholder="支付密码" id="trad_password" value=""></div>
+
+		<div class="wszjxx" style="margin-bottom: .4rem"><button class="tjssb" type="submit" id="bb">提交审核</button></div>
+
+
+
+		<div style="height: 1rem;"></div>
+
+		<div id="xzz">
+			<div class="ywc"><p>兑换</p></div>
+			<div class="xm" >
+				<select name="" id="zh" style="width: 70%;height: .8rem;background: #18C78D;border: 1px solid #18C78D;color: #fff;border-radius: .1rem;text-align:center;text-align-last:center;padding-left:6px; margin:-0.6rem 0;">
+					<option value="1">USDT/NBF</option>
+					<option value="2">NBF/USDT</option>
+				</select>
+			</div>
+
+			
+			<div class="xm" ><input type="text" placeholder="兑换数量" id="zhnumber" value=""></div>
+
+			<div class="wszjxx" style="margin-bottom: .4rem" id="dh"><button class="tjssb" type="submit" >兑换</button></div>
+		</div>
+	</body>
+	
+</html>
+
+<script>
+$('#xzz').hide();
+$.ajax({
+	url:'/index/apply/index',
+	type:"post",
+	data:{},
+	success: function(res) {
+		console.log(res);
+		$('#name').val(res.info.apply_store);
+		if( res.info.user.is_store == 1 ){
+			$('#bb').html('取消商家模式');
+			var url = '/index/apply/delstore';
+			$('#xzz').show();
+		}else{
+			$('#bb').html('提交审核');
+			var url = '/index/apply/subApply';
+		}
+		var aid = res.info.user.aid;
+		$('#bb').click(function(){
+			var trad_password = $('#trad_password').val();
+			$.ajax({
+				url:url,
+				type:"post",
+				data:{trad_password:trad_password,aid:aid},
+				success: function(res) {
+					console.log(res);
+					if(res.code == 0){
+						alert('成功')
+					}else{
+						alert(res.msg)
+					}
+					// $('#name').val(res.info.apply_store);
+
+				},
+			});
+
+		})
+
+		$('#dh').click(function(){
+			var zh = $('#zh').val();
+			var zhnumber = $('#zhnumber').val();
+			if(zhnumber <= 0){
+				return alert('请输入正确的数量');
+			}
+			$.ajax({
+				url:'/index/apply/dh',
+				type:'POST',
+				data:{types:zh,number:zhnumber},
+				dataType: "json",
+				success: function(res) {
+				
+					console.log(res);
+					if(res.code == 0){
+						alert('成功')
+					}else{
+						alert(res.msg)
+					}
+					// $('#name').val(res.info.apply_store);
+
+				},
+			});
+
+		})
+	},
+});
+
+
+</script>

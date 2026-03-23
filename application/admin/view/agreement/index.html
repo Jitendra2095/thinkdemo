@@ -1,0 +1,69 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>协议列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('index')}">
+            <div class="form-group">
+<!--                <a type="button" href="{:url('admin/agreement/create')}" class="btn btn-info">添加协议</a>-->
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">标题</th>
+                <th class="text-center">用户协议</th>
+                <th class="text-center">创建时间</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($list)}
+            {foreach $list as $entity}
+            <tr>
+                <td class="text-center">{$entity.id}</td>
+                <td class="text-center">{$entity.title}</td>
+                <td class="text-center">
+                    <span style="display:none">{:htmlspecialchars_decode($entity['content'])}</span>
+                    <a onclick="showContent(this)"   class="btn btn-xs btn-primary">查看</a>
+                </td>
+                <td class="text-center">{:date('Y-m-d H:i:s',$entity.createtime)}</td>
+                <td class="text-center">
+                    <a href="{:url('admin/agreement/edit',['id'=>$entity['id']])}" class="btn btn-xs btn-info">编辑</a>
+<!--                    <a data-url="{:url('admin/agreement/delete',['id'=>$entity.id])}" onclick="main.ajaxDelete(this)"-->
+<!--                       data-msg="确定要删除该协议吗？" class="btn btn-xs btn-danger">删除</a>-->
+                </td>
+            </tr>
+            {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="6">暂无数据</td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+<script>
+    function showContent(e){
+        $.dialog({
+            title: '步骤内容',
+            content: $(e).prev().html()
+        });
+    }
+</script>
+{/block}
+

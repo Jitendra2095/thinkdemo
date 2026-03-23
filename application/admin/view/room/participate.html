@@ -1,0 +1,90 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>参赛会员列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('room/index')}">
+            <div class="form-group">
+<!--                <a type="button" href="{:url('/admin/room/create')}" class="btn btn-info">创建房间</a>-->
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">房间ID</th>
+                <th class="text-center">房间名称</th>
+                <th class="text-center">会员信息</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($items)}
+            {foreach $items as $entity}
+            <tr>
+                <td class="text-center">{$entity['id']}</td>
+                <td class="text-center">{$entity['roomname']}</td>
+                <td class="text-center">
+                    会员ID：{$entity['uid']}<br>
+                    会员帐号：{$entity['mobile']}<br>
+                    会员昵称：{if !empty($entity['nick_name'])}{$entity['nick_name']}{else}暂未设置{/if}<br>
+                    游戏昵称：{if !empty($entity['game_name'])}{$entity['game_name']}{else}暂未设置{/if}<br>
+                </td>
+                <td class="text-center">
+                    {if $entity['rstatus'] != 5}
+                    {if $entity['rstatus'] <= 1}
+                    <a data-url="{:url('room/cancel',['lid'=>$entity['lid']])}" onclick="main.ajaxDelete(this)" data-msg="确定要退票吗？" class="btn btn-xs btn-info">退票</a>
+<!--                    <a href="{:url('room/cancel',['lid'=>$entity['lid']])}" class="btn btn-xs btn-info">退票</a>-->
+                    {/if}
+                    {if $entity['status'] == 0}
+                        <a href="{:url('room/write_reward',['lid'=>$entity['lid']])}" class="btn btn-xs btn-info">填写奖励</a>
+                        {else}
+                        <a href="{:url('room/write_reward',['lid'=>$entity['lid']])}" class="btn btn-xs btn-warning">修改奖励</a>
+                        {/if}
+                    {/if}
+                </td>
+            </tr>
+            {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="5">暂无数据</td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+<script>
+    function showContent(e){
+        $.dialog({
+            title: '奖励',
+            content: $(e).prev().html()
+        });
+    }
+    function showRule(e){
+        $.dialog({
+            title: '规则',
+            content: $(e).prev().html()
+        });
+    }
+    function showRoomurl(e){
+        $.dialog({
+            title: '比赛房间链接',
+            content: $(e).prev().html()
+        });
+    }
+</script>
+{/block}

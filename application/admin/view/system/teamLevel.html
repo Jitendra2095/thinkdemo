@@ -1,0 +1,71 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>保证金配置</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">保证金</th>
+                <th class="text-center">任务次数</th>
+                <th class="text-center">托管费用</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach $list as $key=>$config}
+            <tr>
+                <td class="text-center" style="vertical-align: middle; ">{$config['id']}</td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="assure_money{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['assure_money']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="task_num{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['task_num']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="deposit_cost{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['deposit_cost']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <a onclick="updateConfig(this)" data-id="{$config['id']}" class="btn btn-xs btn-primary">确认修改</a>
+                </td>
+            </tr>
+            {/foreach}
+            </tbody>
+        </table>
+
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+<script>
+    function updateConfig(e) {
+        var id = $(e).attr('data-id');
+        var assure_money = $("#assure_money" + id).val();
+        var task_num = $("#task_num" + id).val();
+        var deposit_cost = $("#deposit_cost" + id).val();
+        $.post("{:url('editConfigTeamLevel')}", {assure_money: assure_money,task_num: task_num,deposit_cost:deposit_cost,id:id}, function (data) {
+            if (data.code == 1) {
+                main.waringAlert(data.message);
+            } else {
+                main.waringAlert(data.message);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000)
+            }
+        }, 'json')
+    }
+</script>
+{/block}

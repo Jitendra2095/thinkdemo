@@ -1,0 +1,79 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>折扣卷列表</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" action="{:url('room/discount')}">
+            <div class="form-group">
+<!--                <a type="button" href="{:url('/admin/room/creatediscount')}" class="btn btn-info">添加折扣卷</a>-->
+            </div>
+        </form>
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">折扣卷ID</th>
+                <th class="text-center">折扣卷名称</th>
+                <th class="text-center">折扣</th>
+                <th class="text-center">创建时间</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {if !empty($items)}
+            {foreach $items as $entity}
+            <tr>
+                <td class="text-center">{$entity['id']}</td>
+                <td class="text-center">{$entity['title']}</td>
+                <td class="text-center">{$entity['discount']}</td>
+                <td class="text-center">{$entity['createtime']}</td>
+                <td class="text-center">
+                    <a href="{:url('room/editdiscount',['id'=>$entity['id']])}" class="btn btn-xs btn-info">编辑</a>
+<!--                    <a data-url="{:url('room/deletediscount',['id'=>$entity['id']])}" onclick="main.ajaxDelete(this)"-->
+<!--                       data-msg="确定要删除该折扣卷吗？" class="btn btn-xs btn-danger">删除</a><br>-->
+                </td>
+            </tr>
+            {/foreach}
+            {else /}
+            <tr class="text-center">
+                <td colspan="10">暂无数据</td>
+            </tr>
+            {/if}
+            </tbody>
+        </table>
+        <div class="page">
+            {:htmlspecialchars_decode($list->render())}
+        </div>
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+<script>
+    function showContent(e){
+        $.dialog({
+            title: '奖励',
+            content: $(e).prev().html()
+        });
+    }
+    function showRule(e){
+        $.dialog({
+            title: '规则',
+            content: $(e).prev().html()
+        });
+    }
+    function showRoomurl(e){
+        $.dialog({
+            title: '比赛房间链接',
+            content: $(e).prev().html()
+        });
+    }
+</script>
+{/block}

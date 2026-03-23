@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>充提记录</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	
+	
+	<body>
+		<div class="header">
+			<span>充提记录</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		<!--选项卡-->
+		<nav id="nav">
+			<ul>
+				<li class="act" style="border-right: 1px solid #e4e4e4;width: 50%;"><span class="mxb">充值记录</span></li>
+				<li style="width: 49%;"><span>提币记录</span></li>
+			</ul>
+		</nav>
+		
+		<div class="kh"></div>
+		<!--内容部分HTML代码-->
+		<div id="container">
+			<!--充值记录开始-->
+			<section class="tab">
+				<div class="zwsj">
+					<img src="/zc/img/center14.png">
+					<p>暂无数据</p>
+					<button type="submit">点击刷新</button>
+				</div>	
+			</section>
+			<!--充值记录结束-->
+			
+			<!--提币记录开始-->
+			<section class="tab">
+				<div class="zwsj">
+					<img src="/zc/img/center14.png">
+					<p>暂无数据</p>
+					<button type="submit">点击刷新</button>
+				</div>
+			</section>
+			<!--提币记录结束-->
+		</div>
+		<!-- 结束 -->
+	</body>
+	
+	<!--选项卡-->
+	<script>
+	 window.onload=function () {
+	 	var nav=document.getElementById('nav');
+	 	var oNav=nav.getElementsByTagName('li');
+	 
+	 	var container=document.getElementById('container');
+	 	var oDiv=container.getElementsByClassName('tab');
+	 		for(var i=0;i<oNav.length;i++){
+	  			oNav[i].index=i;
+	  			oNav[i].onclick=function () {
+	  		for(var i=0;i<oNav.length;i++){
+	   			oNav[i].className='';
+	   			oDiv[i].style.display="none";
+	  			}
+	  		this.className='act';
+	  			oDiv[this.index].style.display="block"
+	  			}
+	  		for(var m=1;m<oNav.length;m++){
+			   	oNav[m].className='';
+			   	oDiv[m].style.display="none";
+	  		}
+	 	}
+	 };
+	</script>
+	
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" href="/zc/css/style.css" />
+		<link rel="stylesheet" href="/zc/css/index.css" />
+		<link href="/zc/css/footer.css" rel="stylesheet">
+		<script src="/zc/js/flexible.js"></script>
+		<script src="/zc/js/flexible_css.js"></script>
+		<script src="/zc/js/template.js"></script>
+		<script src="/zc/js/jquery.min.js"></script>
+		<script src="/zc/js/unslider.min.js"></script>
+		<script src="/zc/js/foot_bar.js"></script>
+		<style>
+			.hq{
+				height: 1rem;
+				position: absolute;
+				right: .3rem;
+				top: .1rem;
+				z-index: 10;
+				overflow: hidden;
+			}
+			.hq img,.hq p{
+				float: left;
+			}
+			.hq img{
+				width: .4rem;
+				margin-top: .3rem;
+			}
+			.hq p{
+				font-size: .35rem;
+				color: #fff;
+				margin-left: .1rem;
+				line-height: 1rem;
+			}
+			.index_gg_z{
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="index_hq.html">
+		<div class="hq">
+			<img src="/zc/img/hq.png">
+			<p>行情</p>
+		</div>
+		</a>
+		
+		<!--轮播图-->
+		<div class="banner" id="b04">
+		    <ul>
+		        <li><img src="/zc/img/banner03.png" alt="" width="100%" style="height: 5.5rem;"></li>
+		        <li><img src="/zc/img/banner02.png" alt="" width="100%" style="height: 5.5rem;"></li>
+		        <li><img src="/zc/img/banner01.png" alt="" width="100%" style="height: 5.5rem;"></li>
+		    </ul>
+		</div>
+		
+		<!--公告-->
+		<div class="index_gg">
+			<div class="index_gg_lt"><img src="/zc/img/index01.png"></div>
+			<div class="index_gg_z"><p class="p">公告尊敬的UDS用户:南非UDS交易所将于南非时间2019年6月3日9:00，新加坡时间2019年6月3日15:00全球火热上线；重磅推出免押OTC商户入驻与火箭节点计划；为全球用户提供安全、稳定、专业、持久、共赢数字资产流通价值!UDS交易所（技术团队）2019年6月3日    </p></div>
+			<div class="index_gg_rt"><img src="/zc/img/index02.png"></div>
+		</div>
+		
+		<!--公告下方数据-->
+		<div class="index_sj">
+			<div class="index_sj_box">
+				<p class="index_sj_box01">BTC/USDT</p>
+				<p class="index_sj_box02">7684.13</p>
+				<p class="index_sj_box03">-0.09%</p>
+				<p class="index_sj_box04">￥54711.00</p>
+			</div>
+			<div class="index_sj_box">
+				<p class="index_sj_box01">ETH/USDT</p>
+				<p class="index_sj_box02">242.34</p>
+				<p class="index_sj_box03">-0.25%</p>
+				<p class="index_sj_box04">￥1725.46</p>
+			</div>
+			<div class="index_sj_box">
+				<p class="index_sj_box01">DTC/USDT</p>
+				<p class="index_sj_box02">2.6923076</p>
+				<p class="index_sj_box03">+0%</p>
+				<p class="index_sj_box04">￥2.6</p>
+			</div>
+		</div>
+		
+		
+		<!--选项卡-->
+		<nav id="nav">
+			<ul>
+				<li class="act" style="border-right: 1px solid #e4e4e4;"><span class="mxb">本周明星币</span></li>
+				<li style="border-right: 1px solid #e4e4e4;"><span>涨幅榜</span></li>
+				<li><span>跌幅榜</span></li>
+			</ul>
+		</nav>
+		<!--内容部分HTML代码-->
+		<div id="container">
+			<!--本周明星币开始-->
+			<section class="tab">
+				<div class="bzmxb">
+					<div class="bzmxb01"><img src="/zc/img/index03.png"></div>
+					<div class="bzmxb02">
+						<p class="bzmxb02_s">DTC<span>/NBF</span></p>
+						<p class="bzmxb02_x">成交量0</p>
+					</div>
+					<div class="bzmxb03">
+						<p class="bzmxb03_s">2.6923076</p>
+						<p class="bzmxb03_x">￥2.6</p>
+					</div>
+					<div class="bzmxb04">
+						<p>+0%</p>
+					</div>
+				</div>
+				
+				<div class="bzmxb">
+					<div class="bzmxb01"><img src="/zc/img/index03.png"></div>
+					<div class="bzmxb02">
+						<p class="bzmxb02_s">DTC<span>/USDT</span></p>
+						<p class="bzmxb02_x">成交量0</p>
+					</div>
+					<div class="bzmxb03">
+						<p class="bzmxb03_s">2.6923076</p>
+						<p class="bzmxb03_x">￥2.6</p>
+					</div>
+					<div class="bzmxb04">
+						<p>+0%</p>
+					</div>
+				</div>
+			</section>
+			<!--本周明星币结束-->
+			
+			<!--涨幅榜开始-->
+			<section class="tab">
+			<div class="bzmxb">
+					<div class="bzmxb01"><img src="/zc/img/index03.png"></div>
+					<div class="bzmxb02">
+						<p class="bzmxb02_s">DTC<span>/NBF</span></p>
+						<p class="bzmxb02_x">成交量0</p>
+					</div>
+					<div class="bzmxb03">
+						<p class="bzmxb03_s">2.6923076</p>
+						<p class="bzmxb03_x">￥2.6</p>
+					</div>
+					<div class="bzmxb04">
+						<p>+0%</p>
+					</div>
+				</div>
+				<div class="bzmxb">
+					<div class="bzmxb01"><img src="/zc/img/index03.png"></div>
+					<div class="bzmxb02">
+						<p class="bzmxb02_s">DTC<span>/USDT</span></p>
+						<p class="bzmxb02_x">成交量0</p>
+					</div>
+					<div class="bzmxb03">
+						<p class="bzmxb03_s">2.6923076</p>
+						<p class="bzmxb03_x">￥2.6</p>
+					</div>
+					<div class="bzmxb04">
+						<p>+0%</p>
+					</div>
+				</div>
+			</section>
+			<!--涨幅榜结束-->
+			
+			<!--跌幅榜开始-->
+			<section class="tab">
+				<!-- <div class="bzmxb">
+					<div class="bzmxb01"><img src="/zc/img/index03.png"></div>
+					<div class="bzmxb02">
+						<p class="bzmxb02_s">SEAL<span>/USDT</span></p>
+						<p class="bzmxb02_x">成交量1560584.45</p>
+					</div>
+					<div class="bzmxb03">
+						<p class="bzmxb03_s" style="color: #C71818;">0.16701</p>
+						<p class="bzmxb03_x">￥2.12</p>
+					</div>
+					<div class="bzmxb04" style="background: #C71818;">
+						<p>-348.21%</p>
+					</div>
+				</div> -->
+				<div class="bzmxb">
+					<div class="bzmxb01"><img src="/zc/img/index03.png"></div>
+					<div class="bzmxb02">
+						<p class="bzmxb02_s">DTC<span>/NBF</span></p>
+						<p class="bzmxb02_x">成交量0</p>
+					</div>
+					<div class="bzmxb03">
+						<p class="bzmxb03_s" style="color: #C71818;">2.6923076</p>
+						<p class="bzmxb03_x">￥2.6</p>
+					</div>
+					<div class="bzmxb04" style="background: #C71818;">
+						<p>-0%</p>
+					</div>
+				</div>
+				<div class="bzmxb">
+					<div class="bzmxb01"><img src="/zc/img/index03.png"></div>
+					<div class="bzmxb02">
+						<p class="bzmxb02_s">DTC<span>/USDT</span></p>
+						<p class="bzmxb02_x">成交量0</p>
+					</div>
+					<div class="bzmxb03">
+						<p class="bzmxb03_s" style="color: #C71818;">2.6923076</p>
+						<p class="bzmxb03_x">￥2.6</p>
+					</div>
+					<div class="bzmxb04" style="background: #C71818;">
+						<p>-0%</p>
+					</div>
+				</div>
+			</section>
+			<!--跌幅榜结束-->
+		</div>
+		<!-- 结束 -->
+		<div style="height: 1.466667rem"></div>
+        <!-- 底部导航 -->
+		<div class="foot_bar">
+			<div class="foot_block active">
+				<img class="ws1" src="/zc/img/b_icon1.png" alt="">
+				<p>首页</p>
+			</div>
+			<div class="foot_block">
+				<img class="ws2" src="/zc/img/a_icon2.png" alt="">
+				<p>OTC</p>
+			</div>
+			<div class="foot_block" id="jy" style="position: relative;">
+				<div style="position:absolute;top: 0;left:0;width: 50px;height: 50px;" class="jy"></div>
+				<img class="ws3" src="/zc/img/a_icon3.png" alt="">
+				<p>交易</p>
+			</div>
+			<div class="foot_block">
+				<img class="ws4" src="/zc/img/a_icon4.png" alt="">
+				<p>资产</p>
+			</div>
+			<div class="foot_block">
+				<img class="ws5" src="/zc/img/a_icon5.png" alt="">
+				<p>我的</p>
+			</div>            
+		</div>
+		<!--底部栏-->
+	</body>
+	
+	
+	
+	<!--轮播图-->
+	<script>    
+	
+		$(".jy").click(function(){
+			alert("暂未开放")
+		})
+	
+	let zuo=10;
+	setInterval(function(){
+		zuo=zuo+10;
+		console.log(zuo)
+		$('.p').css('margin-left',-zuo+'px')
+		if(zuo>1600){
+			zuo=10;
+		}
+	},500)
+     $(document).ready(function(e) {
+	    var unslider04 = $('#b04').unslider({
+	        dots: true
+	    }),
+	    data04 = unslider04.data('unslider');
+	     
+	    $('.unslider-arrow04').click(function() {
+	        var fn = this.className.split(' ')[2];
+	        data04[fn]();
+	    });
+	});
+	</script>
+	
+	<!--选项卡-->
+	<script>
+	 window.onload=function () {
+	 	var nav=document.getElementById('nav');
+	 	var oNav=nav.getElementsByTagName('li');
+	 
+	 	var container=document.getElementById('container');
+	 	var oDiv=container.getElementsByClassName('tab');
+	 		for(var i=0;i<oNav.length;i++){
+	  			oNav[i].index=i;
+	  			oNav[i].onclick=function () {
+	  		for(var i=0;i<oNav.length;i++){
+	   			oNav[i].className='';
+	   			oDiv[i].style.display="none";
+	  			}
+	  		this.className='act';
+	  			oDiv[this.index].style.display="block"
+	  			}
+	  		for(var m=1;m<oNav.length;m++){
+			   	oNav[m].className='';
+			   	oDiv[m].style.display="none";
+	  		}
+	 	}
+	 };
+	</script>
+	
+	
+</html>

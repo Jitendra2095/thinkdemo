@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购买</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<style>
+		.gm{
+			width: 95%;
+			margin: auto;
+			overflow: hidden;
+			margin-top: .3rem;
+		}
+		.gm_lt,.gm_rt{
+			float: left;
+		}
+		.gm_lt p{
+			font-size: .6rem;
+			color: #333;
+			font-weight: bold;
+		}
+		.gm_lt p a{
+			font-size: .35rem;
+			color: #03be87;
+			font-weight: 100;
+			border: 1px solid #03BE87;
+			border-radius: .1rem;
+			margin-left: .2rem;
+			padding: .05rem .3rem;
+		}
+		.gm_rt{
+			float: right;
+			overflow: hidden;
+		}
+		.gm_rt img,.gm_rt p{
+			float: left;
+		}
+		.gm_rt img{
+			width: .5rem;
+			display: block;
+			margin-top: .05rem;
+			margin-right: .1rem;
+		}
+		.gm_rt p{
+			font-size: .4rem;
+			color: red;
+		}
+		.jn{
+			width: 95%;
+			margin: auto;
+			overflow: hidden;
+			margin-top: .3rem;
+		}
+		.jn_lt,.jn_rt{
+			float: left;
+		}
+		.jn_lt{
+			font-size: ..35rem;
+			color: #333;
+		}
+		.jn_rt{
+			float: right;
+			font-size: .35rem;
+			color: #999;
+		}
+		.yhzz_box{
+			width: 95%;
+			margin: auto;
+			margin-top: .5rem;
+			background: #fff;
+			box-shadow: .1rem .1rem .1rem #f1f1f1;
+			border-top: 1px solid #f1f1f1;
+			padding-bottom: .2rem;
+		}
+		.yhzz{
+			width: 100%;
+			overflow: hidden;
+			margin-top: .2rem;
+		}
+		.yhzz_lt,.yhzz_rt,.xzfs{
+			float: left;
+		}
+		.yhzz_lt{
+			width: 1rem;
+			height: 1rem;
+		}
+		.yhzz_lt img{
+			width: .6rem;
+			margin: auto;
+			display: block;
+			margin-top: .2rem;
+		}
+		.yhzz_rt{
+			margin-left: .2rem;
+		}
+		.yhzz_rt p{
+			font-size: .35rem;
+			color: #333;
+			line-height: 1rem;
+		}
+		.xzfs{
+			width: .5rem;
+			height: .5rem;
+			float: right;
+			margin-right: .3rem;
+			position: relative;
+			margin-top: .2rem;
+		}
+		.xzfs img{
+			width: .5rem;
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		
+		.yhzz_ts{
+			margin-left: 1.2rem;
+		}
+		.yhzz_ts{
+			font-size: .35rem;
+			color: #999;
+			line-height: .6rem;
+		}
+		.gmxx_box{
+			width: 95%;
+			margin: auto;
+		}
+		.gmxx{
+			width: 100%;
+			margin-top: .2rem;
+			height: 1rem;
+			overflow: hidden;
+		}
+		.gmxx_lt,.gmxx_rt{
+			float: left;
+		}
+		.gmxx_lt p{
+			font-size: .4rem;
+			line-height: 1rem;
+			color: #999;
+		}
+		
+		.gmxx_rt{
+			float: right;
+			overflow: hidden;
+		}
+		.gmxx_rt p,.ggxx_img{
+			float: left;
+		}
+		.gmxx_rt p{
+			font-size: .4rem;
+			line-height: 1rem;
+			color: #333;
+		}
+		.gmxx_rt img{
+			width: .45rem;
+			display: block;
+			margin-top: .28rem;
+		}
+		.scpz{
+			width: 95%;
+			margin: auto;
+			border-top: 1px solid #f2f2f2;
+			margin-top: .1rem;
+			padding-bottom: 1.5rem;
+		}
+		.scpz_bt{
+			font-size: .4rem;
+			color: red;
+			line-height: .8rem;
+		}
+		.scpz_k{
+			width: 2rem;
+			height: 2rem;
+			border: 1px solid #999;
+			position: relative;
+		}
+		.scpz_k img{
+			width: 1.2rem;
+			display: block;
+			position: absolute;
+			left: 50%;
+			top: .3rem;
+			transform: translate(-50%);
+		}
+		.scpz_k input{
+			width: 2rem;
+			height: 2rem;
+			opacity: 0;
+		}
+		.qzf{
+			width: 100%;
+			height: 1.2rem;
+			overflow: hidden;
+			border-top: 1px solid #f2f2f2;
+			position: fixed;
+			bottom: 0;
+		}
+		.qzf_lt,.qzf_z,.qzf_rt{
+			float: left;
+		}
+		.qzf_lt{
+			width: 20%;
+			height: 1.2rem;
+			background: #fff;
+		}
+		.qzf_lt img{
+			width: 35%;
+			display: block;
+			margin: auto;
+			margin-top: 10%;
+		}
+		.qzf_z{
+			width: 40%;
+			background: #e4e4e4;
+		}
+		.qzf_z p{
+			font-size: .4rem;
+			color: #03BE87;
+			text-align: center;
+			line-height: 1.2rem;
+		}
+		.qzf_rt{
+			width: 40%;
+			background: #03be87;
+		}
+		.qzf_rt p{
+			font-size: .4rem;
+			color: #fff;
+			text-align: center;
+			line-height: 1.2rem;
+		}
+		.fkqr{
+			width: 90%;
+			margin: auto;
+			background: #fff;
+			margin-top: 5.5rem;
+		}
+		.fkqr01{
+			font-size: .5rem;
+			font-weight: bold;
+			color: #333;
+			text-align: center;
+			padding-top: .5rem;
+		}
+		.fkqr02{
+			width: 90%;
+			margin: auto;
+			font-size: .35rem;
+			color: #666;
+			margin-top: 1rem;
+		}
+		.fkqr03{
+			width: 100%;
+			height: 1rem;
+			overflow: hidden;
+			margin-top: 1rem;
+		}
+		.fkqr03_lt,.fkqr03_rt{
+			float: left;
+			font-size: .4rem;
+			height: 1rem;
+		}
+		.fkqr03_lt{
+			width: 50%;
+			background: #03be870f;
+			color: #03BE87;
+			line-height: 1rem;
+			text-align: center;
+			display: block;
+		}
+		.fkqr03_rt{
+			width: 50%;
+			background: #03be87;
+			color: #fff;
+			line-height: 1rem;
+			text-align: center;
+		}
+	</style>
+	
+	<body>
+		<div class="header">
+			<span>购买</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		<div class="gm">
+			<div class="gm_lt"><p>购买USDT<a href="ss.html">申诉</a></p></div>
+			<div class="gm_rt">
+				<img src="/zc/img/otc_gm01.png">
+				<p>未付款</p>
+			</div>
+		</div>
+		
+		<div class="jn">
+			<p class="jn_lt">商家已缴纳100 USDT 保证金</p>
+			<p class="jn_rt">14分00秒</p>
+		</div>
+		
+		<div class="yhzz_box">
+			<div class="yhzz">
+				<div class="yhzz_lt"><img src="/zc/img/mm01.png"></div>
+				<div class="yhzz_rt"><p>银行转账</p></div>
+				<!--<div class="xzfs">
+					<img class="xzfs_wxz" src="/zc/img/wxz.png">
+					<img style="display: none;" class="xzfs_xz" src="/zc/img/xz.png">
+				</div>-->
+			</div>
+			
+			<div class="yhzz_ts"><p>商家小号和搬砖户不交易，请自觉取消，否则退款！XX银行XX支行</p></div>
+			
+			<!--<div class="yhzz">
+				<div class="yhzz_lt"><img src="/zc/img/mm02.png"></div>
+				<div class="yhzz_rt"><p>支付宝</p></div>
+				<div class="xzfs" id="zfb">
+					<img class="zfb_wxz" src="/zc/img/wxz.png">
+					<img style="display: none;" class="zfb_xz" src="/zc/img/xz.png">
+				</div>
+			</div>-->
+		</div>
+		
+		
+		
+		
+		<div class="gmxx_box">
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>卖家</p></div>
+				<div class="gmxx_rt">
+					<p>张三</p>
+					<img src="/zc/img/yjt_h.png">
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>交易金额</p></div>
+				<div class="gmxx_rt">
+					<p style="color: #03BE87;">378.000.00 CNY</p>
+					<img class="fz" src="/zc/img/fz.png">
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>单价</p></div>
+				<div class="gmxx_rt">
+					<p>1CNY/USDT</p>
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>数量</p></div>
+				<div class="gmxx_rt">
+					<p>2USDT</p>
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>订单号</p></div>
+				<div class="gmxx_rt">
+					<p>#111</p>
+					<img class="fz" src="/zc/img/fz.png">
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>收款账号</p></div>
+				<div class="gmxx_rt">
+					<p>8888888888</p>
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>收款人</p></div>
+				<div class="gmxx_rt">
+					<p>李四</p>
+				</div>
+			</div>
+			
+			<div class="gmxx">
+				<div class="gmxx_lt"><p>订单时间</p></div>
+				<div class="gmxx_rt">
+					<p>2019-06-06-00:00:00</p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="scpz">
+			<p class="scpz_bt">上传凭证</p>
+			<div class="scpz_k">
+				<img src="/zc/img/tj.png">
+				<input type="file" accept="/images*" />
+			</div>
+		</div>
+		
+		
+		<div class="qzf">
+			<a href="tel:13212345678"><div class="qzf_lt"><img src="/zc/img/kfdh.png"></div></a>
+			<div class="qzf_z"><p>取消交易</p></div>
+			<div class="qzf_rt"><p>完成付款</p></div>
+		</div>
+		
+		
+		<div class="dongjie" style="width: 100%;height: 100%;background-color: rgba(0,0,0,0.6);z-index: 11111;position: fixed;left: 0;top:0;display: none;">
+			<div class="fkqr">
+				<p class="fkqr01">付款确认</p>
+				<p class="fkqr02">请确认您已向卖方付款。恶意点击将直接冻结账户！</p>
+				<div class="fkqr03">
+					<p class="fkqr03_lt">取消</p>
+					<p class="fkqr03_rt">确认</p>
+				</div>
+			</div>
+		</div>	
+	</body>
+	
+	<script>
+		$(document).ready(function(){
+			$(".fz").click(function(){
+				alert("复制成功")
+			})
+		})
+	</script>
+	
+	
+	<!--<script>
+		$(document).ready(function(){
+			$(".qzf_rt").click(function(){
+				$(".dongjie").show();
+			});
+		});
+		$(document).ready(function(){
+			$(".fkqr03_lt").click(function(){
+				$(".dongjie").hide();
+			});
+		});
+	</script>
+	
+	<script>
+		$(document).ready(function(){
+			$(".xzfs").click(function(){
+				$(".xzfs_wxz").hide();
+				$(".xzfs_xz").show();
+			});
+		});
+	</script>-->
+	
+	
+	
+</html>

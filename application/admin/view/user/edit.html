@@ -1,0 +1,186 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    {if isset($info)}
+    <header class="panel-heading">
+        <h4>编辑会员</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" method="post" onsubmit="return false" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">上级ID</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$info->pid}" name="pid" class="form-control"
+                           placeholder="上级ID">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">手机号</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$info->mobile}" name="mobile" class="form-control"
+                           placeholder="手机号">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">登录密码</label>
+
+                <div class="col-sm-5">
+                    <input type="password" name="password" class="form-control" placeholder="登录密码">
+                </div>
+                <div class="class-sm-5">
+                    <span class="help-block">如果不填写就不会修改</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">确认密码</label>
+                <div class="col-sm-5">
+                    <input type="password" value="" name="re_password" class="form-control" placeholder="登录密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">请选择等级</label>
+
+                <div class="col-sm-5">
+                    <select name="commission_level" class="form-control" id="game-sel">
+                        <option value="0">勇士</option>
+                        {foreach $commission_level as $key=>$item}
+                        <option value="{$item['id']}" {if $info->commission_level == $item['id']}selected{/if}>{$item['levelname']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-2 control-label">交易密码</label>-->
+
+<!--                <div class="col-sm-5">-->
+<!--                    <input type="password" name="trad_password" class="form-control" placeholder="交易密码">-->
+<!--                </div>-->
+<!--                <div class="class-sm-5">-->
+<!--                    <span class="help-block">如果不填写就不会修改</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-2 control-label">确认交易密码</label>-->
+<!--                <div class="col-sm-5">-->
+<!--                    <input type="password" value="" name="re_trad_password" class="form-control" placeholder="交易密码">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-2 control-label">开户人</label>-->
+<!--                <div class="col-sm-5">-->
+<!--                    <input type="text" value="{$info->bank_user_name}" name="bank_user_name" class="form-control" placeholder="开户人">-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">
+                <label class="col-sm-2 control-label">支付宝姓名</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$info->alipay_name}" name="bank_name" class="form-control" placeholder="支付宝姓名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">支付宝帐号</label>
+                <div class="col-sm-5">
+                    <input type="text" value="{$info->alipay_account}" name="bank_card" class="form-control" placeholder="支付宝帐号">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" data-url="{:url('admin/user/update',['id'=>$info->id])}"
+                            onclick="main.ajaxPosts(this)" class="btn btn-primary">确定修改
+                    </button>
+                    &nbsp;
+                    <button type="button" onclick="javascript:history.back(-1);" class="btn btn-warning">返回
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {else /}
+    <header class="panel-heading">
+        <h4>会员注册</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <form class="form-horizontal" method="post" onsubmit="return false" role="form">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">推荐人账号</label>
+
+                <div class="col-sm-5">
+                    <input type="text" value="" name="higher" class="form-control"
+                           placeholder="请输入推荐人账号">
+                </div>
+                <div class="col-sm-3 help-block">
+                    手机号码即登录账号，添加了不能被修改
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">会员账号</label>
+
+                <div class="col-sm-5">
+                    <input type="text" value="" name="mobile" class="form-control"
+                           placeholder="请输入会员账号">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">请选择等级</label>
+
+                <div class="col-sm-5">
+                    <select name="commission_level" class="form-control" id="game-sel">
+                        <option value="0">勇士</option>
+                        {foreach $commission_level as $key=>$item}
+                        <option value="{$item['id']}">{$item['levelname']}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">登录密码</label>
+
+                <div class="col-sm-5">
+                    <input type="password" name="password" class="form-control" placeholder="请输入登录密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">重复登录密码</label>
+                <div class="col-sm-5">
+                    <input type="password" name="re_password" class="form-control" placeholder="请再次输入登录密码">
+                </div>
+            </div>
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-2 control-label">交易密码</label>-->
+<!--                <div class="col-sm-5">-->
+<!--                    <input type="password" value="" name="trad_password" class="form-control"-->
+<!--                           placeholder="请输入交易密码">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-2 control-label">重复交易密码</label>-->
+<!--                <div class="col-sm-5">-->
+<!--                    <input type="password" value="" name="re_trad_password" class="form-control"-->
+<!--                           placeholder="请再次输入交易密码">-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" onclick="main.ajaxPosts(this)" data-url="{:url('admin/user/save')}"
+                            class="btn btn-primary">提交
+                    </button>
+                    &nbsp;
+                    <button type="button" onclick="javascript:history.back(-1);" class="btn btn-warning">返回
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {/if}
+</section>
+{/block}
+
+
+{block name="footer"}
+    <script src="/admin/vendor/fuelux/checkbox.js"></script>
+{/block}

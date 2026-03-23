@@ -1,0 +1,65 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>开通会员配置</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">开通天数</th>
+                <th class="text-center">开通价格</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach $list as $key=>$config}
+            <tr>
+                <td class="text-center" style="vertical-align: middle; ">{$config['id']}</td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="day_num{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['day_num']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="money{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['money']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <a onclick="updateConfig(this)" data-id="{$config['id']}" class="btn btn-xs btn-primary">确认修改</a>
+                </td>
+            </tr>
+            {/foreach}
+            </tbody>
+        </table>
+
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+<script>
+    function updateConfig(e) {
+        var id = $(e).attr('data-id');
+        var day_num = $("#day_num" + id).val();
+        var money = $("#money" + id).val();
+        $.post("{:url('editConfigVip')}", {day_num: day_num,money: money,id:id}, function (data) {
+            if (data.code == 1) {
+                main.waringAlert(data.message);
+            } else {
+                main.waringAlert(data.message);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000)
+            }
+        }, 'json')
+    }
+</script>
+{/block}

@@ -1,0 +1,95 @@
+{extend name="layout/main" /}
+
+{block name="header"}
+
+{/block}
+
+{block name="content"}
+<section class="panel">
+    <header class="panel-heading">
+        <h4>会员等级配置</h4>
+    </header>
+    <div class="panel-body" style="padding-bottom: 50px">
+        <table class="table table-bordered table-striped no-margin">
+            <thead>
+            <tr>
+                <th class="text-center">等级名称</th>
+                <!-- <th class="text-center">团队人数</th> -->
+                <!-- <th class="text-center">有效人数</th> -->
+                <th class="text-center">团队人数</th>
+                <th class="text-center">享受团队充值</th>
+<!--                <th class="text-center">三级（%）</th>-->
+<!--                <th class="text-center">每日可接次数</th>-->
+<!--                <th class="text-center">会员金额</th>-->
+<!--                <th class="text-center">一级充值奖励（%）</th>-->
+<!--                <th class="text-center">二级充值奖励（%）</th>-->
+<!--                <th class="text-center">三级充值奖励（%）</th>-->
+<!--                <th class="text-center">托管费用</th>-->
+
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {foreach $list as $key=>$config}
+            <tr>
+                <td class="text-center" style="vertical-align: middle; ">
+                    {if $config['id'] == 0}
+                    勇士
+                    {else /}
+                    {$config['levelname']}
+                    {/if}
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="team_num{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['team_num']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <input type="text" id="recharge_commission{$config['id']}" style="text-align: center" class="form-control"
+                           value="{$config['recharge_commission']}">
+                </td>
+                <td class="text-center" style="vertical-align: middle; ">
+                    <a onclick="updateConfig(this)" data-id="{$config['id']}" class="btn btn-xs btn-primary">确认修改</a>
+                </td>
+            </tr>
+            {/foreach}
+            </tbody>
+        </table>
+
+    </div>
+</section>
+{/block}
+
+
+{block name="footer"}
+<script>
+    function updateConfig(e) {
+        var id = $(e).attr('data-id');
+        var levelname = $("#level_name" + id).val();
+        var team_num = $("#team_num" + id).val();
+        var recharge_commission = $("#recharge_commission" + id).val();
+        var valid_num = $("#valid_num" + id).val();
+        var one_level = $("#one_level" + id).val();
+        var two_level = $("#two_level" + id).val();
+        var three_level = $("#three_level" + id).val();
+        var count = $("#count" + id).val();
+        var money = $("#money" + id).val();
+
+        var one_money = $("#one_money" + id).val();
+        var two_money = $("#two_money" + id).val();
+        var three_money = $("#three_money" + id).val();
+        var deposit_cost = $("#deposit_cost" + id).val();
+        
+
+        $.post("{:url('editCommissionLevel')}", {id:id,level_name: levelname,team_num:team_num,recharge_commission:recharge_commission}, function (data) {
+            if (data.code == 1) {
+                main.waringAlert(data.message);
+            } else {
+                main.waringAlert(data.message);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 1000)
+            }
+        }, 'json')
+    }
+</script>
+{/block}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>忘记密码</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/layer.js"></script>
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<style>
+		#getcode, #mcode {
+			position: absolute;
+			right: 0;
+			bottom: 1px;
+			line-height: 1rem;
+			color: #F65656;
+			background: none;
+			border: none;
+		}
+	</style>
+	<body onresize="document.activeElement.scrollIntoView(true);">
+		
+		<div class="header">
+			<span>忘记密码</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		
+		<div class="login_srk" style="margin-top: 4.6rem;margin-left: -.6rem;">
+			<div class="login_zh">
+				<p>手机号：</p>
+				<input class="phone" type="text" placeholder="请输入您的手机号" />
+			</div>
+			<div class="login_mm" style="position: relative;">
+				<p>验证码：</p>
+				<input type="password" placeholder="请输入验证码" class="get_code">
+				<button type="button" id="getcode" class="waves-effect">点击获取</button>
+			</div>
+		</div>
+		
+		<div class="dlan">
+			<button class="next_b" type="button" >下一步</button>
+		</div>
+		<script>
+			$(function () {
+				// 验证码
+				$('#getcode').on('click', function(){
+				var that = $(this);
+				var mobile = $('.phone').val();
+				if(!mobile) return layer.open({content:'请输入手机号码'});
+					$.ajax({
+						type: "POST",
+						url: "/index/publics/send",
+						data: {mobile:mobile},
+						success: function (res) {
+							if (res.code=='0') {
+							that.html('60s').attr('disabled', true);
+							var timer = setInterval(function(){
+								var num = parseInt(that.text());
+								if (num <= 1) {
+									that.html('重新发送').removeAttr('disabled');
+									clearInterval(timer);
+								} else {
+									that.html(--num+'s');
+								}
+							}, 1000);
+						}
+						layer.open({content:res.message});
+						}
+					});
+				})
+				$('.next_b').click(function (e) { 
+					var phone = $('.phone').val();
+					var code=$('.get_code').val();
+					if(!phone) return layer.open({content:'请输入手机号码'});
+					if(!code) return layer.open({content:'请输入验证码'});
+					window.location.href="qrcz.html?phone="+phone+'&code='+code;
+				});
+			});
+		</script>
+	</body>
+</html>

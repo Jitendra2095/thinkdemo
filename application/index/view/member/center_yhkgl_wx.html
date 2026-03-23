@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>添加微信</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+	<link rel="stylesheet" href="/zc/css/style.css" />
+	<link rel="stylesheet" href="/zc/css/index.css" />
+	<link rel="stylesheet" href="/zc/css/login.css" />
+	<link rel="stylesheet" href="/zc/css/center_wddd.css" />
+	<link rel="stylesheet" href="/zc/css/center_gywm.css" />
+	<link rel="stylesheet" href="/zc/css/center_lxkf.css" />
+	<link href="/zc/css/footer.css" rel="stylesheet">
+	<link rel="stylesheet" href="/zc/css/center_aqzx.css" />
+	<script src="/zc/js/flexible.js"></script>
+	<script src="/zc/js/flexible_css.js"></script>
+	<script src="/zc/js/template.js"></script>
+	<script src="/zc/js/jquery.min.js"></script>
+	<script src="/zc/js/unslider.min.js"></script>
+	<script src="/zc/js/foot_bar.js"></script>
+	<style>
+		html,body{
+			background: #f1f1f1;
+		}
+		.yhkxx{
+			width: 100%;
+			color: #999;
+			margin-top: .3rem;
+		}
+		.yhkxx p{
+			width: 95%;
+			margin: auto;
+			font-size: .4rem;
+			color: #333;
+			line-height: .8rem;
+		}
+		.yhkxx_kk{
+			width:100%;
+			height: 1rem;
+			background: #fff;
+		}
+		.yhkxx_kk input{
+			width: 95%;
+			display: block;
+			margin: auto;
+			height: 1rem;
+			line-height: 1rem;
+			border: 0;
+			background: #fff;
+			color: #333;
+			font-size: .35rem;
+		}
+		.tj{
+			width: 100%;
+			height: 1rem;
+			text-align: center;
+			margin-top: 1rem;
+		}
+		.tj button{
+			width: 80%;
+			height: 1rem;
+			border: 1px solid #18C78D;
+			background: #18C78D;
+			font-size: .4rem;
+			color: #fff;
+			line-height: 1rem;
+			border-radius: .2rem;
+		}
+		.yzmbox{
+			width: 100%;
+			height: 1rem;
+			overflow: hidden;
+			background: #fff;
+		}
+		.yzm_lt,.yzm_rt{
+			float: left;
+		}
+		.yzm_lt{
+			width: 70%;
+			height: 1rem;
+		}
+		.yzm_lt input{
+			border: 0;
+			line-height: 1rem;
+			border: 0;
+			background: #fff;
+			color: #333;
+			font-size: .35rem;
+			margin-left: .3rem;
+		}
+		.yzm_rt{
+			width: 30%;
+			height: 1rem;
+			float: right;
+		}
+		.yzm_rt button{
+			width: 100%;
+			height: 1rem;
+			line-height: 1rem;
+			background: #fff;
+			border: 0;
+			font-size: .4rem;
+			color: #18C78D;
+		}
+		.ewm{
+			width: 95%;
+			margin: auto;
+			overflow: hidden;
+			position: relative;
+		}
+		.ewm p{
+			font-size: .35rem;
+			color: #333;
+			line-height: 1rem;
+		}
+		.scewm{
+			width: 2rem;
+			height: 2rem;
+			background: #fff;
+			border: 1px solid #999;
+		}
+		.scewm input{
+			width: 2rem;
+			height: 2rem;
+			background: #fff;
+			border: 0;
+			color: #fff;
+			opacity: 0;
+		}
+		.ewm img{
+			width: 1rem;
+			height: 1rem;
+			display: block;
+			position: absolute;
+			top: 1.5rem;
+			left: 5%;
+		}
+	</style>
+	<body>
+		<div class="header">
+			<span>添加微信</span>
+			<a href="javascript:history.go(-1)" class="return"></a>
+		</div>
+		<div style="height: 1rem;"></div>
+		
+		<div class="yhkxx">
+			<p>姓名</p>
+			<div class="yhkxx_kk"><input class="srk" type="text" placeholder="请输入姓名" id="trad_password" /></div>
+		</div>
+		
+		<div class="yhkxx">
+			<p>证件号码</p>
+			<div class="yhkxx_kk"><input class="srk" type="number" placeholder="请输入您的身份证" id="realname" /></div>
+		</div>
+		
+		<div class="yhkxx">
+			<p>微信账户</p>
+			<div class="yhkxx_kk"><input class="srk" type="text" placeholder="请输入支付宝账户" id="bank_name" /></div>
+		</div>
+		
+		<div class="yhkxx">
+			<p>交易密码</p>
+			<div class="yhkxx_kk"><input class="srk" type="password" placeholder="请输入交易密码" id="bank_open" /></div>
+		</div>
+		
+		<div class="yhkxx">
+			<p>验证码</p>
+			<div class="yzmbox">
+				<div class="yzm_lt"><input autocomplete="off" class="srk" type="text" placeholder="请输入验证码" id="bank_number" /></div>
+				<div class="yzm_rt"><button type="submit">获取验证码</button></div>
+			</div>		
+		</div>
+		
+		<div class="ewm">
+			<p>添加收款二维码</p>
+			<img src="/zc/img/tj.png">
+			<div class="scewm"><input type="file" accept="images/*" /></div>
+		</div>
+		
+		<div class="tj"><button type="submit">添加</button></div>
+	</body>
+	
+</html>
+<script type="text/javascript">
+	function getQueryString(name) {   
+   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+   var r = window.location.search.substr(1).match(reg);
+   if (r != null) return unescape(r[2]); return null;
+  }
+  var id = getQueryString("id");
+  console.log(id)
+	$('.tj').click(function(){
+		
+		var trad_password = $('#trad_password').val();
+		var realname = $('#realname').val();
+		// var types = $('#types').val();
+		var types = 1;
+		var bank_name = $('#bank_name').val();
+		var bank_open = $('#bank_open').val();
+		var bank_number = $('#bank_number').val();
+		// alert(bank_open)
+		// return;
+		$.ajax({
+	        type: "POST",
+	        data: {trad_password:bank_open,realname:trad_password,types:id,bank_name:bank_name,bank_open:realname,bank_number:bank_number},
+	        dataType: "json",
+	        url: "/index/usercenter/addaccount",
+	        success: function (res) {
+	        	console.log(res)
+	            if(res.code==0){
+	            	alert('添加成功')
+	                // $('.otc_order1').append(template("tpl", res));
+	                // if(!res.info || res.info.length<param.limit){
+	                //         status = false;
+	                //     } 
+	            }else{
+	    			//  layer.open({
+					// 	content: res.msg,
+					// 	skin: 'msg',
+					// 	time: 2
+					// }); 
+					alert(res.msg)
+	            }
+	        }
+	    });
+	})
+</script>
